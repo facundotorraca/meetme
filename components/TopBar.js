@@ -2,12 +2,13 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
-export default function TopBar() {
+export default function TopBar({ navigation }) {
     return (
         <View style={styles.container}>
             <FontAwesome5 name='fire' size={iconSize} color={fireColor} ></FontAwesome5 >
-            <FontAwesome name='comments' size={iconSize} color={defaultIconColor} ></FontAwesome >
-            <FontAwesome name='user' size={iconSize} color={defaultIconColor} ></FontAwesome >        
+            <FontAwesome name='comments' size={iconSize} color={defaultIconColor} onPress={() => navigation.navigate('Mensajeria')} ></FontAwesome >
+           
+            <FontAwesome name='user' size={iconSize} color={defaultIconColor}  ></FontAwesome >        
         </View>
     )
 }

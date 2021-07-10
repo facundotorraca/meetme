@@ -8,17 +8,24 @@ import { View, StyleSheet, Image, Text } from 'react-native'
 // on tastes
 
 export default function SwipeableOption({ user, willLike, willPass }) {
+
+    let descripciones = ["asdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasd", "bbbbbbbbb", "ccccccc", "dddddd", "zzzzzzzz"]
+
+    const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
     return (
         <View>
-            <Image source={{ uri: user.picture.large }} style={styles.photo} />
+            <View style={styles.contenedor} ><Text style={styles.textDescription}>{descripciones[getRandomInt(0,4)]} </Text></View>
             {willLike && (
                 <View style={styles.likeBox}>
-                    <Text style={{...styles.textPrimary, color: '#64EDCC'}}>LIKE</Text>
+                    <Text style={{...styles.textPrimary, color: '#64EDCC'}}>Me interesa</Text>
                 </View>
             )}
             {willPass && (
                 <View style={styles.passBox}>
-                    <Text style={{...styles.textPrimary, color: '#F06795'}}>PASS</Text>
+                    <Text style={{...styles.textPrimary, color: '#F06795'}}>Pasar</Text>
                 </View>
             )}
             <View style={styles.textContainer}>
@@ -47,10 +54,23 @@ const boxStyle = {
 }
 
 const styles = StyleSheet.create({
+    textDescription:{
+        paddingTop: 10,
+        paddingBottom: 1,
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: "white"
+    },
     likeBox: {
         ...boxStyle,
         left: 40,
         borderColor: '#64EDCC'
+    },
+    contenedor:{
+        backgroundColor: "#9C27B0",
+        height: '100%',
+        resizeMode: 'cover',
+        borderRadius: 20
     },
 
     passBox: {

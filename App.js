@@ -4,10 +4,23 @@ import Constants from 'expo-constants';
 import Swipes from './components/Swipes';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Mensajeria } from './components/Mensajeria.js';
 
 
-export default function App() {
+function MensajeriaScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <TopBar navigation={navigation}/>
+      <Mensajeria/>
+    </View>
+  );
+}
+
+
+function HomeScreen({ navigation }) {
   const [users, setUsers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -58,29 +71,46 @@ export default function App() {
   useEffect(() => {
     fetchUsers();
   }, []);
-  
+
   return (
     <View style={styles.container}>
-      <TopBar />
+    <TopBar navigation={navigation}/>
 
-      <View style={styles.swipe}>
-        {users.length > 1 && 
-         users.map(
-			(u, i) => currentIndex === i && (
-				<Swipes 
-					key={i} 
-					ref={swipesRef}
-					users={users} 
-					currentIndex={currentIndex} 
-					handleLike={handleLike} 
-					handlePass={handlePass} 
-				/>
-			) 
-         )}
-      </View>
+    <View style={styles.swipe}>
+      {users.length > 1 && 
+      users.map(
+    (u, i) => currentIndex === i && (
+      <Swipes 
+        key={i} 
+        ref={swipesRef}
+        users={users} 
+        currentIndex={currentIndex} 
+        handleLike={handleLike} 
+        handlePass={handlePass} 
+      />
+    ) 
+      )}
+    </View>
 
-      <BottomBar handleLikePress={handleLikePress} handlePassPress={handlePassPress} />
-   </View>
+    <BottomBar handleLikePress={handleLikePress} handlePassPress={handlePassPress} />
+</View>
+  );
+}
+
+
+export default function App() {
+
+  const Stack = createStackNavigator();
+
+  return (
+    <NavigationContainer>
+       <Stack.Navigator>
+        <Stack.Screen name="Meetme" component={HomeScreen} />
+        <Stack.Screen name="Mensajeria" component={MensajeriaScreen} />
+
+      </Stack.Navigator>
+     
+   </NavigationContainer>
   );
 }
 
