@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import Constants from 'expo-constants';
+import Chat from './components/Chat';
+import Inbox from './components/Inbox';
 import Swipes from './components/Swipes';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { Alert, StyleSheet, View } from 'react-native';
-import Inbox from './components/Inbox';
-import Chat from './components/Chat';
+import { Mensajeria } from './components/Mensajeria.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Mensajeria } from './components/Mensajeria.js';
 
 function InboxScreen({ navigation }) {
     return (
@@ -107,7 +106,7 @@ export default function App() {
                     component={Chat}
                     options={({ route }) => ({
                         title: route.params.userName,
-                        headerBackTitleVisible: false
+                        headerBackTitleVisible: false,
                     })}
                 />
             </Stack.Navigator>
@@ -118,7 +117,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Constants.statusBarHeight,
     },
 
     swipe: {
