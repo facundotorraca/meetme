@@ -1,16 +1,17 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { colors } from '../config';
 
 export default function BottomBar({ handlePassPress, handleLikePress }) {
     return (
         <View style={styles.container}>
             <View />
             <TouchableOpacity style={styles.button} onPress={handlePassPress}>
-                <FontAwesome name="times" size={buttonSize} color={crossColor}></FontAwesome>
+                <FontAwesome name="times" size={buttonSize} color={colors.ORANGE}></FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleLikePress}>
-                <FontAwesome name="heart" size={buttonSize} color={heartColor}></FontAwesome>
+                <FontAwesome name="heart" size={buttonSize} color={colors.PINK}></FontAwesome>
             </TouchableOpacity>
             <View />
         </View>
@@ -18,8 +19,6 @@ export default function BottomBar({ handlePassPress, handleLikePress }) {
 }
 
 const buttonSize = 27;
-const heartColor = '#64EDCC';
-const crossColor = '#F06795';
 
 const styles = StyleSheet.create({
     container: {

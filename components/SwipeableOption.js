@@ -1,11 +1,17 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Image, Text } from 'react-native';
+import { colors } from '../config';
 
 // Initially heres come an URL but
 // it is going to be replaced by some text
 // to give the impression o selection based
 // on tastes
+
+var randomColor = function (obj) {
+    var keys = Object.keys(obj);
+    return obj[keys[keys.length * Math.random() << 0]];
+};
 
 export default function SwipeableOption({ user, willLike, willPass }) {
     let descripciones = [
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
         borderColor: '#64EDCC',
     },
     contenedor: {
-        backgroundColor: '#9C27B0',
+        backgroundColor: randomColor(colors),
         height: '100%',
         resizeMode: 'cover',
         borderRadius: 20,

@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { colors } from '../config';
 
 export default function TopBar({ navigation }) {
     return (
         <View style={styles.container}>
-            <FontAwesome5 name="fire" size={iconSize} color={fireColor}></FontAwesome5>
-            
+            <FontAwesome5 name="fire" size={iconSize} color={colors.PURPLE}></FontAwesome5>
+
             <FontAwesome
                 name="comments"
                 size={iconSize}
@@ -20,7 +21,6 @@ export default function TopBar({ navigation }) {
 }
 
 const iconSize = 27;
-const fireColor = '#F06795';
 const defaultIconColor = '#5C5C5C';
 
 const styles = StyleSheet.create({
