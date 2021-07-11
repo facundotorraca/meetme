@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 
 const Messages = [
     {
@@ -47,7 +48,10 @@ export default function Inbox({ navigation }) {
         >
             <View style={styles.chatInfo}>
                 <View style={styles.userImageWrapper}>
-                    <Image style={styles.userImage} source={item.userImg} />
+                    <FontAwesome
+                        name={'question-circle'}
+                        size={53}
+                    />
                 </View>
                 <View style={styles.chatDescription}>
                     <View style={styles.userInfoContainer}>
@@ -92,6 +96,7 @@ const styles = StyleSheet.create({
     userImageWrapper: {
         paddingTop: 15,
         paddingBottom: 15,
+        paddingRight: 10,
     },
 
     userImage: {
