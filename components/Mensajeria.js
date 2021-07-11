@@ -1,64 +1,88 @@
-import React, {useState, useEffect, useRef } from 'react';
-
-import { Alert, StyleSheet, View, Text } from 'react-native';
-
-
+import React from 'react';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 export const Mensajeria = () => {
+    const FAKE_CHAT = {
+        Ana: ['Hola!', 'Siii, vos?', 'Que andas haciendo?'],
+        Paulo: ['Holaa, todo tranqui?', 'Sisi', 'Mirando una peli'],
+    };
 
-    const chat = {izq: ["asddasd", "asfdadasdsa", "1121212"], der: ["asdasdasd", "asfdadasdsa", "1121212"]}
-
-    const retornarChat = (i) => (
-        <View key={i}>
-        <View style={styles.row}>
-        <Text style={styles.textDescriptionIzq}>{chat.izq[i]}</Text></View>
-        <View style={styles.reverseRow}> 
-        <Text style={styles.textDescriptionDer}>{chat.der[i]}</Text></View></View>
-    )
+    const chatRow = (index) => (
+        <View key={index}>
+            <View style={styles.chatAna}>
+                <Text style={styles.textDescription}>{FAKE_CHAT.Ana[index]}</Text>
+            </View>
+            <View style={styles.chatPaulo}>
+                <Text style={styles.textDescription}>{FAKE_CHAT.Paulo[index]}</Text>
+            </View>
+        </View>
+    );
 
     const generarChat = () => {
+        const mensajes = [];
 
-        const mensajes = []
-
-        chat.izq.forEach((element, index) => {
-            mensajes.push(retornarChat(index));
+        FAKE_CHAT.Paulo.forEach((_, index) => {
+            mensajes.push(chatRow(index));
         });
 
         return mensajes;
-    }
+    };
 
-    
+    return (
+        <View style={styles.container}>
+            <View style={styles.chatContainer}>
+                {generarChat()}
+            </View>
+            
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.newInput}
+                    placeholder="Message..."
+                    returnKeyType="send"
+                />
+            </View>
 
-
-    return(
-    <View style={styles.contenedor}>
-        {generarChat()}
-       </View>);
-
-}
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
-   
-    contenedor:{
-        backgroundColor: "#fdd687",
+    container: {
+        backgroundColor: '#fdd687',
         height: '100%',
         resizeMode: 'cover',
     },
-    row:{
-        flexDirection: "row"
-    },
-    reverseRow:{
-        flexDirection: "row-reverse"
+
+    chatContainer: {
+        height: '90%'
     },
 
-    textDescription:{
+    newInput: {
+        borderWidth: 3,
+        borderRadius: 20,
+        borderColor: '#ccc',
+        backgroundColor: '#9C27B0',
+        fontSize: 16,
+        padding:10,
+        height:50,
+    },
+
+
+
+    chatAna: {
+        flexDirection: 'row',
+    },
+
+    chatPaulo: {
+        flexDirection: 'row-reverse',
+    },
+
+    textDescription: {
         paddingTop: 10,
         paddingBottom: 1,
         paddingLeft: 20,
         paddingRight: 20,
-        color: "black",
-        fontWeight: "bold",
-        
-    },
-    
-})
+        color: 'black',
+        fontWeight: 'bold',
+    }
+});
