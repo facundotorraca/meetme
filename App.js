@@ -6,11 +6,12 @@ import Swipes from './components/Swipes';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { menus } from './config';
-import PubsScreen from './Screens/PubsScreen';
+import PubsScreen, { PubScreen } from './Screens/PubsScreen';
 import HomeScreen from './Screens/HomeScreen';
 import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Pubs from './components/Pubs';
 
 function InboxScreen({ navigation }) {
     return (
@@ -56,6 +57,14 @@ export default function App() {
                     name="Pubs"
                     component={PubsScreen}
                     options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="Pub"
+                    component={PubScreen}
+                         options={({ route }) => ({
                         headerBackTitleVisible: false,
                     })}
                 />
