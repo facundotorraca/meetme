@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         borderColor: '#64EDCC',
     },
     contenedor: {
-        backgroundColor: randomColor(colors),
+        backgroundColor: colors.DARK_PURPLE,
         height: '100%',
         resizeMode: 'cover',
         borderRadius: 20,
