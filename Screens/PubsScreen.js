@@ -4,6 +4,28 @@ import TopBar from '../components/TopBar';
 import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
 import { StyleSheet, View, Text, Picker } from 'react-native';
 
+export const Invitacion = (props) => {
+
+    const mensaje = props.route.params.mensaje;
+    const user = props.route.params.user;
+
+    return (
+        <View style={styles.container}>
+            <TopBar navigation={props.navigation} menu={menus.PUBS} />
+            <View>
+                <Text>
+                    Tu invitacion a {user.name} fue enviada con exito!
+                </Text>
+                <Card>
+                    <Card.Title>Invitación</Card.Title>
+                    <Card.Divider />
+                    <Text style={{ marginBottom: 10 }}>{mensaje}</Text>
+                </Card>
+            </View>
+        </View>
+    )
+}
+
 export const PubScreen = (props) => {
     const [value, setValue] = useState('');
     const [invitado, setInvitado] = useState(0);
@@ -30,9 +52,9 @@ export const PubScreen = (props) => {
                     selectedValue={invitado}
                     onValueChange={(itemValue, itemIndex) => setInvitado(itemValue)}
                 >
-                    <Picker.Item label="Juan" value={0} />
-                    <Picker.Item label="Pedro" value={1} />
-                    <Picker.Item label="Natalia" value={2} />
+                    <Picker.Item label="Juan" value="Juan" />
+                    <Picker.Item label="Pedro" value="Pedro" />
+                    <Picker.Item label="Natalia" value="Natalia" />
                 </Picker>
 
                 <Input
@@ -44,6 +66,10 @@ export const PubScreen = (props) => {
 
                 <Button
                     title="Invitar!"
+                    onPress={() => props.navigation.navigate('Invitacion', { 
+                        mensaje: value, 
+                        user: invitado 
+                    })}
                 />
             </View>
         </View>

@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { menus } from './config';
 import Chat from './components/Chat';
 import Inbox from './components/Inbox';
 import Swipes from './components/Swipes';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
-import { menus } from './config';
-import PubsScreen, { PubScreen } from './Screens/PubsScreen';
 import HomeScreen from './Screens/HomeScreen';
 import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Pubs from './components/Pubs';
+import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
 
 function InboxScreen({ navigation }) {
     return (
@@ -64,6 +63,14 @@ export default function App() {
                 <Stack.Screen
                     name="Pub"
                     component={PubScreen}
+                         options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="Invitacion"
+                    component={Invitacion}
                          options={({ route }) => ({
                         headerBackTitleVisible: false,
                     })}
