@@ -15,7 +15,7 @@ const Users = [
     preferences: ['Fiestas', 'Musica', 'Fotografia'],
     location: 'Belgrano, Buenos Aires.', 
     img_id: '01.png',
-    descripcion: 'Hago fotos y toco el saxo. Soy una persona sincera pero sensible. Disfruto mucho salir con mis amigos',
+    descripcion: 'Hago fotos y toco el saxo. Soy una persona sincera pero sensible. Disfruto mucho salir con mis amigos mas que nada a bares y restaurants',
     messageTime: '4 mins ago',
     messageText: 'Holaa',
   },
@@ -60,7 +60,7 @@ const Users = [
     location: 'Tigre, Buenos Aires.', 
     img_id: '06.png',
     descripcion: 'Tranqui, cuando alguien nos pregunte vamos a decir que nos conocimos en un museo. Disfruto la vida lo mas que puedo ' + 
-    'Me gusta mirar peliculas e ir a fiestas (no clandestinas). En mi tiempo libre escucho música.',
+    'Me gusta mirar peliculas e ir a fiestas. En mi tiempo libre escucho música.',
     messageTime: '4 mins ago',
     messageText: 'Holaa',
   },

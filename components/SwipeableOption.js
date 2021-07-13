@@ -97,7 +97,7 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                             <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
                     </View>
                     <View style={styles.textRow}>
-                        <FontAwesome name="map-marker" size={20} color="white"></FontAwesome>
+                        <FontAwesome name="map-marker" size={31} color="white"></FontAwesome>
                         <Text style={[styles.textSecondary, styles.textShadow]}>
                             {user.location}
                         </Text>
@@ -124,14 +124,16 @@ const boxStyle = {
 
 const styles = StyleSheet.create({
     textDescription: {
+        fontSize: 15,
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 20,
+        paddingLeft: 0,
         paddingRight: 20,
+        marginRight: 7,
         color: 'white',
     },
     textPreferences: {
-        fontSize: 25,
+        fontSize: 21,
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     iconPreferences: {
-        fontSize: 25,
+        fontSize: 21,
         paddingTop: 14,
         paddingBottom: 10,
         paddingLeft: 20,
@@ -197,7 +199,6 @@ const styles = StyleSheet.create({
     },
     textRow: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
 
     textPrimary: {
