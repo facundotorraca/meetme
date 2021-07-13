@@ -84,25 +84,27 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                 </View>
             )}
             
-            <View style={styles.imageContainer}>
-                <View style={styles.textRow}>
+            <View style={styles.textAndImageContainer}>
+                <View style={styles.imageContainer}>
                     <Image 
                         source={Icons[user.img_id]}
-                        style={{width: 120, height: 120, borderRadius: 400/ 2}} 
+                        style={styles.avatar} 
                     />
                 </View>
-                <View style={styles.textRow}>
-                    <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
-                    <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
-                </View>
-                <View style={styles.textRow}>
-                    <FontAwesome name="map-marker" size={20} color="white"></FontAwesome>
-                    <Text style={[styles.textSecondary, styles.textShadow]}>
-                        {user.location}
-                    </Text>
-                </View>
-                <View style={styles.textRow}>
-                    <Text style={styles.textDescription}>{user.descripcion} </Text>
+                <View style={styles.textContainer}>            
+                    <View style={styles.textRow}>
+                            <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
+                            <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
+                    </View>
+                    <View style={styles.textRow}>
+                        <FontAwesome name="map-marker" size={20} color="white"></FontAwesome>
+                        <Text style={[styles.textSecondary, styles.textShadow]}>
+                            {user.location}
+                        </Text>
+                    </View>
+                    <View style={styles.textRow}>
+                        <Text style={styles.textDescription}>{user.descripcion} </Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -168,23 +170,31 @@ const styles = StyleSheet.create({
         right: 40,
         borderColor: '#F06795',
     },
-
     photo: {
         height: '100%',
         resizeMode: 'cover',
         borderRadius: 20,
     },
+    avatar: {
+        width: 120, 
+        height: 120, 
+        borderRadius: 400/2,
+        paddingLeft: 20
+    },
     imageContainer: {
         position: 'absolute',
-        bottom: 20,
-        left: 20,
+        justifyContent: 'center',
+        bottom: 200,
+        left: 120,
     },
     textContainer: {
         position: 'absolute',
         bottom: 20,
         left: 20,
     },
-
+    textAndImageContainer: {
+        position: 'relative'
+    },
     textRow: {
         flexDirection: 'row',
         alignItems: 'center',
