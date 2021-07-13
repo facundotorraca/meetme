@@ -9,5 +9,6 @@ export const colors = {
 export const menus = {
   MEETME: 1,
   INBOX: 2,
-  USER: 3
+  PUBS: 3,
+  USER: 4
 }

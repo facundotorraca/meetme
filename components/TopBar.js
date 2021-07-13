@@ -10,6 +10,7 @@ export default function TopBar({ navigation, menu }) {
     const [fireIconColor, setFireIconColor] = useState(defaultIconColor);
     const [chatIconColor, setChatIconColor] = useState(defaultIconColor);
     const [userIconColor, setUserIconColor] = useState(defaultIconColor);
+    const [pubsIconColor, setPubsIconColor] = useState(defaultIconColor);
 
     useEffect(() => {
         switch (menu) {
@@ -20,9 +21,13 @@ export default function TopBar({ navigation, menu }) {
             case menus.INBOX:
                 setChatIconColor(colors.PURPLE);
                 break;
-
+        
             case menus.USER:
                 setUserIconColor(colors.YELLOW);
+                break;
+
+            case menus.PUBS:
+                setPubsIconColor(colors.DARK_PURPLE);
                 break;
 
             default:
@@ -45,6 +50,13 @@ export default function TopBar({ navigation, menu }) {
                 color={chatIconColor}
                 onPress={() => navigation.navigate('Inbox')}
             ></FontAwesome>
+
+            <FontAwesome5
+                name="cocktail"
+                size={iconSize}
+                color={pubsIconColor}
+                onPress={() => navigation.navigate('Pubs')}
+            ></FontAwesome5>
 
             <FontAwesome
                 name="user"

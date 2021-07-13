@@ -15,7 +15,6 @@ var randomColor = function (obj) {
 
 export default function SwipeableOption({ user, willLike, willPass }) {
     let descripciones = [
-        'asdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasdasdsadasdasdasd',
         'bbbbbbbbb',
         'ccccccc',
         'dddddd',

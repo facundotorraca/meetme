@@ -6,6 +6,7 @@ import Swipes from './components/Swipes';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { menus } from './config';
+import PubsScreen from './Screens/PubsScreen';
 import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -120,6 +121,14 @@ export default function App() {
                     component={Chat}
                     options={({ route }) => ({
                         title: route.params.userName,
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="Pubs"
+                    component={PubsScreen}
+                    options={({ route }) => ({
                         headerBackTitleVisible: false,
                     })}
                 />
