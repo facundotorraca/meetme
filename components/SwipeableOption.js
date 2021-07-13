@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../config';
+import { useScrollToTop } from '@react-navigation/native';
 
 // Initially heres come an URL but
 // it is going to be replaced by some text
@@ -13,6 +14,7 @@ var randomColor = function (obj) {
     return obj[keys[keys.length * Math.random() << 0]];
 };
 
+
 export default function SwipeableOption({ user, willLike, willPass }) {
     let descripciones = [
         'bbbbbbbbb',
@@ -21,6 +23,7 @@ export default function SwipeableOption({ user, willLike, willPass }) {
         'zzzzzzzz',
     ];
 
+
     const getRandomInt = (min, max) => {
         return Math.floor(Math.random() * (max - min)) + min;
     };
@@ -28,7 +31,7 @@ export default function SwipeableOption({ user, willLike, willPass }) {
     return (
         <View>
             <View style={styles.contenedor}>
-                <Text style={styles.textDescription}>{descripciones[getRandomInt(0, 4)]} </Text>
+                <Text style={styles.textDescription}>{user.descripcion} </Text>
             </View>
             {willLike && (
                 <View style={styles.likeBox}>
@@ -40,16 +43,27 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                     <Text style={{ ...styles.textPrimary, color: '#F06795' }}>Pasar</Text>
                 </View>
             )}
+            
             <View style={styles.textContainer}>
                 <View style={styles.textRow}>
-                    <Text style={[styles.textPrimary, styles.textShadow]}>{user.name.first}</Text>
-                    <Text style={[styles.textSecondary, styles.textShadow]}>{user.dob.age}</Text>
+                    <Image 
+                        // source={{uri: 'https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg'}} 
+                        source={require('../assets/icons/01.png') }
+                        style={{width: 120, height: 120, borderRadius: 400/ 2}} 
+                    />
+                </View>
+                <View style={styles.textRow}>
+                    <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
+                    <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
                 </View>
                 <View style={styles.textRow}>
                     <FontAwesome name="map-marker" size={20} color="white"></FontAwesome>
                     <Text style={[styles.textSecondary, styles.textShadow]}>
-                        {user.location.city}
+                        {user.location}
                     </Text>
+                </View>
+                <View style={styles.textRow}>
+                    <Text style={styles.textDescription}>{user.descripcion} </Text>
                 </View>
             </View>
         </View>
