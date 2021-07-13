@@ -130,11 +130,13 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         color: 'white',
     },
+
     likeBox: {
         ...boxStyle,
         left: 40,
         borderColor: '#64EDCC',
     },
+    
     contenedor: {
         backgroundColor: colors.DARK_PURPLE,
         height: '100%',
