@@ -4,32 +4,14 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../config';
 import { useScrollToTop } from '@react-navigation/native';
 import Icons from './Icons'
-import { textAlign } from '@material-ui/system';
 
 // Initially heres come an URL but
 // it is going to be replaced by some text
 // to give the impression o selection based
 // on tastes
 
-var randomColor = function (obj) {
-    var keys = Object.keys(obj);
-    return obj[keys[keys.length * Math.random() << 0]];
-};
-
 
 export default function SwipeableOption({ user, willLike, willPass }) {
-    let descripciones = [
-        'bbbbbbbbb',
-        'ccccccc',
-        'dddddd',
-        'zzzzzzzz',
-    ];
-
-
-    const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min)) + min;
-    };
-
     const defaultIconColor = 'white';
     const iconSize = 20;
 
