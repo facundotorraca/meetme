@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { menus } from '../config';
 import TopBar from '../components/TopBar';
-import { ListItem, Card, Avatar, Input, Button } from 'react-native-elements';
+import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
 import { StyleSheet, View, Text, Picker } from 'react-native';
 
 export const PubScreen = (props) => {
@@ -17,9 +17,13 @@ export const PubScreen = (props) => {
                 <Card>
                     <Card.Title>{pub.name}</Card.Title>
                     <Card.Divider />
-                    <Card.Image source={pub.link}>
+                    <Image
+                        style={styles.image}
+                        resizeMode="cover"
+                        source={{ uri: pub.link }}
+                    >
                         <Text style={{ marginBottom: 10 }}>{pub.location}</Text>
-                    </Card.Image>
+                    </Image>
                 </Card>
 
                 <Picker 
@@ -40,8 +44,7 @@ export const PubScreen = (props) => {
 
                 <Button
                     title="Invitar!"
-                >
-                </Button>
+                />
             </View>
         </View>
     );
@@ -121,6 +124,12 @@ const styles = StyleSheet.create({
     time: {
         fontSize: 38,
         color: '#fff',
+    },
+
+    image: {
+        height: 150,
+        width: 150,
+        borderRadius: 25
     },
 
     notes: {
