@@ -5,3 +5,9 @@ export const colors = {
   PINK: '#FB569C',
   ORANGE: '#FB8569'
 }
+
+export const menus = {
+  MEETME: 1,
+  INBOX: 2,
+  USER: 3
+}

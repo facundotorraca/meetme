@@ -1,27 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { colors } from '../config';
+import { colors, menus } from '../config';
 
-export default function TopBar({ navigation }) {
+export default function TopBar({ navigation, menu }) {
+    const defaultIconColor = '#5C5C5C';
+    const iconSize = 27;
+
+    const [fireIconColor, setFireIconColor] = useState(defaultIconColor);
+    const [chatIconColor, setChatIconColor] = useState(defaultIconColor);
+    const [userIconColor, setUserIconColor] = useState(defaultIconColor);
+
+    useEffect(() => {
+        switch (menu) {
+            case menus.MEETME:
+                setFireIconColor(colors.ORANGE);
+                break;
+
+            case menus.INBOX:
+                setChatIconColor(colors.PURPLE);
+                break;
+
+            case menus.USER:
+                setUserIconColor(colors.YELLOW);
+                break;
+
+            default:
+                break;
+        }
+    }, []);
+
     return (
         <View style={styles.container}>
-            <FontAwesome5 name="fire" size={iconSize} color={colors.PURPLE}></FontAwesome5>
+            <FontAwesome5
+                name="fire"
+                size={iconSize}
+                color={fireIconColor}
+                onPress={() => navigation.navigate('Meetme')}
+            ></FontAwesome5>
 
             <FontAwesome
                 name="comments"
                 size={iconSize}
-                color={defaultIconColor}
+                color={chatIconColor}
                 onPress={() => navigation.navigate('Inbox')}
             ></FontAwesome>
 
-            <FontAwesome name="user" size={iconSize} color={defaultIconColor}></FontAwesome>
+            <FontAwesome
+                name="user"
+                size={iconSize}
+                color={userIconColor}
+                onPress={() => navigation.navigate('Inbox')}
+            ></FontAwesome>
         </View>
     );
 }
-
-const iconSize = 27;
-const defaultIconColor = '#5C5C5C';
 
 const styles = StyleSheet.create({
     container: {
