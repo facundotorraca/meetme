@@ -1,8 +1,10 @@
 import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../config';
 import { useScrollToTop } from '@react-navigation/native';
+import Icons from './Icons'
+import { textAlign } from '@material-ui/system';
 
 // Initially heres come an URL but
 // it is going to be replaced by some text
@@ -28,10 +30,48 @@ export default function SwipeableOption({ user, willLike, willPass }) {
         return Math.floor(Math.random() * (max - min)) + min;
     };
 
+    const defaultIconColor = 'white';
+    const iconSize = 20;
+
+    const getIconName = (preference) => {
+        switch (preference) {
+            case 'Fiestas':
+                return 'cocktail';
+            case 'Musica':
+                return 'music';
+            case 'Fotografia':
+                return 'camera';
+            case 'Cine':
+                return 'film';
+            case 'Deportes':
+                return 'running';
+            case 'Gaming':
+                return 'gamepad';
+            default:
+                return null;
+        }
+    }
+
     return (
         <View>
             <View style={styles.contenedor}>
-                <Text style={styles.textDescription}>{user.descripcion} </Text>
+                <View style={styles.contenedor_pref}>
+                    {
+                        user.preferences.map((value, index) => {
+                            return (
+                                <View key={value} style={[styles.contenedor_lat]}>
+                                    <Text style={styles.textPreferences}> {value} </Text>
+                                    <FontAwesome5
+                                        name={getIconName(value)}
+                                        style={styles.iconPreferences}
+                                        size={iconSize}
+                                        color={defaultIconColor}
+                                    ></FontAwesome5>
+                                </View>
+                            )
+                        })
+                    }  
+                </View>
             </View>
             {willLike && (
                 <View style={styles.likeBox}>
@@ -44,11 +84,10 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                 </View>
             )}
             
-            <View style={styles.textContainer}>
+            <View style={styles.imageContainer}>
                 <View style={styles.textRow}>
                     <Image 
-                        // source={{uri: 'https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg'}} 
-                        source={require('../assets/icons/01.png') }
+                        source={Icons[user.img_id]}
                         style={{width: 120, height: 120, borderRadius: 400/ 2}} 
                     />
                 </View>
@@ -84,7 +123,23 @@ const boxStyle = {
 const styles = StyleSheet.create({
     textDescription: {
         paddingTop: 10,
-        paddingBottom: 1,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: 'white',
+    },
+    textPreferences: {
+        fontSize: 25,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: 'white',
+    },
+    iconPreferences: {
+        fontSize: 25,
+        paddingTop: 14,
+        paddingBottom: 10,
         paddingLeft: 20,
         paddingRight: 20,
         color: 'white',
@@ -100,7 +155,14 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 20,
     },
-
+    contenedor_pref: {
+        paddingTop: 20,
+    },
+    contenedor_lat: {
+        paddingTop: 7,
+        flexDirection: 'row',
+        textAlign: 'center'
+    },
     passBox: {
         ...boxStyle,
         right: 40,
@@ -112,7 +174,11 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 20,
     },
-
+    imageContainer: {
+        position: 'absolute',
+        bottom: 20,
+        left: 20,
+    },
     textContainer: {
         position: 'absolute',
         bottom: 20,
@@ -126,8 +192,9 @@ const styles = StyleSheet.create({
 
     textPrimary: {
         color: 'white',
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: 'bold',
+        paddingRight: 10,
     },
 
     textSecondary: {

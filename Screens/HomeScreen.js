@@ -12,7 +12,7 @@ const Users = [
     id: '1',
     userName: 'Juan Martinez',
     age: 23, 
-    preferences: ['Fiestas', 'Musica', 'Fotografía'],
+    preferences: ['Fiestas', 'Musica', 'Fotografia'],
     location: 'Belgrano, Buenos Aires.', 
     img_id: '01.png',
     descripcion: 'Hago fotos y toco el saxo. Soy una persona sincera pero sensible. Disfruto mucho salir con mis amigos',
