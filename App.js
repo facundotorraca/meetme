@@ -7,6 +7,7 @@ import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { menus } from './config';
 import PubsScreen from './Screens/PubsScreen';
+import HomeScreen from './Screens/HomeScreen';
 import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,80 +17,6 @@ function InboxScreen({ navigation }) {
         <View style={styles.container}>
             <TopBar navigation={navigation} menu={menus.INBOX}/>
             <Inbox navigation={navigation} />
-        </View>
-    );
-}
-
-function HomeScreen({ navigation }) {
-    const swipesRef = useRef(null);
-
-    const [users, setUsers] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const USERS_DATA_URL = 'https://randomuser.me/api/?gender=female&results=10';
-
-    async function fetchUsers() {
-        // for now, is fetching from an API
-        // but we can add a vector if we dont
-        // want to use this users
-        try {
-            const { data } = await axios.get(USERS_DATA_URL);
-            setUsers(data.results);
-        } catch (error) {
-            console.log(error);
-            Alert.alert('Error al cargar usuarios', '', [
-                { text: 'Reintentar', onPress: () => fetchUsers() },
-            ]);
-        }
-    }
-
-    function handleLike() {
-        nextUser();
-    }
-
-    function handlePass() {
-        nextUser();
-    }
-
-    function nextUser() {
-        const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1;
-        setCurrentIndex(nextIndex);
-    }
-
-    function handlePassPress() {
-        swipesRef.current.openRight();
-    }
-
-    function handleLikePress() {
-        swipesRef.current.openLeft();
-    }
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    return (
-        <View style={styles.container}>
-            <TopBar navigation={navigation} menu={menus.MEETME} />
-
-            <View style={styles.swipe}>
-                {users.length > 1 &&
-                    users.map(
-                        (u, i) =>
-                            currentIndex === i && (
-                                <Swipes
-                                    key={i}
-                                    ref={swipesRef}
-                                    users={users}
-                                    currentIndex={currentIndex}
-                                    handleLike={handleLike}
-                                    handlePass={handlePass}
-                                />
-                            )
-                    )}
-            </View>
-
-            <BottomBar handleLikePress={handleLikePress} handlePassPress={handlePassPress} />
         </View>
     );
 }
