@@ -112,7 +112,7 @@ export default function HomeScreen({ navigation }) {
                               <Swipes
                                   key={i}
                                   ref={swipesRef}
-                                  users={users}
+                                  users={Users}
                                   currentIndex={currentIndex}
                                   handleLike={handleLike}
                                   handlePass={handlePass}
