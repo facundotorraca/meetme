@@ -21,8 +21,8 @@ export default function TopBar({ navigation, menu }) {
             case menus.INBOX:
                 setChatIconColor(colors.PURPLE);
                 break;
-        
-            case menus.USER:
+
+            case menus.REGALO:
                 setUserIconColor(colors.YELLOW);
                 break;
 
@@ -59,10 +59,10 @@ export default function TopBar({ navigation, menu }) {
             ></FontAwesome5>
 
             <FontAwesome
-                name="user"
+                name="gift"
                 size={iconSize}
                 color={userIconColor}
-                onPress={() => navigation.navigate('Inbox')}
+                onPress={() => navigation.navigate('Regalos')}
             ></FontAwesome>
         </View>
     );

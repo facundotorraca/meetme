@@ -11,11 +11,12 @@ import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
+import Regalos, { Regalo, MensajeRegalo } from './Screens/RegalosScreen';
 
 function InboxScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <TopBar navigation={navigation} menu={menus.INBOX}/>
+            <TopBar navigation={navigation} menu={menus.INBOX} />
             <Inbox navigation={navigation} />
         </View>
     );
@@ -27,22 +28,22 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen 
-                    name="Meetme" 
-                    component={HomeScreen} 
+                <Stack.Screen
+                    name="Meetme"
+                    component={HomeScreen}
                     options={({ route }) => ({
-                        headerTitle: false
+                        headerTitle: false,
                     })}
                 />
-                
-                <Stack.Screen 
-                    name="Inbox" 
-                    component={InboxScreen} 
+
+                <Stack.Screen
+                    name="Inbox"
+                    component={InboxScreen}
                     options={({ route }) => ({
-                        headerTitle: false
+                        headerTitle: false,
                     })}
                 />
-                
+
                 <Stack.Screen
                     name="Chat"
                     component={Chat}
@@ -63,7 +64,7 @@ export default function App() {
                 <Stack.Screen
                     name="Pub"
                     component={PubScreen}
-                         options={({ route }) => ({
+                    options={({ route }) => ({
                         headerBackTitleVisible: false,
                     })}
                 />
@@ -71,7 +72,31 @@ export default function App() {
                 <Stack.Screen
                     name="Invitacion"
                     component={Invitacion}
-                         options={({ route }) => ({
+                    options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="Regalos"
+                    component={Regalos}
+                    options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="Regalo"
+                    component={Regalo}
+                    options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
+
+                <Stack.Screen
+                    name="MensajeRegalo"
+                    component={MensajeRegalo}
+                    options={({ route }) => ({
                         headerBackTitleVisible: false,
                     })}
                 />
@@ -83,7 +108,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: '100%'                    
+        height: '100%',
     },
 
     swipe: {
