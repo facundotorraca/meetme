@@ -47,7 +47,7 @@ const Users = [
     age: 30, 
     preferences: ['Musica', 'Deportes', 'Cine'],
     location: 'Devoto, Buenos Aires.', 
-    img_id: '07.png',
+    img_id: '10.png',
     descripcion: 'Si buscas resultados distintos no hagas siempre lo mismo y apuesta por esa persona que nunca dirías "es este".',
     messageTime: '4 mins ago',
     messageText: 'Holaa',
