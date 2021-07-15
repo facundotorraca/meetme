@@ -12,10 +12,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
 import Regalos, { Regalo, MensajeRegalo } from './Screens/RegalosScreen';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function InboxScreen({ navigation }) {
+    const {top, bottom} = useSafeAreaInsets()
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={navigation} menu={menus.INBOX} />
             <Inbox navigation={navigation} />
         </View>
@@ -27,7 +29,14 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    cardStyle: {
+                        backgroundColor: 'white'
+                    }
+                }}
+            >
                 <Stack.Screen
                     name="Meetme"
                     component={HomeScreen}

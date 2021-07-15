@@ -3,6 +3,7 @@ import { menus } from '../config';
 import TopBar from '../components/TopBar';
 import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
 import { StyleSheet, View, Text, Picker } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const MensajeRegalo = (props) => {
     const mensaje = props.route.params.mensaje;
@@ -92,9 +93,10 @@ export default Regalos = ({ navigation }) => {
             link: 'https://media-cdn.tripadvisor.com/media/photo-s/10/d1/20/93/your-friendly-irish-pub.jpg',
         },
     ];
+    const {top, bottom} = useSafeAreaInsets()
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={navigation} menu={menus.REGALO} />
             {regalos.map((r, index) => (
                 <ListItem

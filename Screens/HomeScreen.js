@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { menus } from '../config';
 import BottomBar from '../components/BottomBar';
 import Swipes from '../components/Swipes';
-import axios from 'axios';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 const Users = [
@@ -79,26 +79,8 @@ const Users = [
 
 export default function HomeScreen({ navigation }) {
   const swipesRef = useRef(null);
-
-  const [users, setUsers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const USERS_DATA_URL = 'https://randomuser.me/api/?gender=female&results=10';
-
-  async function fetchUsers() {
-      // for now, is fetching from an API
-      // but we can add a vector if we dont
-      // want to use this users
-      try {
-          const { data } = await axios.get(USERS_DATA_URL);
-          setUsers(data.results);
-      } catch (error) {
-          console.log(error);
-          Alert.alert('Error al cargar usuarios', '', [
-              { text: 'Reintentar', onPress: () => fetchUsers() },
-          ]);
-      }
-  }
+  const {top, bottom} = useSafeAreaInsets()
 
   function handleLike() {
       nextUser();
@@ -121,17 +103,13 @@ export default function HomeScreen({ navigation }) {
       swipesRef.current.openLeft();
   }
 
-  useEffect(() => {
-      fetchUsers();
-  }, []);
-
   return (
-      <View style={styles.container}>
+      <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
           <TopBar navigation={navigation} menu={menus.MEETME} />
 
           <View style={styles.swipe}>
-              {users.length > 1 &&
-                  users.map(
+              {Users.length > 1 &&
+                  Users.map(
                       (u, i) =>
                           currentIndex === i && (
                               <Swipes
@@ -153,8 +131,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      height: '100%'                    
+      flex: 1,                  
   },
 
   swipe: {

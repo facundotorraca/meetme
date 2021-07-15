@@ -35,7 +35,7 @@ export default function SwipeableOption({ user, willLike, willPass }) {
     }
 
     return (
-        <View>
+        <View style={{}}>
             <View style={styles.contenedor}>
                 <View style={styles.contenedor_pref}>
                     {
@@ -54,6 +54,29 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                         })
                     }  
                 </View>
+                <View style={styles.textAndImageContainer}>
+                    <View style={styles.imageContainer}>
+                        <Image 
+                            source={Icons[user.img_id]}
+                            style={styles.avatar} 
+                        />
+                    </View>
+                    <View style={styles.textContainer}>            
+                        <View style={styles.textRow}>
+                                <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
+                                <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
+                        </View>
+                        <View style={styles.textRow}>
+                            <FontAwesome name="map-marker" size={28} color="white"></FontAwesome>
+                            <Text style={[styles.textLocation, styles.textShadow]}>
+                                {user.location}
+                            </Text>
+                        </View>
+                        <View style={styles.textRow}>
+                            <Text style={styles.textDescription}>{user.descripcion} </Text>
+                        </View>
+                    </View>
+                </View>
             </View>
             {willLike && (
                 <View style={styles.likeBox}>
@@ -66,29 +89,6 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                 </View>
             )}
             
-            <View style={styles.textAndImageContainer}>
-                <View style={styles.imageContainer}>
-                    <Image 
-                        source={Icons[user.img_id]}
-                        style={styles.avatar} 
-                    />
-                </View>
-                <View style={styles.textContainer}>            
-                    <View style={styles.textRow}>
-                            <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
-                            <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
-                    </View>
-                    <View style={styles.textRow}>
-                        <FontAwesome name="map-marker" size={31} color="white"></FontAwesome>
-                        <Text style={[styles.textSecondary, styles.textShadow]}>
-                            {user.location}
-                        </Text>
-                    </View>
-                    <View style={styles.textRow}>
-                        <Text style={styles.textDescription}>{user.descripcion} </Text>
-                    </View>
-                </View>
-            </View>
         </View>
     );
 }
@@ -105,29 +105,21 @@ const boxStyle = {
 };
 
 const styles = StyleSheet.create({
-    textDescription: {
-        fontSize: 15,
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 0,
-        paddingRight: 20,
-        marginRight: 7,
-        color: 'white',
-    },
     textPreferences: {
         fontSize: 21,
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
+        marginHorizontal: 10,
+        // paddingTop: 10,
+        // paddingBottom: 10,
+        // paddingLeft: 20,
+        // paddingRight: 20,
         color: 'white',
     },
     iconPreferences: {
         fontSize: 21,
-        paddingTop: 14,
-        paddingBottom: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
+        // paddingTop: 14,
+        // paddingBottom: 10,
+        // paddingLeft: 20,
+        // paddingRight: 20,
         color: 'white',
     },
 
@@ -140,16 +132,17 @@ const styles = StyleSheet.create({
     contenedor: {
         backgroundColor: colors.DARK_PURPLE,
         height: '100%',
-        resizeMode: 'cover',
+        // resizeMode: 'cover',
         borderRadius: 20,
+        padding: 15
     },
     contenedor_pref: {
         paddingTop: 20,
     },
     contenedor_lat: {
-        paddingTop: 7,
+        // paddingTop: 7,
+        marginBottom: 15,
         flexDirection: 'row',
-        textAlign: 'center'
     },
     passBox: {
         ...boxStyle,
@@ -164,40 +157,58 @@ const styles = StyleSheet.create({
     avatar: {
         width: 140, 
         height: 140, 
-        borderRadius: 400/2,
-        paddingLeft: 20
+        // borderRadius: 400/2,
+        // paddingLeft: 20
     },
     imageContainer: {
-        position: 'absolute',
-        justifyContent: 'center',
-        bottom: 200,
-        left: 120,
+        // position: 'absolute',
+        // justifyContent: 'center',
+        // bottom: 200,
+        // left: 120,
     },
     textContainer: {
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
+        marginTop: 15,
+        // position: 'absolute',
+        // bottom: 20,
+        // left: 20,
     },
     textAndImageContainer: {
-        position: 'relative'
+        // position: 'relative'
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center'
     },
     textRow: {
         flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10
     },
-
     textPrimary: {
         color: 'white',
         fontSize: 30,
         fontWeight: 'bold',
         paddingRight: 10,
     },
-
     textSecondary: {
         color: 'white',
         marginLeft: 10,
         fontSize: 25,
     },
-
+    textLocation: {
+        color: 'white',
+        marginLeft: 10,
+        fontSize: 22,
+    },
+    textDescription: {
+        fontSize: 16,
+        // paddingTop: 10,
+        // paddingBottom: 10,
+        // paddingLeft: 0,
+        // paddingRight: 20,
+        // marginRight: 7,
+        marginTop: 10,
+        color: 'white',
+    },
     textShadow: {
         textShadowColor: 'rgba(0, 0, 0, 0.80)',
         textShadowOffset: { width: -1, height: 1 },

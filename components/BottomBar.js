@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         backgroundColor: 'white',
-        borderRadius: 25,
+        borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
             width: 0,
             height: 0,
         },
-        shadowOpacity: 0.15,
-        shadowRadius: 6.46,
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
         elevation: 9,
     },
 });

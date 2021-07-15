@@ -125,15 +125,13 @@ const styles = StyleSheet.create({
     },
 
     chatUserName: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'bold',
-        fontFamily: '',
     },
 
     chatPostTime: {
         fontSize: 12,
         color: '#666',
-        fontFamily: '',
     },
 
     messageText: {

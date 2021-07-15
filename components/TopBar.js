@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors, menus } from '../config';
 
+
 export default function TopBar({ navigation, menu }) {
     const defaultIconColor = '#5C5C5C';
     const iconSize = 27;
@@ -60,7 +61,7 @@ export default function TopBar({ navigation, menu }) {
 
             <FontAwesome
                 name="gift"
-                size={iconSize}
+                size={30}
                 color={userIconColor}
                 onPress={() => navigation.navigate('Regalos')}
             ></FontAwesome>
