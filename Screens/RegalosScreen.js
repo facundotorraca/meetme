@@ -8,14 +8,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export const MensajeRegalo = (props) => {
     const mensaje = props.route.params.mensaje;
     const user = props.route.params.user;
+    const {top, bottom} = useSafeAreaInsets()
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={props.navigation} menu={menus.REGALO} />
-            <View>
-                <Text>Tu regalo a {user} fue enviada con exito!</Text>
+            <View style={{marginTop: 20}}>
+                <Text style={{alignSelf: 'center', marginTop: 15}}>Tu regalo a {user} fue enviada con exito!</Text>
                 <Card>
-                    <Card.Title>Carta</Card.Title>
+                    <Card.Title>Mensaje</Card.Title>
                     <Card.Divider />
                     <Text style={{ marginBottom: 10 }}>{mensaje}</Text>
                 </Card>
@@ -27,19 +28,24 @@ export const MensajeRegalo = (props) => {
 export const Regalo = (props) => {
     const [value, setValue] = useState('');
     const [invitado, setInvitado] = useState('Lucia Ramirez');
-
+    const {top, bottom} = useSafeAreaInsets()
     const regalo = props.route.params.regalo;
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={props.navigation} menu={menus.REGALO} />
-            <View>
+            <View style={{marginTop: 20}}>
                 <Card>
-                    <Card.Title>{regalo.name}</Card.Title>
+                    <Card.Title style={{fontSize: 19}}>{regalo.name}</Card.Title>
                     <Card.Divider />
-                    <Image style={styles.image} resizeMode="cover" source={{ uri: regalo.link }}>
-                    </Image>
-                        <Text style={{ marginBottom: 10 }}>{regalo.precio}</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Image style={styles.image} resizeMode="cover" source={{ uri: regalo.link }}/>
+                        <Text style={{
+                            marginRight: 25,
+                            fontWeight: 'bold',
+                            fontSize: 23
+                            }}>{regalo.precio}</Text>
+                    </View>
                 </Card>
 
                 <Picker
@@ -54,7 +60,7 @@ export const Regalo = (props) => {
                 </Picker>
 
                 <Input
-                    placeholder="Carta"
+                    placeholder="Escribe un mensaje"
                     leftIcon={{ type: 'font-awesome', name: 'comment' }}
                     style={styles.input}
                     onChangeText={(value) => setValue(value)}
@@ -100,19 +106,24 @@ export default Regalos = ({ navigation }) => {
     return (
         <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={navigation} menu={menus.REGALO} />
-            {regalos.map((r, index) => (
-                <ListItem
-                    key={index}
-                    onPress={() => navigation.navigate('Regalo', { regalo: r })}
-                    bottomDivider
-                >
-                    <Avatar source={{ uri: r.link }} />
-                    <ListItem.Content>
-                        <ListItem.Title>{r.name}</ListItem.Title>
-                        <ListItem.Subtitle>{r.precio}</ListItem.Subtitle>
-                    </ListItem.Content>
-                </ListItem>
-            ))}
+            <View style={{marginTop: 20}}>
+                {regalos.map((r, index) => (
+                    <ListItem
+                        key={index}
+                        onPress={() => navigation.navigate('Regalo', { regalo: r })}
+                        bottomDivider
+                    >
+                        <Avatar source={{ uri: r.link }} />
+                        <ListItem.Content>
+                            <ListItem.Title style={{
+                                fontWeight: 'bold',
+                                fontSize: 19
+                            }}>{r.name}</ListItem.Title>
+                            <ListItem.Subtitle>{r.precio}</ListItem.Subtitle>
+                        </ListItem.Content>
+                    </ListItem>
+                ))}
+            </View>
         </View>
     );
 };

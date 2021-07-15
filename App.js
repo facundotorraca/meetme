@@ -19,6 +19,7 @@ function InboxScreen({ navigation }) {
     return (
         <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
             <TopBar navigation={navigation} menu={menus.INBOX} />
+            <View style={{height: 20}}/>
             <Inbox navigation={navigation} />
         </View>
     );

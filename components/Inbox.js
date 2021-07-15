@@ -50,7 +50,7 @@ export default function Inbox({ navigation }) {
             <View style={styles.chatInfo}>
                 <View style={styles.userImageWrapper}>
                     <FontAwesome
-                        name={'question-circle'}
+                        name={'user'}
                         size={53}
                         color={randomColor(colors)}
                     />
