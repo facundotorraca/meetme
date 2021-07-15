@@ -11,33 +11,33 @@ var randomColor = function (obj) {
 const Messages = [
     {
         id: '1',
-        userName: 'Jenny Doe',
+        userName: 'Lucia Ramirez',
         messageTime: '4 mins ago',
-        messageText: 'Hey there, this is my test for a post of my social app in React Native.',
+        messageText: 'buenas, como andas?',
     },
     {
         id: '2',
-        userName: 'John Doe',
-        messageTime: '2 hours ago',
-        messageText: 'Hey there, this is my test for a post of my social app in React Native.',
+        userName: 'Florencia Toloza',
+        messageTime: '1 hours ago',
+        messageText: 'si obvio! Igual despues vemos que onda',
     },
     {
         id: '3',
-        userName: 'Ken William',
-        messageTime: '1 hours ago',
-        messageText: 'Hey there, this is my test for a post of my social app in React Native.',
+        userName: 'Julieta Fernandez',
+        messageTime: '2 hours ago',
+        messageText: 'cansada',
     },
     {
         id: '4',
-        userName: 'Selina Paul',
+        userName: 'Gabriela Gimenez',
         messageTime: '1 day ago',
-        messageText: 'Hey there, this is my test for a post of my social app in React Native.',
+        messageText: 'jajajaja noo, me re colgue',
     },
     {
         id: '5',
-        userName: 'Christy Alex',
+        userName: 'Martina Montero',
         messageTime: '2 days ago',
-        messageText: 'Hey there, this is my test for a post of my social app in React Native.',
+        messageText: 'hablamos',
     },
 ];
 

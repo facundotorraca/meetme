@@ -18,7 +18,7 @@ export const Invitacion = (props) => {
                     alignSelf: 'center',
                     marginTop: 15
                     }}
-                >Tu invitacion a {user.name} fue enviada con exito!</Text>
+                >Tu invitacion a {user} fue enviada con exito!</Text>
                 <Card>
                     <Card.Title>Invitación</Card.Title>
                     <Card.Divider />
@@ -30,8 +30,8 @@ export const Invitacion = (props) => {
 };
 
 export const PubScreen = (props) => {
-    const [value, setValue] = useState('Juan');
-    const [invitado, setInvitado] = useState(0);
+    const [value, setValue] = useState('');
+    const [invitado, setInvitado] = useState('Lucia Ramirez');
     const {top, bottom} = useSafeAreaInsets()
     const pub = props.route.params.pub;
 
@@ -44,7 +44,7 @@ export const PubScreen = (props) => {
                     <Card.Divider />
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Image style={styles.image} resizeMode="cover" source={{ uri: pub.link }}/>
-                        <Text style={{fontSize: 15}}>{pub.location}</Text>
+                        <Text style={{fontSize: 15, alignSelf:'center'}}>{pub.location}</Text>
                     </View>
                 </Card>
 
@@ -52,9 +52,11 @@ export const PubScreen = (props) => {
                     selectedValue={invitado}
                     onValueChange={(itemValue, itemIndex) => setInvitado(itemValue)}
                 >
-                    <Picker.Item label="Juan" value="Juan" />
-                    <Picker.Item label="Pedro" value="Pedro" />
-                    <Picker.Item label="Natalia" value="Natalia" />
+                    <Picker.Item label="Lucia Ramirez" value="Lucia Ramirez" />
+                    <Picker.Item label="Florencia Toloza" value="Florencia Toloza" />
+                    <Picker.Item label="Julieta Fernandez" value="Julieta Fernandez" />
+                    <Picker.Item label="Gabriela Gimenez" value="Gabriela Gimenez" />
+                    <Picker.Item label="Martina Montero" value="Martina Montero" />
                 </Picker>
 
                 <Input

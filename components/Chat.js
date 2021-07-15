@@ -10,7 +10,7 @@ export default function Chat({ route }) {
     setMessages([
       {
         _id: 1,
-        text: 'Hello developer',
+        text: 'buenas, como andas?',
         createdAt: new Date(),
         user: {
           _id: 2,
