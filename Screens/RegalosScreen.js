@@ -4,21 +4,42 @@ import TopBar from '../components/TopBar';
 import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
 import { StyleSheet, View, Text, Picker } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors } from '../config/index.js';
 
 export const MensajeRegalo = (props) => {
     const mensaje = props.route.params.mensaje;
     const user = props.route.params.user;
-    const {top, bottom} = useSafeAreaInsets()
+    const { top, bottom } = useSafeAreaInsets();
 
     return (
-        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
+        <View
+            style={{
+                ...styles.container,
+                marginTop: top + 10,
+                marginBottom: bottom,
+                backgroundColor: colors.PINK,
+            }}
+        >
             <TopBar navigation={props.navigation} menu={menus.REGALO} />
-            <View style={{marginTop: 20}}>
-                <Text style={{alignSelf: 'center', marginTop: 15}}>Tu regalo a {user} fue enviada con exito!</Text>
-                <Card>
+            <View style={{ marginTop: 20 }}>
+                <Text
+                    style={{
+                        alignSelf: 'center',
+                        marginTop: 15,
+                        fontSize: 15,
+                        fontWeight: 'bold',
+                    }}
+                >
+                    Tu regalo a {user} fue enviada con exito!
+                </Text>
+                <Card
+                    containerStyle={{
+                        backgroundColor: colors.YELLOW,
+                    }}
+                >
                     <Card.Title>Mensaje</Card.Title>
                     <Card.Divider />
-                    <Text style={{ marginBottom: 10 }}>{mensaje}</Text>
+                    <Text style={{ marginBottom: 10, alignSelf: 'center' }}>{mensaje}</Text>
                 </Card>
             </View>
         </View>
@@ -28,23 +49,48 @@ export const MensajeRegalo = (props) => {
 export const Regalo = (props) => {
     const [value, setValue] = useState('');
     const [invitado, setInvitado] = useState('Lucia Ramirez');
-    const {top, bottom} = useSafeAreaInsets()
+    const { top, bottom } = useSafeAreaInsets();
     const regalo = props.route.params.regalo;
 
     return (
-        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
+        <View
+            style={{
+                ...styles.container,
+                marginTop: top + 10,
+                marginBottom: bottom,
+                backgroundColor: colors.PINK,
+            }}
+        >
             <TopBar navigation={props.navigation} menu={menus.REGALO} />
-            <View style={{marginTop: 20}}>
-                <Card>
-                    <Card.Title style={{fontSize: 19}}>{regalo.name}</Card.Title>
+            <View style={{ marginTop: 20 }}>
+                <Card
+                    containerStyle={{
+                        backgroundColor: colors.YELLOW,
+                    }}
+                >
+                    <Card.Title style={{ fontSize: 19 }}>{regalo.name}</Card.Title>
                     <Card.Divider />
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                        <Image style={styles.image} resizeMode="cover" source={{ uri: regalo.link }}/>
-                        <Text style={{
-                            marginRight: 25,
-                            fontWeight: 'bold',
-                            fontSize: 23
-                            }}>{regalo.precio}</Text>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <Image
+                            style={styles.image}
+                            resizeMode="cover"
+                            source={{ uri: regalo.link }}
+                        />
+                        <Text
+                            style={{
+                                marginRight: 25,
+                                fontWeight: 'bold',
+                                fontSize: 23,
+                            }}
+                        >
+                            {regalo.precio}
+                        </Text>
                     </View>
                 </Card>
 
@@ -66,15 +112,19 @@ export const Regalo = (props) => {
                     onChangeText={(value) => setValue(value)}
                 />
 
-                <Button
-                    title="Enviar!"
-                    onPress={() =>
-                        props.navigation.navigate('MensajeRegalo', {
-                            mensaje: value,
-                            user: invitado,
-                        })
-                    }
-                />
+                <View style={{ padding: 10 }}>
+                    <Button
+                        containerStyle={{ borderRadius: 20, marginBottom: 10 }}
+                        buttonStyle={{ backgroundColor: colors.PURPLE }}
+                        title="Enviar!"
+                        onPress={() =>
+                            props.navigation.navigate('MensajeRegalo', {
+                                mensaje: value,
+                                user: invitado,
+                            })
+                        }
+                    />
+                </View>
             </View>
         </View>
     );
@@ -101,24 +151,35 @@ export default Regalos = ({ navigation }) => {
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
         },
     ];
-    const {top, bottom} = useSafeAreaInsets()
+    const { top, bottom } = useSafeAreaInsets();
 
     return (
-        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
+        <View
+            style={{
+                ...styles.container,
+                marginTop: top + 10,
+                marginBottom: bottom,
+            }}
+        >
             <TopBar navigation={navigation} menu={menus.REGALO} />
-            <View style={{marginTop: 20}}>
+            <View style={{ marginTop: 20 }}>
                 {regalos.map((r, index) => (
                     <ListItem
+                        containerStyle={{ backgroundColor: colors.PINK }}
                         key={index}
                         onPress={() => navigation.navigate('Regalo', { regalo: r })}
                         bottomDivider
                     >
                         <Avatar source={{ uri: r.link }} />
                         <ListItem.Content>
-                            <ListItem.Title style={{
-                                fontWeight: 'bold',
-                                fontSize: 19
-                            }}>{r.name}</ListItem.Title>
+                            <ListItem.Title
+                                style={{
+                                    fontWeight: 'bold',
+                                    fontSize: 19,
+                                }}
+                            >
+                                {r.name}
+                            </ListItem.Title>
                             <ListItem.Subtitle>{r.precio}</ListItem.Subtitle>
                         </ListItem.Content>
                     </ListItem>
