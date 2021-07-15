@@ -52,6 +52,12 @@ export const Regalo = (props) => {
     const { top, bottom } = useSafeAreaInsets();
     const regalo = props.route.params.regalo;
 
+    const envio = getRandomInt(15, 300);
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
     return (
         <View
             style={{
@@ -82,15 +88,26 @@ export const Regalo = (props) => {
                             resizeMode="cover"
                             source={{ uri: regalo.link }}
                         />
-                        <Text
-                            style={{
-                                marginRight: 25,
-                                fontWeight: 'bold',
-                                fontSize: 23,
-                            }}
-                        >
-                            {regalo.precio}
-                        </Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            <Text
+                                style={{
+                                    marginRight: 25,
+                                    fontWeight: 'bold',
+                                    fontSize: 23,
+                                }}
+                            >
+                                {regalo.precio}
+                            </Text>
+                            <Text
+                                style={{
+                                    marginRight: 25,
+                                    fontWeight: 'bold',
+                                    fontSize: 10,
+                                }}
+                            >
+                                precio envío: ${envio}
+                            </Text>
+                        </View>
                     </View>
                 </Card>
 

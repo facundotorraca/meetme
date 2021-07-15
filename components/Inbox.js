@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config';
 
 var randomColor = function (obj) {
     var keys = Object.keys(obj);
-    return obj[keys[keys.length * Math.random() << 0]];
+    return obj[keys[(keys.length * Math.random()) << 0]];
 };
 
 const Messages = [
@@ -49,11 +49,7 @@ export default function Inbox({ navigation }) {
         >
             <View style={styles.chatInfo}>
                 <View style={styles.userImageWrapper}>
-                    <FontAwesome
-                        name={'user'}
-                        size={53}
-                        color={randomColor(colors)}
-                    />
+                    <FontAwesome name={'user'} size={53} color={randomColor(colors)} />
                 </View>
                 <View style={styles.chatDescription}>
                     <View style={styles.userInfoContainer}>
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
         alignItems: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FBFDD2',
     },
 
     chatCard: {

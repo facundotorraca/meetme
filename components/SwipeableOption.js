@@ -3,13 +3,12 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../config';
 import { useScrollToTop } from '@react-navigation/native';
-import Icons from './Icons'
+import Icons from './Icons';
 
 // Initially heres come an URL but
 // it is going to be replaced by some text
 // to give the impression o selection based
 // on tastes
-
 
 export default function SwipeableOption({ user, willLike, willPass }) {
     const defaultIconColor = 'white';
@@ -32,39 +31,38 @@ export default function SwipeableOption({ user, willLike, willPass }) {
             default:
                 return null;
         }
-    }
+    };
 
     return (
         <View style={{}}>
             <View style={styles.contenedor}>
                 <View style={styles.contenedor_pref}>
-                    {
-                        user.preferences.map((value, index) => {
-                            return (
-                                <View key={value} style={[styles.contenedor_lat]}>
-                                    <Text style={styles.textPreferences}> {value} </Text>
-                                    <FontAwesome5
-                                        name={getIconName(value)}
-                                        style={styles.iconPreferences}
-                                        size={iconSize}
-                                        color={defaultIconColor}
-                                    ></FontAwesome5>
-                                </View>
-                            )
-                        })
-                    }  
+                    {user.preferences.map((value, index) => {
+                        return (
+                            <View key={value} style={[styles.contenedor_lat]}>
+                                <Text style={styles.textPreferences}> {value} </Text>
+                                <FontAwesome5
+                                    name={getIconName(value)}
+                                    style={styles.iconPreferences}
+                                    size={iconSize}
+                                    color={defaultIconColor}
+                                ></FontAwesome5>
+                            </View>
+                        );
+                    })}
                 </View>
                 <View style={styles.textAndImageContainer}>
                     <View style={styles.imageContainer}>
-                        <Image 
-                            source={Icons[user.img_id]}
-                            style={styles.avatar} 
-                        />
+                        <Image source={Icons[user.img_id]} style={styles.avatar} />
                     </View>
-                    <View style={styles.textContainer}>            
+                    <View style={styles.textContainer}>
                         <View style={styles.textRow}>
-                                <Text style={[styles.textPrimary, styles.textShadow]}>{user.userName}</Text>
-                                <Text style={[styles.textSecondary, styles.textShadow]}>{user.age}</Text>
+                            <Text style={[styles.textPrimary, styles.textShadow]}>
+                                {user.userName}
+                            </Text>
+                            <Text style={[styles.textSecondary, styles.textShadow]}>
+                                {user.age}
+                            </Text>
                         </View>
                         <View style={styles.textRow}>
                             <FontAwesome name="map-marker" size={28} color="white"></FontAwesome>
@@ -88,7 +86,6 @@ export default function SwipeableOption({ user, willLike, willPass }) {
                     <Text style={{ ...styles.textPrimary, color: '#F06795' }}>Pasar</Text>
                 </View>
             )}
-            
         </View>
     );
 }
@@ -128,13 +125,13 @@ const styles = StyleSheet.create({
         left: 40,
         borderColor: '#64EDCC',
     },
-    
+
     contenedor: {
         backgroundColor: colors.DARK_PURPLE,
         height: '100%',
         // resizeMode: 'cover',
         borderRadius: 20,
-        padding: 15
+        padding: 15,
     },
     contenedor_pref: {
         paddingTop: 20,
@@ -155,8 +152,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     avatar: {
-        width: 140, 
-        height: 140, 
+        width: 140,
+        height: 140,
         // borderRadius: 400/2,
         // paddingLeft: 20
     },
@@ -176,12 +173,12 @@ const styles = StyleSheet.create({
         // position: 'relative'
         alignItems: 'center',
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
     },
     textPrimary: {
         color: 'white',
