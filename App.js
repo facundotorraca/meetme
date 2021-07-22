@@ -4,7 +4,6 @@ import { menus } from './config';
 import Chat from './components/Chat';
 import Inbox from './components/Inbox';
 import Swipes from './components/Swipes';
-import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import HomeScreen from './Screens/HomeScreen';
 import { Alert, StyleSheet, View } from 'react-native';
@@ -12,20 +11,49 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
 import Regalos, { Regalo, MensajeRegalo } from './Screens/RegalosScreen';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import { InboxScreen } from './components/Inbox';
+import MiPerfil from './components/MiPerfil';
 
-function InboxScreen({ navigation }) {
-    const {top, bottom} = useSafeAreaInsets()
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+const StackChat = createStackNavigator();
+const StackMensajeria = () => {
     return (
-        <View style={{...styles.container, marginTop: top +10, marginBottom: bottom}}>
-            <TopBar navigation={navigation} menu={menus.INBOX} />
-            <View style={{height: 20}}/>
-            <Inbox navigation={navigation} />
-        </View>
+        <StackChat.Navigator
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: 'white',
+                },
+            }}
+        >
+            <StackChat.Screen
+                name="Inbox"
+                component={InboxScreen}
+                options={({ route }) => ({
+                    headerTitle: false,
+                })}
+            />
+            <StackChat.Screen name="Chat" component={Chat} />
+        </StackChat.Navigator>
     );
-}
+};
 
-export default function App() {
+const Tab = createMaterialTopTabNavigator();
+const TabTop = () => {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Chat" component={StackMensajeria} />
+            <Tab.Screen name="MiPerfil" component={MiPerfil} />
+        </Tab.Navigator>
+    );
+};
+
+const RootComponent = () => {
     const Stack = createStackNavigator();
 
     return (
@@ -34,32 +62,16 @@ export default function App() {
                 screenOptions={{
                     headerShown: false,
                     cardStyle: {
-                        backgroundColor: 'white'
-                    }
+                        backgroundColor: 'white',
+                    },
                 }}
             >
+                <Stack.Screen name="Tab" component={TabTop} />
                 <Stack.Screen
                     name="Meetme"
                     component={HomeScreen}
                     options={({ route }) => ({
                         headerTitle: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Inbox"
-                    component={InboxScreen}
-                    options={({ route }) => ({
-                        headerTitle: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Chat"
-                    component={Chat}
-                    options={({ route }) => ({
-                        title: route.params.userName,
-                        headerBackTitleVisible: false,
                     })}
                 />
 
@@ -110,8 +122,28 @@ export default function App() {
                         headerBackTitleVisible: false,
                     })}
                 />
+
+                <Stack.Screen
+                    name="Mi Perfil"
+                    component={MiPerfil}
+                    options={({ route }) => ({
+                        headerBackTitleVisible: false,
+                    })}
+                />
             </Stack.Navigator>
         </NavigationContainer>
+    );
+};
+
+const { store, persistor } = configureStore();
+
+export default function App() {
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <RootComponent />
+            </PersistGate>
+        </Provider>
     );
 }
 

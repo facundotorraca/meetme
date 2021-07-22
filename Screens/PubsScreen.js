@@ -21,7 +21,6 @@ export const Invitacion = (props) => {
                 backgroundColor: colors.PINK,
             }}
         >
-            <TopBar navigation={props.navigation} menu={menus.PUBS} />
             <View>
                 <Text
                     style={{
@@ -62,7 +61,6 @@ export const PubScreen = (props) => {
                 backgroundColor: colors.PINK,
             }}
         >
-            <TopBar navigation={props.navigation} menu={menus.PUBS} />
             <View>
                 <Card
                     containerStyle={{
@@ -194,7 +192,6 @@ export default function PubsScreen({ navigation }) {
 
     return (
         <View style={{ ...styles.container, marginTop: top + 10, marginBottom: bottom }}>
-            <TopBar navigation={navigation} menu={menus.PUBS} />
             <View style={{ marginTop: 15 }}>
                 {pubs.map((pub, index) => (
                     <ListItem

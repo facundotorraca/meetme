@@ -2,6 +2,19 @@ import React from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import TopBar from './TopBar';
+import { menus } from '../config';
+
+export const InboxScreen = ({ navigation }) => {
+    const { top, bottom } = useSafeAreaInsets();
+    return (
+        <View style={{ flex: 1, marginTop: top + 10, marginBottom: bottom }}>
+            <View style={{ height: 20 }} />
+            <Inbox navigation={navigation} />
+        </View>
+    );
+};
 
 var randomColor = function (obj) {
     var keys = Object.keys(obj);
@@ -80,6 +93,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         alignItems: 'center',
         backgroundColor: '#FBFDD2',
+        height: '100%',
     },
 
     chatCard: {

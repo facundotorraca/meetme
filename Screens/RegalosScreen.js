@@ -20,7 +20,6 @@ export const MensajeRegalo = (props) => {
                 backgroundColor: colors.PINK,
             }}
         >
-            <TopBar navigation={props.navigation} menu={menus.REGALO} />
             <View style={{ marginTop: 20 }}>
                 <Text
                     style={{
@@ -67,7 +66,6 @@ export const Regalo = (props) => {
                 backgroundColor: colors.PINK,
             }}
         >
-            <TopBar navigation={props.navigation} menu={menus.REGALO} />
             <View style={{ marginTop: 20 }}>
                 <Card
                     containerStyle={{
@@ -178,7 +176,6 @@ export default Regalos = ({ navigation }) => {
                 marginBottom: bottom,
             }}
         >
-            <TopBar navigation={navigation} menu={menus.REGALO} />
             <View style={{ marginTop: 20 }}>
                 {regalos.map((r, index) => (
                     <ListItem
