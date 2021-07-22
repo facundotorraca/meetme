@@ -3,8 +3,6 @@ import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import TopBar from './TopBar';
-import { menus } from '../config';
 
 export const InboxScreen = ({ navigation }) => {
     const { top, bottom } = useSafeAreaInsets();

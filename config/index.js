@@ -1,8 +1,8 @@
 export const colors = {
     PURPLE: '#9C27B0',
     DARK_PURPLE: '#8225E2',
-    YELLOW: '#B68AB7',
-    PINK: '#F4DDEE',
+    YELLOW: '#FBB831',
+    PINK: '#E850E0',
     ORANGE: '#FB8569',
 };
 

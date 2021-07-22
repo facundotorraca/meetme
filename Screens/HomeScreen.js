@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/TopBar_deprecated';
 import { View, StyleSheet } from 'react-native';
 import { menus } from '../config';
 import BottomBar from '../components/BottomBar';
