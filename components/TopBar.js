@@ -1,88 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import StackChat from './StackChat';
+import MiPerfil from './MiPerfil';
+import { colors } from '../config';
+import HomeScreen from '../Screens/HomeScreen';
+import { StyleSheet } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { colors, menus } from '../config';
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-export default function TopBar({ navigation, menu }) {
-    const defaultIconColor = '#5C5C5C';
-    const iconSize = 27;
+const Tab = createMaterialTopTabNavigator();
 
-    const [fireIconColor, setFireIconColor] = useState(defaultIconColor);
-    const [chatIconColor, setChatIconColor] = useState(defaultIconColor);
-    const [userIconColor, setUserIconColor] = useState(defaultIconColor);
-    const [pubsIconColor, setPubsIconColor] = useState(defaultIconColor);
+const inactiveColor = 'white';
+const iconSize = 30;
 
-    useEffect(() => {
-        switch (menu) {
-            case menus.MEETME:
-                setFireIconColor(colors.ORANGE);
-                break;
-
-            case menus.INBOX:
-                setChatIconColor(colors.PURPLE);
-                break;
-
-            case menus.REGALO:
-                setUserIconColor(colors.YELLOW);
-                break;
-
-            case menus.PUBS:
-                setPubsIconColor(colors.DARK_PURPLE);
-                break;
-
-            default:
-                break;
-        }
-    }, []);
-
+const TabTopBar = () => {
     return (
-        <View style={styles.container}>
-            <FontAwesome5
-                name="fire"
-                size={iconSize}
-                color={fireIconColor}
-                onPress={() => navigation.navigate('Meetme')}
-            ></FontAwesome5>
+        <Tab.Navigator
+            tabBarOptions={{
+                showIcon: true,
+                showLabel: false,
+                style: { ...styles.container },
+            }}
+        >
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    color: colors.PURPLE,
+                    title: 'Home',
+                    tabBarIcon: ({ focused }) => (
+                        <FontAwesome5
+                            name="fire"
+                            size={iconSize}
+                            color={focused ? colors.PURPLE : inactiveColor}
+                        ></FontAwesome5>
+                    ),
+                }}
+            />
 
-            <FontAwesome
-                name="comments"
-                size={iconSize}
-                color={chatIconColor}
-                onPress={() => navigation.navigate('Inbox')}
-            ></FontAwesome>
+            <Tab.Screen
+                name="Chat"
+                component={StackChat}
+                options={{
+                    title: 'Chat',
+                    tabBarBadge: 3,
+                    tabBarIcon: ({ focused }) => (
+                        <FontAwesome
+                            name="comments"
+                            size={iconSize}
+                            color={focused ? colors.YELLOW : inactiveColor}
+                        ></FontAwesome>
+                    ),
+                }}
+            />
 
-            <FontAwesome5
-                name="cocktail"
-                size={iconSize}
-                color={pubsIconColor}
-                onPress={() => navigation.navigate('Pubs')}
-            ></FontAwesome5>
-
-            <FontAwesome
-                name="gift"
-                size={30}
-                color={userIconColor}
-                onPress={() => navigation.navigate('Regalos')}
-            ></FontAwesome>
-        </View>
+            <Tab.Screen
+                name="MiPerfil"
+                component={MiPerfil}
+                options={{
+                    title: 'Me',
+                    showIcon: true,
+                    tabBarIcon: ({ focused }) => (
+                        <FontAwesome
+                            name="user"
+                            size={iconSize}
+                            color={focused ? colors.PINK : inactiveColor}
+                        ></FontAwesome>
+                    ),
+                }}
+            />
+        </Tab.Navigator>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
-        height: 60,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 15,
-        backgroundColor: 'white',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.12,
-        shadowRadius: 5.46,
-        elevation: 9,
+        paddingTop: 50,
+        paddingBottom: 10,
+        backgroundColor: colors.ORANGE,
     },
 });
+
+export default TabTopBar;

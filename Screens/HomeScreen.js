@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import TopBar from '../components/TopBar';
 import { View, StyleSheet } from 'react-native';
-import { menus } from '../config';
 import BottomBar from '../components/BottomBar';
 import Swipes from '../components/Swipes';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
