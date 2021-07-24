@@ -5,17 +5,6 @@ import { colors } from '../config';
 import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
 
-const userMock = {
-    id: 0,
-    nombre: 'Sergio Aguero',
-    edad: 40,
-    ciudad: 'Buenos Aires',
-    gustos: ['Salir de fiesta', 'Videojuegos', 'Aire libre'],
-    match: false,
-    descripcion:
-        'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
-};
-
 export default function UserCard({ user, willLike, willPass }) {
     const iconSize = 25;
 
@@ -30,10 +19,10 @@ export default function UserCard({ user, willLike, willPass }) {
             <Chip
                 title={gusto}
                 icon={{
-                    name: infoGustos[gusto].icono,
+                    name: infoGustos[gusto]?.icono,
                     type: 'font-awesome',
                     size: iconSize,
-                    color: infoGustos[gusto].color,
+                    color: infoGustos[gusto]?.color,
                 }}
                 type="solid"
                 backgroundColor="red"
@@ -41,8 +30,6 @@ export default function UserCard({ user, willLike, willPass }) {
             />
         </View>
     );
-
-    user = userMock;
 
     return (
         <View>

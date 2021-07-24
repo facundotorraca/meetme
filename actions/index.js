@@ -23,9 +23,7 @@ const loggearUsuario = () => ({
     type: 'LOGGEAR',
 });
 
-const addTodoFailure = (error) => ({
-    type: ADD_TODO_FAILURE,
-    payload: {
-        error,
-    },
+export const matchearUsuario = (usuario) => ({
+    type: 'MATCH_USER',
+    payload: usuario,
 });

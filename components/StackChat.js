@@ -15,7 +15,13 @@ const StackChat = () => {
                 },
             }}
         >
-            <Stack.Screen name="Inbox" component={Inbox} />
+            <Stack.Screen
+                name="Inbox"
+                component={Inbox}
+                options={({ route }) => ({
+                    headerBackTitleVisible: true,
+                })}
+            />
             <Stack.Screen name="Chat" component={Chat} />
         </Stack.Navigator>
     );

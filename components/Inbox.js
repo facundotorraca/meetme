@@ -4,6 +4,7 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { BigHead } from 'react-native-bigheads';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../config';
+import { useSelector } from 'react-redux';
 
 export const InboxScreen = ({ navigation }) => {
     const { top, bottom } = useSafeAreaInsets();
@@ -20,86 +21,70 @@ var randomColor = function (obj) {
     return obj[keys[(keys.length * Math.random()) << 0]];
 };
 
-const Messages = [
-    {
-        id: '1',
-        userName: 'Lucia Ramirez',
-        messageTime: '4 mins ago',
-        messageText: 'buenas, como andas?',
-    },
-    {
-        id: '2',
-        userName: 'Florencia Toloza',
-        messageTime: '1 hours ago',
-        messageText: 'si obvio! Igual despues vemos que onda',
-    },
-    {
-        id: '3',
-        userName: 'Julieta Fernandez',
-        messageTime: '2 hours ago',
-        messageText: 'cansada',
-    },
-    {
-        id: '4',
-        userName: 'Gabriela Gimenez',
-        messageTime: '1 day ago',
-        messageText: 'jajajaja noo, me re colgue',
-    },
-    {
-        id: '5',
-        userName: 'Martina Montero',
-        messageTime: '2 days ago',
-        messageText: 'hablamos',
-    },
-];
-
 export default function Inbox({ navigation }) {
-    const chatItem = ({ item }) => (
-        <TouchableOpacity
-            style={styles.chatCard}
-            onPress={() => navigation.navigate('Chat', { userName: item.userName })}
-        >
-            <View style={styles.chatInfo}>
-                <View style={styles.userImageWrapper}>
-                    <BigHead
-                        accessory="shades"
-                        bgColor="yellow"
-                        bgShape="circle"
-                        body="chest"
-                        clothing="tankTop"
-                        clothingColor="black"
-                        eyebrows="angry"
-                        eyes="wink"
-                        facialHair="mediumBeard"
-                        graphic="vue"
-                        hair="short"
-                        hairColor="black"
-                        hat="none"
-                        hatColor="green"
-                        lashes={false}
-                        lipColor="purple"
-                        mouth="open"
-                        showBackground={true}
-                        size={80}
-                        skinTone="brown"
-                    />
-                </View>
-                <View style={styles.chatDescription}>
-                    <View style={styles.userInfoContainer}>
-                        <Text style={styles.chatUserName}>{item.userName}</Text>
-                        <Text style={styles.chatPostTime}>{item.messageTime}</Text>
+    const users = useSelector((state) => state.general.usuariosTotales);
+    const chats = useSelector((state) => state.general.mensajes);
+
+    let matches = users.filter((u) => u.match == true);
+
+    const chatItem = ({ item }) => {
+        return (
+            <TouchableOpacity
+                style={styles.chatCard}
+                onPress={() => navigation.navigate('Chat', { userName: item.nombre })}
+            >
+                <View style={styles.chatInfo}>
+                    <View style={styles.userImageWrapper}>
+                        <BigHead
+                            accessory="shades"
+                            bgColor="yellow"
+                            bgShape="circle"
+                            body="chest"
+                            clothing="tankTop"
+                            clothingColor="black"
+                            eyebrows="angry"
+                            eyes="wink"
+                            facialHair="mediumBeard"
+                            graphic="vue"
+                            hair="short"
+                            hairColor="black"
+                            hat="none"
+                            hatColor="green"
+                            lashes={false}
+                            lipColor="purple"
+                            mouth="open"
+                            showBackground={true}
+                            size={80}
+                            skinTone="brown"
+                        />
                     </View>
-                    <Text style={styles.messageText}>{item.messageText}</Text>
+                    <View style={styles.chatDescription}>
+                        <View style={styles.userInfoContainer}>
+                            <Text style={styles.chatUserName}>{item.nombre}</Text>
+                            <Text style={styles.chatPostTime}>
+                                {chats[`${item.id}`]?.conversacion?.[
+                                    chats[`${item.id}`]?.conversacion?.length - 1
+                                ].fecha.toString()}
+                            </Text>
+                        </View>
+                        <Text style={styles.messageText}>
+                            {
+                                chats[`${item.id}`]?.conversacion?.[
+                                    chats[`${item.id}`]?.conversacion?.length - 1
+                                ].mensaje
+                            }
+                        </Text>
+                    </View>
                 </View>
-            </View>
-        </TouchableOpacity>
-    );
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={Messages}
-                keyExtractor={(item) => item.id}
+                data={matches}
+                keyExtractor={(usuario) => usuario.id.toString()}
                 renderItem={chatItem}
             ></FlatList>
         </View>

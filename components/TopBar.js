@@ -5,15 +5,19 @@ import { colors } from '../config';
 import HomeScreen from '../Screens/HomeScreen';
 import { StyleSheet } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { Dimensions } from 'react-native';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const Tab = createMaterialTopTabNavigator();
-
-const inactiveColor = 'white';
-const iconSize = 30;
-
 const TabTopBar = () => {
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
+
+    const Tab = createMaterialTopTabNavigator();
+
+    const inactiveColor = 'white';
+    const iconSize = 25;
+
     return (
         <Tab.Navigator
             tabBarOptions={{

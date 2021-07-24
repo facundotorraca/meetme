@@ -1,12 +1,8 @@
-const mensajes = [
-    {
-        idUsuario: {
-            conversacion: [
-                { senderMe: true, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') },
-            ],
-        },
+const mensajes = {
+    1: {
+        conversacion: [{ senderMe: true, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
     },
-];
+};
 
 export const gustos = {
     MUSICA: 'Musica',
@@ -14,31 +10,6 @@ export const gustos = {
     AIRE_LIBRE: 'Aire libre',
     VIDEOJUEGOS: 'Videojuegos',
     SALIR_DE_FIESTA: 'Salir de fiesta',
-};
-
-export const initialState = {
-    usuario: { autorizado: false },
-
-    caracteristicasUsuario: {
-        nombre: '',
-        apellido: '',
-        edad: '',
-        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
-    },
-
-    caracteristicasPago: {
-        numeroTarjeta: 123134141,
-        banco: 'Santander Rio',
-        premium: true,
-    },
-
-    lugares: [{ nombre: 'Vita', direccion: 'Palermo', Estrellas: 4, tipo: 'Pub' }],
-    regalos: [{ nombre: 'Caja de bombones', precio: 500, tipo: 'Dulces' }],
-    matches: [{ idUsuario: 1, nombre: 'Sergio', edad: 40, ciudad: 'Buenos Aires' }],
-
-    mensajes: mensajes,
-    usuariosTotales: usuarios,
-    app: { idUsuarioChat: null },
 };
 
 const usuarios = [
@@ -59,7 +30,7 @@ const usuarios = [
         edad: 21,
         ciudad: 'Rosario',
         gustos: [gustos.DEPORTES, gustos.VIDEOJUEGOS],
-        match: false,
+        match: true,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
@@ -70,8 +41,41 @@ const usuarios = [
         edad: 37,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
-        match: true,
+        match: false,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
+    {
+        id: 3,
+        nombre: 'Facundo Torraca',
+        edad: 22,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
+        match: false,
+        descripcion: 'Soy de virgo',
+    },
 ];
+
+export const initialState = {
+    usuario: { autorizado: false },
+
+    caracteristicasUsuario: {
+        nombre: '',
+        apellido: '',
+        edad: '',
+        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+    },
+
+    caracteristicasPago: {
+        numeroTarjeta: 123134141,
+        banco: 'Santander Rio',
+        premium: true,
+    },
+
+    lugares: [{ nombre: 'Vita', direccion: 'Palermo', Estrellas: 4, tipo: 'Pub' }],
+    regalos: [{ nombre: 'Caja de bombones', precio: 500, tipo: 'Dulces' }],
+
+    mensajes: mensajes,
+    usuariosTotales: usuarios,
+    app: { idUsuarioChat: null },
+};
