@@ -1,9 +1,10 @@
 export const colors = {
-    PURPLE: '#9C27B0',
-    DARK_PURPLE: '#8225E2',
-    YELLOW: '#FBB831',
     PINK: '#E850E0',
+    PURPLE: '#9C27B0',
+    YELLOW: '#FBB831',
     ORANGE: '#FB8569',
+    DARK_PINK: '#FB569C',
+    DARK_PURPLE: '#8225E2',
 };
 
 export const menus = {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import SwipeableOption from './SwipeableOption';
+import UserCard from './UserCard';
 import { Swipeable } from 'react-native-gesture-handler';
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -11,7 +11,7 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     const renderLeftActions = () => {
         return (
             <RectButton style={styles.container}>
-                <SwipeableOption user={users[currentIndex + 1]} />
+                <UserCard user={users[currentIndex + 1]} />
             </RectButton>
         );
     };
@@ -19,7 +19,7 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     const renderRightActions = () => {
         return (
             <RectButton style={styles.container}>
-                <SwipeableOption user={users[currentIndex + 1]} />
+                <UserCard user={users[currentIndex + 1]} />
             </RectButton>
         );
     };
@@ -27,9 +27,9 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     return (
         <Swipeable
             ref={swipesRef}
-            friction={2}
-            leftThreshold={40}
-            rightThreshold={40}
+            friction={3}
+            leftThreshold={10}
+            rightThreshold={10}
             renderLeftActions={renderLeftActions}
             renderRightActions={renderRightActions}
             onSwipeableLeftOpen={() => {
@@ -43,7 +43,7 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
             onSwipeableLeftWillOpen={() => setWillLike(true)}
             onSwipeableRightWillOpen={() => setWillPass(true)}
         >
-            <SwipeableOption user={users[currentIndex]} willLike={willLike} willPass={willPass} />
+            <UserCard user={users[currentIndex]} willLike={willLike} willPass={willPass} />
         </Swipeable>
     );
 }

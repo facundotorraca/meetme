@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { colors } from '../config';
+import { BigHead } from 'react-native-bigheads';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors } from '../config';
 
 export const InboxScreen = ({ navigation }) => {
     const { top, bottom } = useSafeAreaInsets();
@@ -60,7 +61,28 @@ export default function Inbox({ navigation }) {
         >
             <View style={styles.chatInfo}>
                 <View style={styles.userImageWrapper}>
-                    <FontAwesome name={'user'} size={53} color={randomColor(colors)} />
+                    <BigHead
+                        accessory="shades"
+                        bgColor="yellow"
+                        bgShape="circle"
+                        body="chest"
+                        clothing="tankTop"
+                        clothingColor="black"
+                        eyebrows="angry"
+                        eyes="wink"
+                        facialHair="mediumBeard"
+                        graphic="vue"
+                        hair="short"
+                        hairColor="black"
+                        hat="none"
+                        hatColor="green"
+                        lashes={false}
+                        lipColor="purple"
+                        mouth="open"
+                        showBackground={true}
+                        size={80}
+                        skinTone="brown"
+                    />
                 </View>
                 <View style={styles.chatDescription}>
                     <View style={styles.userInfoContainer}>
@@ -90,7 +112,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
         alignItems: 'center',
-        backgroundColor: '#FBFDD2',
+        backgroundColor: 'white',
         height: '100%',
     },
 

@@ -5,7 +5,7 @@
   "printWidth": 100,
   "singleQuote": true,
   "useTabs": false,
-  "quoteProps": "as-needed",
+  "quoteProps":"consistent",
   "bracketSpacing": true,
   "arrowParens": "always"
 }
