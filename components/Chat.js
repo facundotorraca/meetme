@@ -19,13 +19,14 @@ export default function Chat({ route }) {
         .slice()
         .reverse()
         .map((m, i) => {
+            console.log(m);
             return {
                 _id: i,
                 text: m.mensaje,
                 createdAt: m.fecha,
                 user: {
-                    _id: m.senderMe == true ? usuarioPropio.id : match.id,
-                    name: m.senderMe == true ? usuarioPropio.nombre : match.nombre,
+                    _id: m.senderMe ? usuarioPropio.id : match.id,
+                    name: m.senderMe ? usuarioPropio.nombre : match.nombre,
                 },
             };
         });
@@ -43,9 +44,7 @@ export default function Chat({ route }) {
         <GiftedChat
             messages={messages}
             onSend={(messages) => onSend(messages)}
-            user={{
-                _id: match.id,
-            }}
+            user={{ _id: usuarioPropio.id }}
         />
     );
 }
