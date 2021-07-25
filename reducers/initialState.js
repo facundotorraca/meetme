@@ -1,15 +1,15 @@
-const mensajes = {
-    1: {
-        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
-    },
-};
-
 export const gustos = {
     MUSICA: 'Musica',
     DEPORTES: 'Deportes',
     AIRE_LIBRE: 'Aire libre',
     VIDEOJUEGOS: 'Videojuegos',
     SALIR_DE_FIESTA: 'Salir de fiesta',
+};
+
+const mensajes = {
+    1: {
+        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
+    },
 };
 
 const usuarios = [
@@ -23,7 +23,6 @@ const usuarios = [
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
-
     {
         id: 1,
         nombre: 'Lionel Messi',
@@ -34,13 +33,12 @@ const usuarios = [
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
-
     {
         id: 2,
         nombre: 'Roman Riquelme',
         edad: 37,
         ciudad: 'Buenos Aires',
-        gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         match: false,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
@@ -50,7 +48,7 @@ const usuarios = [
         nombre: 'Facundo Torraca',
         edad: 22,
         ciudad: 'Buenos Aires',
-        gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         match: false,
         descripcion: 'Soy de virgo',
     },
@@ -58,13 +56,6 @@ const usuarios = [
 
 export const initialState = {
     usuario: { autorizado: false, id: 9000, nombre: 'Barbara' },
-
-    caracteristicasUsuario: {
-        nombre: '',
-        apellido: '',
-        edad: '',
-        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
-    },
 
     caracteristicasPago: {
         numeroTarjeta: 123134141,

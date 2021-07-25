@@ -8,10 +8,18 @@ export default function BottomBar({ handlePassPress, handleLikePress, disabled }
         <View style={styles.container}>
             <View />
             <TouchableOpacity style={styles.button} onPress={handlePassPress} disabled={disabled}>
-                <FontAwesome name="times" size={buttonSize} color={colors.ORANGE}></FontAwesome>
+                <FontAwesome
+                    name="times"
+                    size={buttonSize}
+                    color={disabled ? 'grey' : colors.ORANGE}
+                ></FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleLikePress} disabled={disabled}>
-                <FontAwesome name="heart" size={buttonSize} color={colors.PINK}></FontAwesome>
+                <FontAwesome
+                    name="heart"
+                    size={buttonSize}
+                    color={disabled ? 'grey' : colors.DARK_PINK}
+                ></FontAwesome>
             </TouchableOpacity>
             <View />
         </View>

@@ -5,12 +5,12 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { RectButton } from 'react-native-gesture-handler';
 import EmptyUserCard from './EmptyUsersCard';
 
-function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
+function Swipes({ user, nextUser, handleLike, handlePass, swipesRef }) {
     const [willLike, setWillLike] = useState(false);
     const [willPass, setWillPass] = useState(false);
 
-    const renderLeftActions = () => {
-        if (users.length == 1) {
+    const renderNextUser = () => {
+        if (!nextUser) {
             return (
                 <RectButton style={styles.container}>
                     <EmptyUserCard />
@@ -20,23 +20,7 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
 
         return (
             <RectButton style={styles.container}>
-                <UserCard user={users[currentIndex + 1]} />
-            </RectButton>
-        );
-    };
-
-    const renderRightActions = () => {
-        if (users.length == 1) {
-            return (
-                <RectButton style={styles.container}>
-                    <EmptyUserCard />
-                </RectButton>
-            );
-        }
-
-        return (
-            <RectButton style={styles.container}>
-                <UserCard user={users[currentIndex + 1]} />
+                <UserCard user={nextUser} />
             </RectButton>
         );
     };
@@ -47,8 +31,8 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
             friction={3}
             leftThreshold={10}
             rightThreshold={10}
-            renderLeftActions={renderLeftActions}
-            renderRightActions={renderRightActions}
+            renderLeftActions={user && renderNextUser}
+            renderRightActions={user && renderNextUser}
             onSwipeableLeftOpen={() => {
                 setWillLike(false);
                 handleLike();
@@ -60,7 +44,11 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
             onSwipeableLeftWillOpen={() => setWillLike(true)}
             onSwipeableRightWillOpen={() => setWillPass(true)}
         >
-            <UserCard user={users[currentIndex]} willLike={willLike} willPass={willPass} />
+            {user ? (
+                <UserCard user={user} willLike={willLike} willPass={willPass} />
+            ) : (
+                <EmptyUserCard />
+            )}
         </Swipeable>
     );
 }

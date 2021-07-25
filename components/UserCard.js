@@ -41,7 +41,7 @@ export default function UserCard({ user, willLike, willPass }) {
                 </View>
                 <View style={styles.body}>
                     <View style={styles.imageContainer}>
-                        <BigHead
+                        {/* <BigHead
                             accessory="shades"
                             bgColor="yellow"
                             bgShape="circle"
@@ -62,7 +62,7 @@ export default function UserCard({ user, willLike, willPass }) {
                             showBackground={true}
                             size={400}
                             skinTone="brown"
-                        />
+                        /> */}
                     </View>
                 </View>
                 <View style={styles.footer}>

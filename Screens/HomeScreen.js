@@ -5,27 +5,31 @@ import Swipes from '../components/Swipes';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 import { matchearUsuario } from '../actions/index';
+import { set } from 'react-native-reanimated';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
     const dispatch = useDispatch();
 
+    const [usersToShow, setUsersToShow] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     const users = useSelector((state) => state.general.usuariosTotales);
-    let Users = users.filter((u) => u.match == false);
+
+    useEffect(() => {
+        console.log(users);
+        setUsersToShow(users.filter((u) => u.match == false));
+    }, [users]);
 
     const swipesRef = useRef(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const { top, bottom } = useSafeAreaInsets();
 
     function handleLike(usuario) {
         dispatch(matchearUsuario(usuario));
+        console.log(currentIndex);
     }
 
     function handlePass() {
-        nextUser();
-    }
-
-    function nextUser() {
-        const nextIndex = Users?.length - 2 === currentIndex ? 0 : currentIndex + 1;
+        const nextIndex = currentIndex + 1; // >= usersToShow.length ? 0 : currentIndex + 1;
         setCurrentIndex(nextIndex);
     }
 
@@ -40,20 +44,22 @@ export default function HomeScreen({ navigation }) {
     return (
         <View style={{ ...styles.container, marginTop: top + 10, marginBottom: bottom }}>
             <View style={styles.swipe}>
-                <Swipes
-                    key={currentIndex}
-                    ref={swipesRef}
-                    users={Users}
-                    currentIndex={currentIndex}
-                    handleLike={() => handleLike(Users[currentIndex])}
-                    handlePass={() => handlePass(Users[currentIndex])}
-                />
+                {usersToShow.length > 0 && (
+                    <Swipes
+                        key={currentIndex}
+                        ref={swipesRef}
+                        user={usersToShow[currentIndex]}
+                        nextUser={usersToShow[currentIndex + 1]}
+                        handleLike={() => handleLike(usersToShow[currentIndex])}
+                        handlePass={() => handlePass()}
+                    />
+                )}
             </View>
 
             <BottomBar
                 handleLikePress={handleLikePress}
                 handlePassPress={handlePassPress}
-                disabled={Users.length == 0 ? true : false}
+                disabled={!usersToShow[currentIndex]}
             />
         </View>
     );
