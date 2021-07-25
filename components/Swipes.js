@@ -3,16 +3,19 @@ import { StyleSheet } from 'react-native';
 import UserCard from './UserCard';
 import { Swipeable } from 'react-native-gesture-handler';
 import { RectButton } from 'react-native-gesture-handler';
+import EmptyUserCard from './EmptyUsersCard';
 
 function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     const [willLike, setWillLike] = useState(false);
     const [willPass, setWillPass] = useState(false);
 
-    const largo = users.length;
-
     const renderLeftActions = () => {
-        if (largo == 1) {
-            return null;
+        if (users.length == 1) {
+            return (
+                <RectButton style={styles.container}>
+                    <EmptyUserCard />
+                </RectButton>
+            );
         }
 
         return (
@@ -23,8 +26,12 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     };
 
     const renderRightActions = () => {
-        if (largo == 1) {
-            return null;
+        if (users.length == 1) {
+            return (
+                <RectButton style={styles.container}>
+                    <EmptyUserCard />
+                </RectButton>
+            );
         }
 
         return (
