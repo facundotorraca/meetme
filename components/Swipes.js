@@ -8,7 +8,13 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     const [willLike, setWillLike] = useState(false);
     const [willPass, setWillPass] = useState(false);
 
+    const largo = users.length;
+
     const renderLeftActions = () => {
+        if (largo == 1) {
+            return null;
+        }
+
         return (
             <RectButton style={styles.container}>
                 <UserCard user={users[currentIndex + 1]} />
@@ -17,6 +23,10 @@ function Swipes({ users, currentIndex, handleLike, handlePass, swipesRef }) {
     };
 
     const renderRightActions = () => {
+        if (largo == 1) {
+            return null;
+        }
+
         return (
             <RectButton style={styles.container}>
                 <UserCard user={users[currentIndex + 1]} />

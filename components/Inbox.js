@@ -31,7 +31,7 @@ export default function Inbox({ navigation }) {
         return (
             <TouchableOpacity
                 style={styles.chatCard}
-                onPress={() => navigation.navigate('Chat', { userName: item.nombre })}
+                onPress={() => navigation.navigate('Chat', { user: item })}
             >
                 <View style={styles.chatInfo}>
                     <View style={styles.userImageWrapper}>
@@ -64,7 +64,7 @@ export default function Inbox({ navigation }) {
                             <Text style={styles.chatPostTime}>
                                 {chats[`${item.id}`]?.conversacion?.[
                                     chats[`${item.id}`]?.conversacion?.length - 1
-                                ].fecha.toString()}
+                                ].fecha?.toString()}
                             </Text>
                         </View>
                         <Text style={styles.messageText}>

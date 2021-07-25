@@ -1,6 +1,6 @@
 const mensajes = {
     1: {
-        conversacion: [{ senderMe: true, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
+        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
     },
 };
 
@@ -57,7 +57,7 @@ const usuarios = [
 ];
 
 export const initialState = {
-    usuario: { autorizado: false },
+    usuario: { autorizado: false, id: 9000, nombre: 'Barbara' },
 
     caracteristicasUsuario: {
         nombre: '',

@@ -27,3 +27,8 @@ export const matchearUsuario = (usuario) => ({
     type: 'MATCH_USER',
     payload: usuario,
 });
+
+export const guardarMensaje = (message) => ({
+    type: 'GUARDAR_MENSAJE',
+    payload: message,
+});

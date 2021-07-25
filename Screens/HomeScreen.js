@@ -29,31 +29,25 @@ export default function HomeScreen({ navigation }) {
         setCurrentIndex(nextIndex);
     }
 
-    function handlePassPress(usuario) {
+    function handlePassPress() {
         swipesRef.current.openRight();
     }
 
-    function handleLikePress(usuario) {
+    function handleLikePress() {
         swipesRef.current.openLeft();
     }
 
     return (
         <View style={{ ...styles.container, marginTop: top + 10, marginBottom: bottom }}>
             <View style={styles.swipe}>
-                {Users?.length > 1 &&
-                    Users.map(
-                        (u, i) =>
-                            currentIndex === i && (
-                                <Swipes
-                                    key={i}
-                                    ref={swipesRef}
-                                    users={Users}
-                                    currentIndex={currentIndex}
-                                    handleLike={() => handleLike(u)}
-                                    handlePass={() => handlePass(u)}
-                                />
-                            )
-                    )}
+                <Swipes
+                    key={currentIndex}
+                    ref={swipesRef}
+                    users={Users}
+                    currentIndex={currentIndex}
+                    handleLike={() => handleLike(Users[currentIndex])}
+                    handlePass={() => handlePass(Users[currentIndex])}
+                />
             </View>
 
             <BottomBar
