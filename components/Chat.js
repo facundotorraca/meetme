@@ -24,8 +24,8 @@ export default function Chat({ route }) {
                 text: m.mensaje,
                 createdAt: m.fecha,
                 user: {
-                    _id: m.sender == true ? usuarioPropio.id : match.id,
-                    name: m.sender == true ? usuarioPropio.nombre : match.nombre,
+                    _id: m.senderMe == true ? usuarioPropio.id : match.id,
+                    name: m.senderMe == true ? usuarioPropio.nombre : match.nombre,
                 },
             };
         });
