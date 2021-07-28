@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import HomeScreen from './Screens/HomeScreen';
-import { Alert, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
@@ -10,6 +9,10 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import MiPerfil from './components/MiPerfil';
 import TopBar from './components/TopBar';
+
+// desactivar warning de las librerias
+import { View, LogBox } from 'react-native';
+LogBox.ignoreLogs(['Animated']);
 
 const RootComponent = () => {
     const Stack = createStackNavigator();

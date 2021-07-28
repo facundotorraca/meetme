@@ -1,8 +1,4 @@
-const mensajes = {
-    1: {
-        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
-    },
-};
+import { colors } from '../config';
 
 export const gustos = {
     MUSICA: 'Musica',
@@ -12,36 +8,46 @@ export const gustos = {
     SALIR_DE_FIESTA: 'Salir de fiesta',
 };
 
+const mensajes = {
+    1: {
+        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
+    },
+};
+
 const usuarios = [
     {
         id: 0,
         nombre: 'Sergio Aguero',
         edad: 40,
+        colorCard: colors.PURPLE,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
-        match: false,
+        meDioLike: false,
+        leDiLike: false,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
-
     {
         id: 1,
         nombre: 'Lionel Messi',
         edad: 21,
+        colorCard: colors.YELLOW,
         ciudad: 'Rosario',
         gustos: [gustos.DEPORTES, gustos.VIDEOJUEGOS],
-        match: true,
+        meDioLike: true,
+        leDiLike: false,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
-
     {
         id: 2,
         nombre: 'Roman Riquelme',
         edad: 37,
+        colorCard: colors.DARK_PINK,
         ciudad: 'Buenos Aires',
-        gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
-        match: false,
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        meDioLike: true,
+        leDiLike: false,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
@@ -49,22 +55,50 @@ const usuarios = [
         id: 3,
         nombre: 'Facundo Torraca',
         edad: 22,
+        colorCard: colors.DARK_PURPLE,
         ciudad: 'Buenos Aires',
-        gustos: [gustos.SALIR_DE_FIESTA, gustos.DEPORTES, gustos.MUSICA],
-        match: false,
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        meDioLike: true,
+        leDiLike: true,
+        descripcion: 'Soy de virgo',
+    },
+    {
+        id: 4,
+        nombre: 'Anda pro favor',
+        edad: 22,
+        colorCard: colors.ORANGE,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        meDioLike: true,
+        leDiLike: false,
+        descripcion: 'blblblblblblb',
+    },
+    {
+        id: 5,
+        nombre: 'LCTM',
+        edad: 22,
+        colorCard: colors.PINK,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        meDioLike: false,
+        leDiLike: true,
+        descripcion: 'Saa',
+    },
+    {
+        id: 6,
+        nombre: 'Cahu',
+        edad: 22,
+        colorCard: colors.DARK_PURPLE,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS],
+        meDioLike: true,
+        leDiLike: true,
         descripcion: 'Soy de virgo',
     },
 ];
 
 export const initialState = {
     usuario: { autorizado: false, id: 9000, nombre: 'Barbara' },
-
-    caracteristicasUsuario: {
-        nombre: '',
-        apellido: '',
-        edad: '',
-        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
-    },
 
     caracteristicasPago: {
         numeroTarjeta: 123134141,

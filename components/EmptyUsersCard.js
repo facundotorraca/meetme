@@ -1,21 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { colors } from '../config';
 import { Animated } from 'react-native';
-import { BigHead } from 'react-native-bigheads';
-import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
-
-//= StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: 'rgb(254, 254, 254)',
-//     padding: 8,
-//   },
-// });
 
 export default function EmptyUserCard() {
     const centralIconSize = 180;
@@ -30,14 +18,14 @@ export default function EmptyUserCard() {
                 // increase size
                 Animated.timing(anim.current, {
                     toValue: 2,
-                    useNativeDriver: true,
                     duration: 1500,
+                    useNativeDriver: true,
                 }),
                 // decrease size
                 Animated.timing(anim.current, {
                     toValue: 1.5,
-                    useNativeDriver: true,
                     duration: 1500,
+                    useNativeDriver: true,
                 }),
             ])
         ).start();
@@ -59,14 +47,26 @@ export default function EmptyUserCard() {
                 </View>
                 <View style={styles.footer}>
                     <View style={styles.textRow}>
-                        <Text style={[styles.textMessage, styles.textShadow]}>
+                        <Text style={[styles.textMessagePrimary, styles.textShadow]}>
                             No quedan mas opciones cerca de ti...
+                        </Text>
+                    </View>
+                    <View style={styles.textRow}>
+                        <Text style={[styles.textMessageSeconday, styles.textShadow]}>
+                            Puedes cambiar los ajustes de ubicacion o volver a cargar usuarios.
                         </Text>
                     </View>
 
                     <View style={styles.textRow}>
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.textButton}>Configuraciones de ubicación</Text>
+                        <TouchableOpacity
+                            style={{ ...styles.button, backgroundColor: colors.PURPLE }}
+                        >
+                            <FontAwesome name="gear" style={styles.textButton} color="black" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ ...styles.button, backgroundColor: colors.ORANGE }}
+                        >
+                            <FontAwesome name="repeat" style={styles.textButton} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -94,12 +94,6 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
 
-    textPreferences: {
-        fontSize: 21,
-        marginHorizontal: 10,
-        color: 'white',
-    },
-
     textRow: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -110,16 +104,23 @@ const styles = StyleSheet.create({
 
     textButton: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 30,
         textAlign: 'center',
         padding: 20,
     },
 
-    textMessage: {
+    textMessagePrimary: {
         color: 'white',
         textAlign: 'center',
         marginLeft: 10,
         fontSize: 25,
+    },
+
+    textMessageSeconday: {
+        color: 'white',
+        textAlign: 'center',
+        marginLeft: 10,
+        fontSize: 18,
     },
 
     textShadow: {
@@ -129,7 +130,9 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderRadius: 40,
-        backgroundColor: colors.PURPLE,
+        borderRadius: 30,
+        paddingHorizontal: 5,
+        marginHorizontal: 10,
+        backgroundColor: colors.ORANGE,
     },
 });
