@@ -109,8 +109,8 @@ export default function HomeScreen() {
             </View>
 
             <BottomBar
-                handleLikePress={() => setIndex(index + 1)}
-                handlePassPress={() => setIndex(index + 1)}
+                handleLikePress={() => swipesRef.current.swipeRight()}
+                handlePassPress={() => swipesRef.current.swipeLeft()}
                 disabled={!users[index]}
             />
         </View>
