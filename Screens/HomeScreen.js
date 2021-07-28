@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Platform } from 'react-native';
+import { Platform, ToastAndroid } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
 import { Button, StyleSheet, Text, View } from 'react-native';
@@ -14,6 +14,16 @@ export default function HomeScreen() {
         const aux = state.general.usuariosTotales.filter((u) => !u.leDiLike);
         return aux;
     });
+
+    const showToastWithGravityAndOffset = () => {
+        ToastAndroid.showWithGravityAndOffset(
+            'Has hecho match!',
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM,
+            25,
+            50
+        );
+    };
 
     const dispatch = useDispatch();
     const swipesRef = useRef(null);
@@ -41,6 +51,9 @@ export default function HomeScreen() {
 
     const handleLike = (_, user) => {
         if (!user) return;
+        if (user.meDioLike) {
+            showToastWithGravityAndOffset();
+        }
         dispatch(matchearUsuario(user));
     };
 
