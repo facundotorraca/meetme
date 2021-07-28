@@ -8,15 +8,17 @@ export default function generalReducer(state = initialState, action) {
             return { ...state, usuario: stateUsuario };
 
         case 'MATCH_USER': {
-            let usuario = action.payload;
-            let usuariosTotales = state.usuariosTotales;
-            let mensajes = state.mensajes;
+            const usuario = action.payload;
 
-            let match = { ...usuario, match: true };
+            const mensajes = state.mensajes;
+            const usuariosTotales = state.usuariosTotales;
 
-            let nuevosMensajes = {
+            const usuarioLikeado = { ...usuario, leDiLike: true };
+
+            const nuevosMensajes = {
                 ...mensajes,
-                [`${usuario.id}`]: {
+
+                [usuario.id]: {
                     conversacion: [
                         { senderMe: false, mensaje: 'Has hecho match conmigo!', fecha: new Date() },
                     ],
@@ -25,10 +27,13 @@ export default function generalReducer(state = initialState, action) {
 
             return {
                 ...state,
-                usuariosTotales: usuariosTotales.map((u) => (u.id != match.id ? u : match)),
+                usuariosTotales: usuariosTotales.map((u) =>
+                    u.id == usuarioLikeado.id ? usuarioLikeado : u
+                ),
                 mensajes: nuevosMensajes,
             };
         }
+
         case 'GUARDAR_MENSAJE': {
             console.log('payload', action.payload);
 

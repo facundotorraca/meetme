@@ -25,7 +25,7 @@ export default function Inbox({ navigation }) {
     const users = useSelector((state) => state.general.usuariosTotales);
     const chats = useSelector((state) => state.general.mensajes);
 
-    let matches = users.filter((u) => u.match == true);
+    let matches = users.filter((u) => u.leDiLike && u.meDioLike);
 
     const chatItem = ({ item }) => {
         return (

@@ -1,65 +1,117 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import BottomBar from '../components/BottomBar';
-import Swipes from '../components/Swipes';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useState, useRef } from 'react';
+import { Platform } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import Swiper from 'react-native-deck-swiper';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { matchearUsuario } from '../actions/index';
-import { set } from 'react-native-reanimated';
+import UserCard from '../components/UserCard';
+import BottomBar from '../components/BottomBar';
+import { matchearUsuario } from '../actions';
+import EmptyUserCard from '../components/EmptyUsersCard';
 
 export default function HomeScreen() {
+    const users = useSelector((state) => {
+        const aux = state.general.usuariosTotales.filter((u) => !u.leDiLike);
+        console.log('USERS CARGADOS\n', aux);
+        return aux;
+    });
+
     const dispatch = useDispatch();
-
-    const [usersToShow, setUsersToShow] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const users = useSelector((state) => state.general.usuariosTotales);
-
-    useEffect(() => {
-        console.log(users);
-        setUsersToShow(users.filter((u) => u.match == false));
-    }, [users]);
-
     const swipesRef = useRef(null);
-    const { top, bottom } = useSafeAreaInsets();
+    const [index, setIndex] = useState(0);
 
-    function handleLike(usuario) {
-        dispatch(matchearUsuario(usuario));
-        console.log(currentIndex);
-    }
+    const renderCard = (user, index) => {
+        if (!user) {
+            return (
+                <RectButton style={styles.container}>
+                    <EmptyUserCard />
+                </RectButton>
+            );
+        }
 
-    function handlePass() {
-        const nextIndex = currentIndex + 1; // >= usersToShow.length ? 0 : currentIndex + 1;
-        setCurrentIndex(nextIndex);
-    }
+        return (
+            <RectButton style={styles.container}>
+                <UserCard user={user} color={user.colorCard} />
+            </RectButton>
+        );
+    };
 
-    function handlePassPress() {
-        swipesRef.current.openRight();
-    }
+    const handlePass = (_, user) => {
+        setIndex(index + 1);
+        console.log('pass', index, user);
+    };
 
-    function handleLikePress() {
-        swipesRef.current.openLeft();
-    }
+    const handleLike = (_, user) => {
+        if (!user) return;
+        dispatch(matchearUsuario(user));
+    };
 
     return (
-        <View style={{ ...styles.container, marginTop: top + 10, marginBottom: bottom }}>
+        <View style={styles.container}>
             <View style={styles.swipe}>
-                {usersToShow.length > 0 && (
-                    <Swipes
-                        key={currentIndex}
-                        ref={swipesRef}
-                        user={usersToShow[currentIndex]}
-                        nextUser={usersToShow[currentIndex + 1]}
-                        handleLike={() => handleLike(usersToShow[currentIndex])}
-                        handlePass={() => handlePass()}
-                    />
-                )}
+                <Swiper
+                    ref={swipesRef}
+                    backgroundColor={'white'}
+                    cardVerticalMargin={20}
+                    marginBottom={150}
+                    //onSwiped={() => this.onSwiped('general')}
+                    onSwipedLeft={handlePass}
+                    onSwipedRight={handleLike}
+                    //onSwipedTop={() => this.onSwiped('top')}
+                    //onSwipedBottom={() => this.onSwiped('bottom')}
+                    //onTapCard={this.swipeLeft}
+                    cards={users}
+                    cardIndex={index}
+                    renderCard={renderCard}
+                    onSwipedAll={() => setIndex(0)}
+                    stackSize={3}
+                    useViewOverflow={Platform.OS === 'ios'}
+                    stackSeparation={15}
+                    key={users.length}
+                    overlayLabels={{
+                        left: {
+                            title: 'PASS',
+                            style: {
+                                label: {
+                                    backgroundColor: 'red',
+                                    color: 'white',
+                                },
+                                wrapper: {
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-end',
+                                    justifyContent: 'flex-start',
+                                    marginTop: 30,
+                                    marginLeft: -30,
+                                },
+                            },
+                        },
+                        right: {
+                            title: 'LIKE',
+                            style: {
+                                label: {
+                                    backgroundColor: '#64EDCC',
+                                    color: 'white',
+                                },
+                                wrapper: {
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
+                                    justifyContent: 'flex-start',
+                                    marginTop: 30,
+                                    marginLeft: 30,
+                                },
+                            },
+                        },
+                    }}
+                    animateOverlayLabelsOpacity
+                    animateCardOpacity
+                    swipeBackCard
+                />
             </View>
 
             <BottomBar
-                handleLikePress={handleLikePress}
-                handlePassPress={handlePassPress}
-                disabled={!usersToShow[currentIndex]}
+                handleLikePress={() => setIndex(index + 1)}
+                handlePassPress={() => setIndex(index + 1)}
+                disabled={!users[index]}
             />
         </View>
     );
@@ -72,15 +124,6 @@ const styles = StyleSheet.create({
 
     swipe: {
         flex: 1,
-        padding: 12,
-        paddingTop: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 7,
+        backgroundColor: 'white',
     },
 });
