@@ -19,7 +19,6 @@ export default function Chat({ route }) {
         .slice()
         .reverse()
         .map((m, i) => {
-            console.log(m);
             return {
                 _id: i,
                 text: m.mensaje,
@@ -36,8 +35,10 @@ export default function Chat({ route }) {
     }, []);
 
     const onSend = useCallback((messages = []) => {
-        dispatch(guardarMensaje(messages));
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
+
+        let nuevoMessage = { ...messages[0], _id: match.id };
+        dispatch(guardarMensaje(nuevoMessage));
     }, []);
 
     return (

@@ -12,7 +12,6 @@ import EmptyUserCard from '../components/EmptyUsersCard';
 export default function HomeScreen() {
     const users = useSelector((state) => {
         const aux = state.general.usuariosTotales.filter((u) => !u.leDiLike);
-        console.log('USERS CARGADOS\n', aux);
         return aux;
     });
 
@@ -38,7 +37,6 @@ export default function HomeScreen() {
 
     const handlePass = (_, user) => {
         setIndex(index + 1);
-        console.log('pass', index, user);
     };
 
     const handleLike = (_, user) => {

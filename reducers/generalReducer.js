@@ -39,16 +39,16 @@ export default function generalReducer(state = initialState, action) {
 
             let mensajes = state.mensajes;
 
-            let mensaje = action.payload[0];
+            let mensaje = action.payload;
 
             let nuevaConversacion = [
-                ...mensajes[`${mensaje.user._id}`].conversacion,
+                ...mensajes[`${mensaje._id}`].conversacion,
                 { senderMe: true, mensaje: mensaje.text, fecha: new Date() },
             ];
 
             let nuevosMensajes = {
                 ...mensajes,
-                [`${mensaje.user._id}`]: {
+                [`${mensaje._id}`]: {
                     conversacion: nuevaConversacion,
                 },
             };

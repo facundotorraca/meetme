@@ -12,6 +12,14 @@ const mensajes = {
     1: {
         conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
     },
+    3: {
+        conversacion: [
+            { senderMe: false, mensaje: 'hola! como va?', fecha: new Date('2021-06-21T22:00') },
+        ],
+    },
+    6: {
+        conversacion: [{ senderMe: false, mensaje: 'holuu', fecha: new Date('2021-07-23T19:00') }],
+    },
 };
 
 const usuarios = [
@@ -35,7 +43,7 @@ const usuarios = [
         ciudad: 'Rosario',
         gustos: [gustos.DEPORTES, gustos.VIDEOJUEGOS],
         meDioLike: true,
-        leDiLike: false,
+        leDiLike: true,
         descripcion:
             'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
     },
@@ -64,7 +72,7 @@ const usuarios = [
     },
     {
         id: 4,
-        nombre: 'Anda pro favor',
+        nombre: 'Ramiro German',
         edad: 22,
         colorCard: colors.ORANGE,
         ciudad: 'Buenos Aires',
@@ -75,7 +83,7 @@ const usuarios = [
     },
     {
         id: 5,
-        nombre: 'LCTM',
+        nombre: 'Rodrigo Santiago',
         edad: 22,
         colorCard: colors.PINK,
         ciudad: 'Buenos Aires',
@@ -86,7 +94,7 @@ const usuarios = [
     },
     {
         id: 6,
-        nombre: 'Cahu',
+        nombre: 'Roberto Cahu',
         edad: 22,
         colorCard: colors.DARK_PURPLE,
         ciudad: 'Buenos Aires',
