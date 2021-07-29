@@ -35,8 +35,6 @@ export default function generalReducer(state = initialState, action) {
         }
 
         case 'GUARDAR_MENSAJE': {
-            console.log('payload', action.payload);
-
             let mensajes = state.mensajes;
 
             let mensaje = action.payload;

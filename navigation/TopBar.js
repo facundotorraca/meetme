@@ -1,6 +1,6 @@
 import React from 'react';
 import StackChat from './StackChat';
-import MiPerfil from './MiPerfil';
+import MiPerfil from '../components/MiPerfil';
 import { colors } from '../config';
 import HomeScreen from '../Screens/HomeScreen';
 import { StyleSheet } from 'react-native';

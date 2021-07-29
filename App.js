@@ -2,13 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import HomeScreen from './Screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import PubsScreen, { Invitacion, PubScreen } from './Screens/PubsScreen';
-import Regalos, { Regalo, MensajeRegalo } from './Screens/RegalosScreen';
+
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import MiPerfil from './components/MiPerfil';
-import TopBar from './components/TopBar';
+import TopBar from './navigation/TopBar';
 
 // desactivar warning de las librerias
 import { View, LogBox } from 'react-native';
@@ -34,54 +33,6 @@ const RootComponent = () => {
                     component={HomeScreen}
                     options={({ route }) => ({
                         headerTitle: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Pubs"
-                    component={PubsScreen}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Pub"
-                    component={PubScreen}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Invitacion"
-                    component={Invitacion}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Regalos"
-                    component={Regalos}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Regalo"
-                    component={Regalo}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="MensajeRegalo"
-                    component={MensajeRegalo}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
                     })}
                 />
 

@@ -1,10 +1,32 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { guardarMensaje } from '../actions/index';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { colors } from '../config';
 
-export default function Chat({ route }) {
+const PanelBotonesChat = ({ navigation, usuario }) => {
+    return (
+        <View style={styles.buttonBar}>
+            <Button
+                containerStyle={styles.buttonContainer}
+                icon={<Icon name="gift" size={30} color={colors.ORANGE} />}
+                type="outline"
+                onPress={() => navigation.navigate('Regalos', { usuario: usuario })}
+            />
+            <Button
+                containerStyle={styles.buttonContainer}
+                icon={<Icon name="glass" size={30} color={colors.ORANGE} />}
+                type="outline"
+                onPress={() => navigation.navigate('Pubs', { usuario: usuario })}
+            />
+        </View>
+    );
+};
+
+export default function Chat({ route, navigation }) {
     const dispatch = useDispatch();
 
     const [messages, setMessages] = useState([]);
@@ -42,10 +64,28 @@ export default function Chat({ route }) {
     }, []);
 
     return (
-        <GiftedChat
-            messages={messages}
-            onSend={(messages) => onSend(messages)}
-            user={{ _id: usuarioPropio.id }}
-        />
+        <View style={styles.container}>
+            <GiftedChat
+                messages={messages}
+                onSend={(messages) => onSend(messages)}
+                user={{ _id: usuarioPropio.id }}
+            />
+            <PanelBotonesChat navigation={navigation} usuario={match} />
+        </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    buttonBar: {
+        flexDirection: 'row',
+        alignSelf: 'stretch',
+        justifyContent: 'space-around',
+        paddingBottom: 5,
+        paddingTop: 5,
+        backgroundColor: colors.ORANGE,
+    },
+    buttonContainer: { backgroundColor: 'white' },
+});
