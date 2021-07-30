@@ -8,6 +8,7 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Actividades from '../Screens/ActividadesScreen';
 
 const TabTopBar = () => {
     const windowWidth = Dimensions.get('window').width;
@@ -54,6 +55,22 @@ const TabTopBar = () => {
                             size={iconSize}
                             color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome>
+                    ),
+                }}
+            />
+
+            <Tab.Screen
+                name="Actividades"
+                component={Actividades}
+                options={{
+                    title: 'Actividades',
+                    tabBarBadge: 3,
+                    tabBarIcon: ({ focused }) => (
+                        <FontAwesome5
+                            name="tasks"
+                            size={iconSize}
+                            color={focused ? colors.PURPLE : inactiveColor}
+                        ></FontAwesome5>
                     ),
                 }}
             />

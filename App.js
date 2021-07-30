@@ -27,22 +27,6 @@ const RootComponent = () => {
                 }}
             >
                 <Stack.Screen name="Tab" component={TopBar} />
-
-                <Stack.Screen
-                    name="Meetme"
-                    component={HomeScreen}
-                    options={({ route }) => ({
-                        headerTitle: false,
-                    })}
-                />
-
-                <Stack.Screen
-                    name="Mi Perfil"
-                    component={MiPerfil}
-                    options={({ route }) => ({
-                        headerBackTitleVisible: false,
-                    })}
-                />
             </Stack.Navigator>
         </NavigationContainer>
     );
