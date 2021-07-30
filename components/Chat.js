@@ -54,7 +54,7 @@ export default function Chat({ route, navigation }) {
 
     useEffect(() => {
         setMessages(chatMappeado);
-    }, []);
+    }, [chat]);
 
     const onSend = useCallback((messages = []) => {
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));

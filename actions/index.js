@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { actividades } from '../reducers/initialState';
 
 export const addTodo = ({ title, userId }) => {
     return (dispatch) => {
@@ -21,6 +22,16 @@ export const addTodo = ({ title, userId }) => {
 
 const loggearUsuario = () => ({
     type: 'LOGGEAR',
+});
+
+export const guardarInvite = (usuario, mensaje, pub) => ({
+    type: 'GUARDAR_INVITE',
+    payload: { usuario, mensaje, pub, tipo: actividades.INVITACION },
+});
+
+export const guardarRegalo = (usuario, mensaje, regalo) => ({
+    type: 'GUARDAR_INVITE',
+    payload: { usuario, mensaje, regalo, tipo: actividades.REGALO },
 });
 
 export const matchearUsuario = (usuario) => ({

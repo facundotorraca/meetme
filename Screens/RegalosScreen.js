@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { menus } from '../config';
 import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
 import { StyleSheet, View, Text, Picker } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../config/index.js';
+import { guardarRegalo } from '../actions';
+import { useDispatch } from 'react-redux';
 
 export const MensajeRegalo = (props) => {
+    const dispatch = useDispatch();
     const mensaje = props.route.params.mensaje;
     const user = props.route.params.user;
+    const regalo = props.route.params.regalo;
+    const { navigation } = props;
+
     const { top, bottom } = useSafeAreaInsets();
 
     return (
@@ -28,7 +34,7 @@ export const MensajeRegalo = (props) => {
                         fontWeight: 'bold',
                     }}
                 >
-                    Tu regalo a {user} fue enviada con exito!
+                    Tu regalo a {user.nombre} fue enviada con exito!
                 </Text>
                 <Card
                     containerStyle={{
@@ -39,6 +45,15 @@ export const MensajeRegalo = (props) => {
                     <Card.Divider />
                     <Text style={{ marginBottom: 10, alignSelf: 'center' }}>{mensaje}</Text>
                 </Card>
+                <Button
+                    title={'Volver al chat!'}
+                    style={styles.button}
+                    onPress={() => {
+                        dispatch(guardarRegalo(user, mensaje, regalo));
+                        navigation.navigate('Chat', { user: user });
+                    }}
+                    type="clear"
+                />
             </View>
         </View>
     );
@@ -46,11 +61,10 @@ export const MensajeRegalo = (props) => {
 
 export const Regalo = (props) => {
     const [value, setValue] = useState('');
-    const [invitado, setInvitado] = useState('Lucia Ramirez');
+    const [envio, setEnvio] = useState(getRandomInt(15, 300));
     const { top, bottom } = useSafeAreaInsets();
     const regalo = props.route.params.regalo;
-
-    const envio = getRandomInt(15, 300);
+    const usuario = props.route.params.usuario;
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
@@ -108,16 +122,9 @@ export const Regalo = (props) => {
                     </View>
                 </Card>
 
-                <Picker
-                    selectedValue={invitado}
-                    onValueChange={(itemValue, itemIndex) => setInvitado(itemValue)}
-                >
-                    <Picker.Item label="Lucia Ramirez" value="Lucia Ramirez" />
-                    <Picker.Item label="Florencia Toloza" value="Florencia Toloza" />
-                    <Picker.Item label="Julieta Fernandez" value="Julieta Fernandez" />
-                    <Picker.Item label="Gabriela Gimenez" value="Gabriela Gimenez" />
-                    <Picker.Item label="Martina Montero" value="Martina Montero" />
-                </Picker>
+                <Text style={styles.invitacion}>
+                    Estas eligiendo un regalo para: {usuario.nombre}
+                </Text>
 
                 <Input
                     placeholder="Escribe un mensaje"
@@ -134,7 +141,8 @@ export const Regalo = (props) => {
                         onPress={() =>
                             props.navigation.navigate('MensajeRegalo', {
                                 mensaje: value,
-                                user: invitado,
+                                user: usuario,
+                                regalo: regalo,
                             })
                         }
                     />
@@ -144,7 +152,10 @@ export const Regalo = (props) => {
     );
 };
 
-export default Regalos = ({ navigation }) => {
+export default Regalos = (props) => {
+    const { navigation } = props;
+    const usuario = props.route.params.usuario;
+
     const regalos = [
         {
             id: 1,
@@ -180,7 +191,9 @@ export default Regalos = ({ navigation }) => {
                     <ListItem
                         containerStyle={{ backgroundColor: colors.PINK }}
                         key={index}
-                        onPress={() => navigation.navigate('Regalo', { regalo: r })}
+                        onPress={() =>
+                            navigation.navigate('Regalo', { regalo: r, usuario: usuario })
+                        }
                         bottomDivider
                     >
                         <Avatar source={{ uri: r.link }} />
@@ -228,5 +241,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         textTransform: 'capitalize',
+    },
+
+    invitacion: { fontSize: 25, textAlign: 'center', padding: 10 },
+    button: {
+        backgroundColor: colors.YELLOW,
+        borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
+        elevation: 9,
+        margin: 10,
     },
 });

@@ -8,6 +8,11 @@ export const gustos = {
     SALIR_DE_FIESTA: 'Salir de fiesta',
 };
 
+export const actividades = {
+    REGALO: 'Regalo',
+    INVITACION: 'Invitacion',
+};
+
 const mensajes = {
     1: {
         conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
@@ -19,6 +24,14 @@ const mensajes = {
     },
     6: {
         conversacion: [{ senderMe: false, mensaje: 'holuu', fecha: new Date('2021-07-23T19:00') }],
+    },
+};
+
+const misActividades = {
+    1: {
+        agenda: [
+            { senderMe: false, tipo: actividades.REGALO, fecha: new Date('2021-07-21T21:00') },
+        ],
     },
 };
 
@@ -118,6 +131,7 @@ export const initialState = {
     regalos: [{ nombre: 'Caja de bombones', precio: 500, tipo: 'Dulces' }],
 
     mensajes: mensajes,
+    misActividades: misActividades,
     usuariosTotales: usuarios,
     app: { idUsuarioChat: null },
 };

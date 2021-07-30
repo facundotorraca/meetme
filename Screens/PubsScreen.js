@@ -4,10 +4,18 @@ import { StyleSheet, View, Text, Picker } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config/index.js';
+import { TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { guardarInvite, guardarMensaje } from '../actions/index';
+import { actividades } from '../reducers/initialState.js';
 
 export const Invitacion = (props) => {
+    const { navigation } = props;
+    const dispatch = useDispatch();
     const mensaje = props.route.params.mensaje;
     const user = props.route.params.user;
+    const pub = props.route.params.pub;
+
     const { top, bottom } = useSafeAreaInsets();
 
     return (
@@ -28,7 +36,7 @@ export const Invitacion = (props) => {
                         fontWeight: 'bold',
                     }}
                 >
-                    Tu invitacion a {user} fue enviada con exito!
+                    Tu invitacion a {user.nombre} al {pub.name} fue enviada con exito!
                 </Text>
                 <Card
                     containerStyle={{
@@ -39,6 +47,22 @@ export const Invitacion = (props) => {
                     <Card.Divider />
                     <Text style={{ marginBottom: 10, alignSelf: 'center' }}>{mensaje}</Text>
                 </Card>
+                <Button
+                    title={'Volver al chat!'}
+                    style={styles.button}
+                    onPress={() => {
+                        dispatch(
+                            guardarMensaje({
+                                text: '¡Te he enviado una invitacion! \n' + mensaje,
+                                _id: user.id,
+                            })
+                        );
+
+                        dispatch(guardarInvite(user, mensaje, pub));
+                        navigation.navigate('Chat', { user: user });
+                    }}
+                    type="clear"
+                />
             </View>
         </View>
     );
@@ -46,9 +70,9 @@ export const Invitacion = (props) => {
 
 export const PubScreen = (props) => {
     const [value, setValue] = useState('');
-    const [invitado, setInvitado] = useState('Lucia Ramirez');
     const { top, bottom } = useSafeAreaInsets();
     const pub = props.route.params.pub;
+    const usuario = props.route.params.usuario;
 
     return (
         <View
@@ -105,17 +129,7 @@ export const PubScreen = (props) => {
                         </View>
                     </View>
                 </Card>
-
-                <Picker
-                    selectedValue={invitado}
-                    onValueChange={(itemValue, itemIndex) => setInvitado(itemValue)}
-                >
-                    <Picker.Item label="Lucia Ramirez" value="Lucia Ramirez" />
-                    <Picker.Item label="Florencia Toloza" value="Florencia Toloza" />
-                    <Picker.Item label="Julieta Fernandez" value="Julieta Fernandez" />
-                    <Picker.Item label="Gabriela Gimenez" value="Gabriela Gimenez" />
-                    <Picker.Item label="Martina Montero" value="Martina Montero" />
-                </Picker>
+                <Text style={styles.invitacion}>Estas invitando a {usuario.nombre}</Text>
 
                 <Input
                     placeholder="Mensaje de invitacion"
@@ -131,7 +145,8 @@ export const PubScreen = (props) => {
                         onPress={() =>
                             props.navigation.navigate('Invitacion', {
                                 mensaje: value,
-                                user: invitado,
+                                user: usuario,
+                                pub: pub,
                             })
                         }
                     />
@@ -141,7 +156,10 @@ export const PubScreen = (props) => {
     );
 };
 
-export default function PubsScreen({ navigation }) {
+export default function PubsScreen(props) {
+    const { navigation } = props;
+    const usuario = props.route.params.usuario;
+
     const pubs = [
         {
             id: 1,
@@ -175,7 +193,7 @@ export default function PubsScreen({ navigation }) {
             id: 5,
             name: '7030',
             location: 'Pilar',
-            link: '',
+            link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
             direction: 'Las Magnolias 765',
         },
         {
@@ -195,7 +213,7 @@ export default function PubsScreen({ navigation }) {
                     <ListItem
                         containerStyle={{ backgroundColor: colors.PINK }}
                         key={index}
-                        onPress={() => navigation.navigate('Pub', { pub: pub })}
+                        onPress={() => navigation.navigate('Pub', { pub: pub, usuario: usuario })}
                         bottomDivider
                     >
                         <Avatar source={{ uri: pub.link }} />
@@ -243,5 +261,21 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         textTransform: 'capitalize',
+    },
+    invitacion: { fontSize: 25, textAlign: 'center', padding: 10 },
+    button: {
+        backgroundColor: colors.YELLOW,
+        borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
+        elevation: 9,
+        margin: 10,
     },
 });

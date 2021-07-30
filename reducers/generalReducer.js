@@ -1,4 +1,4 @@
-import { initialState } from './initialState';
+import { initialState, actividades } from './initialState';
 
 export default function generalReducer(state = initialState, action) {
     switch (action.type) {
@@ -36,8 +36,8 @@ export default function generalReducer(state = initialState, action) {
 
         case 'GUARDAR_MENSAJE': {
             let mensajes = state.mensajes;
-
             let mensaje = action.payload;
+            console.log(mensaje);
 
             let nuevaConversacion = [
                 ...mensajes[`${mensaje._id}`].conversacion,
@@ -55,6 +55,28 @@ export default function generalReducer(state = initialState, action) {
                 ...state,
                 mensajes: nuevosMensajes,
             };
+        }
+        case 'GUARDAR_INVITE': {
+            let usuario = action.payload.usuario;
+
+            let misActividadesConUsuario = state.misActividades[`${usuario.id}`] ?? { agenda: [] };
+
+            let agenda = misActividadesConUsuario.agenda;
+            let nuevaAgenda = [
+                ...agenda,
+                { senderMe: true, tipo: actividades.INVITACION, fecha: new Date() },
+            ];
+
+            let nuevasActividadesConUsuario = {
+                ...state.misActividades,
+                [`${usuario.id}`]: {
+                    agenda: nuevaAgenda,
+                },
+            };
+
+            let misNuevasActividades = { ...misActividadesConUsuario, nuevasActividadesConUsuario };
+
+            return { ...state, misActividades: misNuevasActividades };
         }
         default:
             return state;
