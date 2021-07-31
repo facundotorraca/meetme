@@ -10,9 +10,17 @@ import { matchearUsuario } from '../actions';
 import EmptyUserCard from '../components/EmptyUsersCard';
 
 export default function HomeScreen() {
+    const dispatch = useDispatch();
+    const swipesRef = useRef(null);
+    const [index, setIndex] = useState(0);
+
     const users = useSelector((state) => {
-        const aux = state.general.usuariosTotales.filter((u) => !u.leDiLike);
-        return aux;
+        const usersToShow = state.general.usuariosTotales.filter((u) => !u.leDiLike);
+
+        // agrego un elemento null al final para poder
+        // detectar que se terminaron los usuarios y
+        // mostrar el card de fin de usuarios
+        return [...usersToShow, null];
     });
 
     const showToastWithGravityAndOffset = () => {
@@ -25,36 +33,56 @@ export default function HomeScreen() {
         );
     };
 
-    const dispatch = useDispatch();
-    const swipesRef = useRef(null);
-    const [index, setIndex] = useState(0);
-
-    const renderCard = (user, index) => {
-        if (!user) {
-            return (
-                <RectButton style={styles.container}>
-                    <EmptyUserCard />
-                </RectButton>
-            );
-        }
-
+    const renderCard = (user) => {
         return (
             <RectButton style={styles.container}>
-                <UserCard user={user} color={user.colorCard} />
+                {user ? <UserCard user={user} color={user.colorCard} /> : <EmptyUserCard />}
             </RectButton>
         );
     };
 
-    const handlePass = (_, user) => {
+    const handlePass = (index, user) => {
         setIndex(index + 1);
     };
 
-    const handleLike = (_, user) => {
+    const handleLike = (index, user) => {
         if (!user) return;
-        if (user.meDioLike) {
-            showToastWithGravityAndOffset();
-        }
+        if (user.meDioLike) showToastWithGravityAndOffset();
         dispatch(matchearUsuario(user));
+    };
+
+    const leftLabel = {
+        title: 'PASS',
+        style: {
+            label: {
+                backgroundColor: 'red',
+                color: 'white',
+            },
+            wrapper: {
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-start',
+                marginTop: 30,
+                marginLeft: -30,
+            },
+        },
+    };
+
+    const rightLabel = {
+        title: 'LIKE',
+        style: {
+            label: {
+                backgroundColor: '#64EDCC',
+                color: 'white',
+            },
+            wrapper: {
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                marginTop: 30,
+                marginLeft: 30,
+            },
+        },
     };
 
     return (
@@ -65,12 +93,8 @@ export default function HomeScreen() {
                     backgroundColor={'white'}
                     cardVerticalMargin={20}
                     marginBottom={150}
-                    //onSwiped={() => this.onSwiped('general')}
                     onSwipedLeft={handlePass}
                     onSwipedRight={handleLike}
-                    //onSwipedTop={() => this.onSwiped('top')}
-                    //onSwipedBottom={() => this.onSwiped('bottom')}
-                    //onTapCard={this.swipeLeft}
                     cards={users}
                     cardIndex={index}
                     renderCard={renderCard}
@@ -79,40 +103,8 @@ export default function HomeScreen() {
                     useViewOverflow={Platform.OS === 'ios'}
                     stackSeparation={15}
                     key={users.length}
-                    overlayLabels={{
-                        left: {
-                            title: 'PASS',
-                            style: {
-                                label: {
-                                    backgroundColor: 'red',
-                                    color: 'white',
-                                },
-                                wrapper: {
-                                    flexDirection: 'column',
-                                    alignItems: 'flex-end',
-                                    justifyContent: 'flex-start',
-                                    marginTop: 30,
-                                    marginLeft: -30,
-                                },
-                            },
-                        },
-                        right: {
-                            title: 'LIKE',
-                            style: {
-                                label: {
-                                    backgroundColor: '#64EDCC',
-                                    color: 'white',
-                                },
-                                wrapper: {
-                                    flexDirection: 'column',
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'flex-start',
-                                    marginTop: 30,
-                                    marginLeft: 30,
-                                },
-                            },
-                        },
-                    }}
+                    overlayLabels={{ left: leftLabel, right: rightLabel }}
+                    infinite={true}
                     animateOverlayLabelsOpacity
                     animateCardOpacity
                     swipeBackCard
