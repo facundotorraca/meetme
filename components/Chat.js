@@ -4,24 +4,30 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { guardarMensaje } from '../actions/index';
 import { Button } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../config';
 
 const PanelBotonesChat = ({ navigation, usuario }) => {
+    const buttonSize = 27;
+
     return (
-        <View style={styles.buttonBar}>
-            <Button
-                containerStyle={styles.buttonContainer}
-                icon={<Icon name="gift" size={30} color={colors.ORANGE} />}
-                type="outline"
+        <View style={styles.containerBotones}>
+            <View />
+            <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('Regalos', { usuario: usuario })}
-            />
-            <Button
-                containerStyle={styles.buttonContainer}
-                icon={<Icon name="glass" size={30} color={colors.ORANGE} />}
-                type="outline"
+            >
+                <FontAwesome name="gift" size={buttonSize} color={colors.DARK_PURPLE}></FontAwesome>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('Pubs', { usuario: usuario })}
-            />
+            >
+                <FontAwesome name="glass" size={buttonSize} color={colors.DARK_PINK}></FontAwesome>
+            </TouchableOpacity>
+            <View />
         </View>
     );
 };
@@ -79,13 +85,29 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    buttonBar: {
+
+    containerBotones: {
+        height: 75,
+        backgroundColor: 'white',
         flexDirection: 'row',
-        alignSelf: 'stretch',
         justifyContent: 'space-around',
-        paddingBottom: 5,
-        paddingTop: 5,
-        backgroundColor: colors.ORANGE,
+        alignItems: 'center',
     },
-    buttonContainer: { backgroundColor: 'white' },
+
+    button: {
+        width: 50,
+        height: 50,
+        backgroundColor: colors.YELLOW,
+        borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
+        elevation: 9,
+    },
 });

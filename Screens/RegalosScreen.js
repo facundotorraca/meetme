@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { menus } from '../config';
-import { ListItem, Card, Avatar, Input, Button, Image } from 'react-native-elements';
-import { StyleSheet, View, Text, Picker } from 'react-native';
+import React, { useState } from 'react';
+import { Card, Input, Button, Image } from 'react-native-elements';
+import { StyleSheet, View, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../config/index.js';
 import { guardarRegalo } from '../actions';
 import { useDispatch } from 'react-redux';
+import { FlatList } from 'react-native';
+import GiftCard from '../components/GiftCard.js';
 
 export const MensajeRegalo = (props) => {
     const dispatch = useDispatch();
@@ -160,56 +161,64 @@ export default Regalos = (props) => {
         {
             id: 1,
             name: 'Caja de Chocolates',
-            precio: '$500',
+            color: colors.PINK,
+            precio: 500,
             link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
         },
         {
             id: 2,
             name: 'Ramo de Flores',
-            precio: '$900',
+            color: colors.ORANGE,
+            precio: 900,
             link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
         },
         {
             id: 3,
             name: '1/4 kg Helado',
-            precio: '$420',
+            color: colors.PURPLE,
+            precio: 420,
+            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+        },
+        {
+            id: 4,
+            name: '1/4 kg Helado',
+            color: colors.PINK,
+            precio: 420,
+            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+        },
+        {
+            id: 5,
+            name: '1/4 kg Helado',
+            color: colors.YELLOW,
+            precio: 420,
+            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+        },
+        {
+            id: 6,
+            name: '1/4 kg Helado',
+            color: colors.DARK_PINK,
+            precio: 420,
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
         },
     ];
+
     const { top, bottom } = useSafeAreaInsets();
 
     return (
-        <View
-            style={{
-                ...styles.container,
-                marginTop: top + 10,
-                marginBottom: bottom,
-            }}
-        >
-            <View style={{ marginTop: 20 }}>
-                {regalos.map((r, index) => (
-                    <ListItem
-                        containerStyle={{ backgroundColor: colors.PINK }}
-                        key={index}
-                        onPress={() =>
-                            navigation.navigate('Regalo', { regalo: r, usuario: usuario })
-                        }
-                        bottomDivider
-                    >
-                        <Avatar source={{ uri: r.link }} />
-                        <ListItem.Content>
-                            <ListItem.Title
-                                style={{
-                                    fontWeight: 'bold',
-                                    fontSize: 19,
-                                }}
-                            >
-                                {r.name}
-                            </ListItem.Title>
-                            <ListItem.Subtitle>{r.precio}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))}
+        <View style={{ ...styles.container, marginTop: top, marginBottom: bottom + 20 }}>
+            <View>
+                <FlatList
+                    data={regalos}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <GiftCard
+                            gift={item}
+                            onPress={() =>
+                                navigation.navigate('Regalo', { regalo: item, usuario: usuario })
+                            }
+                        />
+                    )}
+                />
             </View>
         </View>
     );
@@ -226,24 +235,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
-    time: {
-        fontSize: 38,
-        color: '#fff',
-    },
-
-    image: {
-        height: 150,
-        width: 150,
-        borderRadius: 25,
-    },
-
-    notes: {
-        fontSize: 18,
-        color: '#fff',
-        textTransform: 'capitalize',
-    },
-
     invitacion: { fontSize: 25, textAlign: 'center', padding: 10 },
+
     button: {
         backgroundColor: colors.YELLOW,
         borderRadius: 100,

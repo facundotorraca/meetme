@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Platform, ToastAndroid } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import UserCard from '../components/UserCard';
 import BottomBar from '../components/BottomBar';
@@ -19,7 +19,7 @@ export default function HomeScreen() {
         ToastAndroid.showWithGravityAndOffset(
             'Has hecho match!',
             ToastAndroid.LONG,
-            ToastAndroid.BOTTOM,
+            ToastAndroid.CENTER,
             25,
             50
         );
