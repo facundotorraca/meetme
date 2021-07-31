@@ -13,6 +13,14 @@ export const actividades = {
     INVITACION: 'Invitacion',
 };
 
+// TODO -> tal vez esto ver que
+// nos pusieron en la encuesta
+export const giftType = {
+    CANDY: 'Dulces',
+    FLOWER: 'Flores',
+    DRINKS: 'Bebidas',
+};
+
 const mensajes = {
     1: {
         conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],

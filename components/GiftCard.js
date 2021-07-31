@@ -1,13 +1,26 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { giftType } from '../reducers/initialState';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
+import { FontAwesome5, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { colors } from '../config';
 
-export default GiftCard = ({ gift, onPress }) => {
+export default GiftCard = ({ gift, onPress, shippingCost }) => {
+    const giftIcon = {
+        [giftType.CANDY]: <FontAwesome5 name="candy-cane" size={24} color="white" />,
+        [giftType.DRINKS]: <FontAwesome name="glass" size={24} color="white" />,
+        [giftType.FLOWER]: <MaterialCommunityIcons name="flower" size={24} color="white" />,
+    };
+
     return (
         <TouchableOpacity onPress={onPress}>
             <Card containerStyle={{ ...styles.card, backgroundColor: gift.color }}>
-                <Text style={styles.title}>{gift.name}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={styles.title}>{gift.name}</Text>
+                    <View style={styles.icon}>{giftIcon[gift.tipo]}</View>
+                </View>
+
                 <Divider style={styles.divider} />
 
                 <View
@@ -18,8 +31,24 @@ export default GiftCard = ({ gift, onPress }) => {
                     }}
                 >
                     <Image style={styles.image} source={{ uri: gift.link }} />
-                    <Text style={styles.price}>${gift.precio.toFixed(2)}</Text>
+
+                    <View style={{ alignSelf: 'flex-end' }}>
+                        <Text style={[styles.price, styles.textShadow]}>
+                            ${gift.precio.toFixed(2)}
+                        </Text>
+                        {shippingCost && (
+                            <Text style={styles.shippingPrice}>+ {shippingCost.toFixed(2)}</Text>
+                        )}
+                    </View>
                 </View>
+
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                ></View>
             </Card>
         </TouchableOpacity>
     );
@@ -27,13 +56,25 @@ export default GiftCard = ({ gift, onPress }) => {
 
 const styles = StyleSheet.create({
     card: {
-        borderWidth: 0,
         borderRadius: 20,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
+        elevation: 9,
     },
 
     price: {
-        fontSize: 38,
+        fontSize: 33,
         color: '#fff',
+    },
+
+    textShadow: {
+        textShadowColor: 'rgba(0, 0, 0, 0.80)',
+        textShadowOffset: { width: -1, height: 1 },
+        textShadowRadius: 8,
     },
 
     image: {
@@ -48,9 +89,22 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 18,
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 19,
+    },
+
+    icon: {
+        backgroundColor: colors.DARK_PURPLE,
+        padding: 7,
+        borderRadius: 25,
+        alignSelf: 'flex-end',
+    },
+
+    shippingPrice: {
+        fontSize: 20,
+        color: 'green',
+        fontWeight: 'bold',
+        alignSelf: 'flex-end',
     },
 });

@@ -79,18 +79,6 @@ export default function UserCard({ user, color }) {
                     </View>
                 </View>
             </View>
-
-            {/* {willLike && (
-                <View style={styles.likeBox}>
-                    <Text style={{ ...styles.textPrimary, color: '#64EDCC' }}>Like</Text>
-                </View>
-            )}
-
-            {willPass && (
-                <View style={styles.passBox}>
-                    <Text style={{ ...styles.textPrimary, color: '#F06795' }}>Pasar</Text>
-                </View>
-            )} */}
         </View>
     );
 }
