@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
     divider: {
         marginTop: 10,
-        borderBottomColor: 'whitez',
+        borderBottomColor: 'white',
     },
 
     title: {
