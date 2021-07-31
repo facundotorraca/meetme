@@ -14,7 +14,7 @@ export default GiftCard = ({ gift, onPress, shippingCost }) => {
     };
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} disabled={shippingCost != null}>
             <Card containerStyle={{ ...styles.card, backgroundColor: gift.color }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.title}>{gift.name}</Text>
