@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Input, Button, Image, Divider } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../config/index.js';
@@ -9,6 +9,7 @@ import { FlatList } from 'react-native';
 import GiftCard from '../components/GiftCard.js';
 import { giftType } from '../reducers/initialState.js';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { KeyboardAvoidingView } from 'react-native';
 
 export const MensajeRegalo = (props) => {
     const dispatch = useDispatch();
@@ -84,10 +85,10 @@ export const Regalo = (props) => {
                 marginBottom: bottom,
             }}
         >
-            <View>
+            <View style={{ flex: 1 }}>
                 <GiftCard gift={regalo} shippingCost={envio} />
 
-                <Text style={styles.mensajeInformativoRegalo}>
+                <Text style={styles.mensajePrincipalRegalo}>
                     Estas eligiendo un regalo para
                     <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
                 </Text>
@@ -98,8 +99,7 @@ export const Regalo = (props) => {
                         underlineColorAndroid="transparent"
                         placeholder="Escribe un mensaje"
                         placeholderTextColor={'#9E9E9E'}
-                        numberOfLines={10}
-                        multiline={false}
+                        multiline={true}
                         onChangeText={(message) => setMessage(message)}
                     />
                 </View>
@@ -117,6 +117,11 @@ export const Regalo = (props) => {
                         }
                     />
                 </View>
+
+                <Text style={styles.mensajeInformativoRegalo}>
+                    Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                </Text>
             </View>
         </View>
     );
@@ -208,29 +213,39 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    mensajeInformativoRegalo: {
+    mensajePrincipalRegalo: {
         fontSize: 25,
         textAlign: 'center',
         padding: 10,
         paddingTop: 30,
     },
 
+    mensajeInformativoRegalo: {
+        fontSize: 13,
+        textAlign: 'justify',
+        padding: 20,
+        alignSelf: 'flex-end',
+        paddingTop: 30,
+    },
+
     textAreaContainer: {
         flex: 1,
+        flex: 1,
+
         paddingTop: Platform.OS === 'ios' ? 20 : 0,
         justifyContent: 'center',
         margin: 20,
-        marginBottom: 100,
-        marginTop: 50,
+        marginBottom: 200,
     },
 
     textArea: {
-        textAlign: 'center',
         borderWidth: 2,
         borderColor: '#9E9E9E',
         borderRadius: 20,
-        backgroundColor: '#FFFFFF',
         height: 100,
+        backgroundColor: '#FFFFFF',
+        textAlignVertical: 'top',
+        padding: 20,
     },
 
     buttonContainer: {

@@ -21,7 +21,7 @@ export default GiftCard = ({ gift, onPress, shippingCost }) => {
                     <View style={styles.icon}>{giftIcon[gift.tipo]}</View>
                 </View>
 
-                <Divider style={styles.divider} />
+                <Divider style={styles.divider} width={1} />
 
                 <View
                     style={{
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
 
     divider: {
         marginTop: 10,
+        borderBottomColor: 'whitez',
     },
 
     title: {
