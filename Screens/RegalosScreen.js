@@ -70,7 +70,7 @@ export const Regalo = (props) => {
     const [envio, setEnvio] = useState(getShippingCost(minShippingCost, maxShippingCost));
 
     const { top, bottom } = useSafeAreaInsets();
-    const { regalo, usuario } = props.route.params;
+    const { regalo, usuario, giftColor } = props.route.params;
 
     function getShippingCost(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
@@ -85,7 +85,7 @@ export const Regalo = (props) => {
             }}
         >
             <View style={{ flex: 1 }}>
-                <GiftCard gift={regalo} shippingCost={envio} />
+                <GiftCard gift={regalo} color={giftColor} shippingCost={envio} />
 
                 <Text style={styles.mensajePrincipalRegalo}>
                     Estas eligiendo un regalo para
@@ -202,7 +202,11 @@ export default Regalos = (props) => {
                             gift={item}
                             color={getNextColor(index)}
                             onPress={() =>
-                                navigation.navigate('Regalo', { regalo: item, usuario: usuario })
+                                navigation.navigate('Regalo', {
+                                    regalo: item,
+                                    usuario: usuario,
+                                    giftColor: getNextColor(index),
+                                })
                             }
                         />
                     )}
