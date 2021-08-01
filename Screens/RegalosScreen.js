@@ -11,10 +11,12 @@ import { giftType } from '../reducers/initialState.js';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 export const MensajeRegalo = (props) => {
+    const GIFT_ICON_SIZE = 250;
+
     const dispatch = useDispatch();
 
     const { navigation } = props;
-    const { mensaje, user, regalo } = props.route.params;
+    const { mensaje, user, regalo, giftColor } = props.route.params;
 
     const { top, bottom } = useSafeAreaInsets();
 
@@ -26,10 +28,10 @@ export const MensajeRegalo = (props) => {
                 marginBottom: bottom,
             }}
         >
-            <Card containerStyle={{ ...styles.giftSentCard, backgroundColor: regalo.color }}>
+            <Card containerStyle={{ ...styles.giftSentCard, backgroundColor: giftColor }}>
                 <Card.Title>
                     <Text style={styles.giftSentCardTitle}>
-                        {'Tu regalo a \n'}{' '}
+                        {'Tu regalo a \n'}
                         <Text style={{ color: colors.DARK_PURPLE }}>{user.nombre}</Text>{' '}
                         {'\n fue enviado con exito!'}
                     </Text>
@@ -37,7 +39,11 @@ export const MensajeRegalo = (props) => {
 
                 <View>
                     <Text style={{ alignSelf: 'center' }}>
-                        <FontAwesome5 name="gift" size={250} color={colors.PURPLE}></FontAwesome5>
+                        <FontAwesome5
+                            name="gift"
+                            size={GIFT_ICON_SIZE}
+                            color={colors.PURPLE}
+                        ></FontAwesome5>
                     </Text>
                 </View>
 
@@ -88,7 +94,7 @@ export const Regalo = (props) => {
                 <GiftCard gift={regalo} color={giftColor} shippingCost={envio} />
 
                 <Text style={styles.mensajePrincipalRegalo}>
-                    Estas eligiendo un regalo para
+                    {'Estas eligiendo un regalo para\n'}
                     <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
                 </Text>
 
@@ -112,6 +118,7 @@ export const Regalo = (props) => {
                                 mensaje: message,
                                 user: usuario,
                                 regalo: regalo,
+                                giftColor: giftColor,
                             })
                         }
                     />

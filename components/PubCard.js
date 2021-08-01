@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
 
-export default PubCard = ({ pub, color, onPress, shippingCost }) => {
+export default PubCard = ({ pub, color, onPress }) => {
     const starSize = 24;
     const paddingStars = 2;
 
@@ -44,7 +44,7 @@ export default PubCard = ({ pub, color, onPress, shippingCost }) => {
     };
 
     return (
-        <TouchableOpacity onPress={onPress} disabled={shippingCost != null}>
+        <TouchableOpacity onPress={onPress} disabled={!onPress}>
             <Card containerStyle={{ ...styles.card, backgroundColor: color }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.title}>{pub.name}</Text>

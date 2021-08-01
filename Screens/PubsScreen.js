@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Card, Input, Button, Image } from 'react-native-elements';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { Card, Button } from 'react-native-elements';
+import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config/index.js';
-import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { guardarInvite, guardarMensaje } from '../actions/index';
 import PubCard from '../components/PubCard.js';
 
 export const Invitacion = (props) => {
-    const { navigation } = props;
+    const CHEERS_ICON_SIZE = 250;
+
     const dispatch = useDispatch();
-    const mensaje = props.route.params.mensaje;
-    const user = props.route.params.user;
-    const pub = props.route.params.pub;
+
+    const { navigation } = props;
+    const { mensaje, user, pub, pubColor } = props.route.params;
 
     const { top, bottom } = useSafeAreaInsets();
 
@@ -24,32 +24,38 @@ export const Invitacion = (props) => {
                 ...styles.container,
                 marginTop: top + 10,
                 marginBottom: bottom,
-                backgroundColor: colors.PINK,
             }}
         >
-            <View>
-                <Text
-                    style={{
-                        alignSelf: 'center',
-                        marginTop: 15,
-                        fontSize: 15,
-                        fontWeight: 'bold',
-                    }}
-                >
-                    Tu invitacion a {user.nombre} al {pub.name} fue enviada con exito!
-                </Text>
-                <Card
-                    containerStyle={{
-                        backgroundColor: colors.YELLOW,
-                    }}
-                >
-                    <Card.Title>Invitación</Card.Title>
-                    <Card.Divider />
-                    <Text style={{ marginBottom: 10, alignSelf: 'center' }}>{mensaje}</Text>
+            <Card containerStyle={{ ...styles.pubInvitationSentCard, backgroundColor: pubColor }}>
+                <Card.Title>
+                    <Text style={styles.pubInvitationSentCardTitle}>
+                        {'Tu inviación a\n'}
+                        <Text style={{ color: colors.DARK_PURPLE }}>{user.nombre}</Text>{' '}
+                        {'\n fue enviada con exito!'}
+                    </Text>
+                </Card.Title>
+
+                <View>
+                    <Text style={{ alignSelf: 'center' }}>
+                        <FontAwesome5
+                            name="glass-cheers"
+                            size={CHEERS_ICON_SIZE}
+                            color={colors.PURPLE}
+                        ></FontAwesome5>
+                    </Text>
+                </View>
+
+                <Card containerStyle={styles.subcardWithPubInvitation}>
+                    <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
+                    <Card.Divider></Card.Divider>
+                    <Text>{mensaje}</Text>
                 </Card>
+            </Card>
+
+            <View style={styles.buttonContainer}>
                 <Button
                     title={'Volver al chat!'}
-                    style={styles.button}
+                    buttonStyle={{ ...styles.button, paddingHorizontal: 100, marginTop: 50 }}
                     onPress={() => {
                         dispatch(
                             guardarMensaje({
@@ -61,7 +67,6 @@ export const Invitacion = (props) => {
                         dispatch(guardarInvite(user, mensaje, pub));
                         navigation.navigate('Chat', { user: user });
                     }}
-                    type="clear"
                 />
             </View>
         </View>
@@ -69,10 +74,10 @@ export const Invitacion = (props) => {
 };
 
 export const PubScreen = (props) => {
-    const [value, setValue] = useState('');
+    const [message, setMessage] = useState('');
+
     const { top, bottom } = useSafeAreaInsets();
-    const pub = props.route.params.pub;
-    const usuario = props.route.params.usuario;
+    const { pub, pubColor, usuario } = props.route.params;
 
     return (
         <View
@@ -80,77 +85,46 @@ export const PubScreen = (props) => {
                 ...styles.container,
                 marginTop: top + 10,
                 marginBottom: bottom,
-                backgroundColor: colors.PINK,
             }}
         >
-            <View>
-                <Card
-                    containerStyle={{
-                        backgroundColor: colors.YELLOW,
-                    }}
-                >
-                    <Card.Title style={{ fontSize: 19 }}>{pub.name}</Card.Title>
-                    <Card.Divider />
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <Image style={styles.image} resizeMode="cover" source={{ uri: pub.link }} />
-                        <View style={{ alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <FontAwesome
-                                    name="map-marker"
-                                    size={28}
-                                    color="black"
-                                ></FontAwesome>
-                                <Text
-                                    style={{
-                                        marginHorizontal: 15,
-                                        fontSize: 15,
-                                        alignSelf: 'center',
-                                    }}
-                                >
-                                    {pub.location}
-                                </Text>
-                            </View>
-                            <Text
-                                style={{
-                                    marginHorizontal: 15,
-                                    fontSize: 13,
-                                    alignSelf: 'center',
-                                    marginTop: 10,
-                                }}
-                            >
-                                {pub.direction}
-                            </Text>
-                        </View>
-                    </View>
-                </Card>
-                <Text style={styles.invitacion}>Estas invitando a {usuario.nombre}</Text>
+            <View style={{ flex: 1 }}>
+                <PubCard pub={pub} color={pubColor} />
 
-                <Input
-                    placeholder="Mensaje de invitacion"
-                    leftIcon={{ type: 'font-awesome', name: 'comment' }}
-                    style={styles.input}
-                    onChangeText={(value) => setValue(value)}
-                />
+                <Text style={styles.mensajePrincipalPub}>
+                    {'Estas invitando a\n'}
+                    <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
+                </Text>
+
+                <View style={styles.textAreaContainer}>
+                    <TextInput
+                        style={styles.textArea}
+                        underlineColorAndroid="transparent"
+                        placeholder="Escribe un mensaje"
+                        placeholderTextColor={'#9E9E9E'}
+                        multiline={true}
+                        onChangeText={(message) => setMessage(message)}
+                    />
+                </View>
+
                 <View style={{ padding: 10 }}>
                     <Button
-                        containerStyle={{ borderRadius: 20, marginBottom: 10 }}
-                        buttonStyle={{ backgroundColor: colors.PURPLE }}
+                        buttonStyle={{ ...styles.button, paddingHorizontal: 150 }}
                         title="Invitar!"
                         onPress={() =>
                             props.navigation.navigate('Invitacion', {
-                                mensaje: value,
+                                mensaje: message,
                                 user: usuario,
                                 pub: pub,
+                                pubColor: pubColor,
                             })
                         }
                     />
                 </View>
+
+                <Text style={styles.mensajeInformativoPub}>
+                    Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                </Text>
             </View>
         </View>
     );
@@ -241,7 +215,11 @@ export default function PubsScreen(props) {
                             pub={item}
                             color={getNextColor(index)}
                             onPress={() =>
-                                navigation.navigate('Pub', { pub: item, usuario: usuario })
+                                navigation.navigate('Pub', {
+                                    pub: item,
+                                    usuario: usuario,
+                                    pubColor: getNextColor(index),
+                                })
                             }
                         />
                     )}
@@ -256,9 +234,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    time: {
-        fontSize: 38,
-        color: '#fff',
+    mensajePrincipalPub: {
+        fontSize: 25,
+        textAlign: 'center',
+        padding: 10,
+        paddingTop: 30,
+    },
+
+    mensajeInformativoPub: {
+        fontSize: 13,
+        textAlign: 'justify',
+        padding: 20,
+        alignSelf: 'flex-end',
+        paddingTop: 30,
     },
 
     image: {
@@ -273,12 +261,40 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
     },
     invitacion: { fontSize: 25, textAlign: 'center', padding: 10 },
-    button: {
-        backgroundColor: colors.YELLOW,
-        borderRadius: 100,
+
+    textAreaContainer: {
+        flex: 1,
+        flex: 1,
+
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        justifyContent: 'center',
+        margin: 20,
+        marginBottom: 200,
+    },
+
+    textArea: {
+        borderWidth: 2,
+        borderColor: '#9E9E9E',
+        borderRadius: 20,
+        height: 100,
+        backgroundColor: '#FFFFFF',
+        textAlignVertical: 'top',
+        padding: 20,
+    },
+
+    buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: '#000',
+    },
+
+    button: {
+        backgroundColor: colors.PURPLE,
+        borderRadius: 20,
+    },
+
+    pubInvitationSentCard: {
+        height: '80%',
+        borderRadius: 25,
         shadowOffset: {
             width: 0,
             height: 0,
@@ -286,6 +302,15 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 8,
         elevation: 9,
-        margin: 10,
+    },
+
+    pubInvitationSentCardTitle: {
+        fontSize: 25,
+    },
+
+    subcardWithPubInvitation: {
+        borderRadius: 20,
+        height: '23%',
+        backgroundColor: '#FFFFFF',
     },
 });
