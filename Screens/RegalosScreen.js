@@ -137,7 +137,6 @@ export default Regalos = (props) => {
         {
             id: 1,
             name: 'Caja de Chocolates',
-            color: colors.DARK_PINK,
             precio: 500,
             tipo: giftType.CANDY,
             link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
@@ -145,16 +144,13 @@ export default Regalos = (props) => {
         {
             id: 2,
             name: 'Ramo de Flores',
-            color: colors.ORANGE,
             precio: 900,
-
             tipo: giftType.FLOWER,
             link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
         },
         {
             id: 3,
             name: '1/4 kg Helado',
-            color: colors.YELLOW,
             precio: 420,
             tipo: giftType.DRINKS,
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
@@ -162,7 +158,6 @@ export default Regalos = (props) => {
         {
             id: 4,
             name: '1/4 kg Helado',
-            color: colors.PINK,
             precio: 420,
             tipo: giftType.DRINKS,
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
@@ -170,7 +165,6 @@ export default Regalos = (props) => {
         {
             id: 5,
             name: '1/4 kg Helado',
-            color: colors.YELLOW,
             precio: 420,
             tipo: giftType.FLOWER,
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
@@ -178,7 +172,6 @@ export default Regalos = (props) => {
         {
             id: 6,
             name: '1/4 kg Helado',
-            color: colors.DARK_PINK,
             precio: 420,
             tipo: giftType.CANDY,
             link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
@@ -187,15 +180,27 @@ export default Regalos = (props) => {
 
     const { top, bottom } = useSafeAreaInsets();
 
+    const colorByIndex = {
+        0: colors.DARK_PINK,
+        1: colors.ORANGE,
+        2: colors.YELLOW,
+    };
+
+    const getNextColor = (giftIndex) => {
+        const normalizedIndex = giftIndex % 3;
+        return colorByIndex[normalizedIndex];
+    };
+
     return (
         <View style={{ ...styles.container, marginTop: top, marginBottom: bottom + 20 }}>
             <View>
                 <FlatList
                     data={regalos}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({ index, item }) => (
                         <GiftCard
                             gift={item}
+                            color={getNextColor(index)}
                             onPress={() =>
                                 navigation.navigate('Regalo', { regalo: item, usuario: usuario })
                             }

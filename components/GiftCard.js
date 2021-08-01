@@ -1,12 +1,12 @@
 import React from 'react';
+import { colors } from '../config';
 import { TouchableOpacity } from 'react-native';
 import { giftType } from '../reducers/initialState';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
 import { FontAwesome5, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-import { colors } from '../config';
 
-export default GiftCard = ({ gift, onPress, shippingCost }) => {
+export default GiftCard = ({ gift, color, onPress, shippingCost }) => {
     const giftIcon = {
         [giftType.CANDY]: <FontAwesome5 name="candy-cane" size={24} color="white" />,
         [giftType.DRINKS]: <FontAwesome name="glass" size={24} color="white" />,
@@ -15,7 +15,7 @@ export default GiftCard = ({ gift, onPress, shippingCost }) => {
 
     return (
         <TouchableOpacity onPress={onPress} disabled={shippingCost != null}>
-            <Card containerStyle={{ ...styles.card, backgroundColor: gift.color }}>
+            <Card containerStyle={{ ...styles.card, backgroundColor: color }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.title}>{gift.name}</Text>
                     <View style={styles.icon}>{giftIcon[gift.tipo]}</View>
@@ -41,14 +41,6 @@ export default GiftCard = ({ gift, onPress, shippingCost }) => {
                         )}
                     </View>
                 </View>
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                    }}
-                ></View>
             </Card>
         </TouchableOpacity>
     );

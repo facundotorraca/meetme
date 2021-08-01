@@ -1,11 +1,9 @@
 import React from 'react';
-import { colors } from '../config';
-import { TouchableOpacity } from 'react-native';
 import { times } from 'lodash';
-import { giftType } from '../reducers/initialState';
+import { TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
 
 export default PubCard = ({ pub, color, onPress, shippingCost }) => {
     const starSize = 24;
@@ -28,6 +26,7 @@ export default PubCard = ({ pub, color, onPress, shippingCost }) => {
             i++;
         });
 
+        let j = i + 1;
         times(5 - i, () => {
             stars.push(
                 <FontAwesome
@@ -35,8 +34,10 @@ export default PubCard = ({ pub, color, onPress, shippingCost }) => {
                     size={starSize}
                     color="white"
                     style={{ paddingLeft: paddingStars }}
+                    key={j}
                 />
             );
+            j++;
         });
 
         return stars;
@@ -72,14 +73,6 @@ export default PubCard = ({ pub, color, onPress, shippingCost }) => {
                         </Text>
                     </View>
                 </View>
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                    }}
-                ></View>
             </Card>
         </TouchableOpacity>
     );
