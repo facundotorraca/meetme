@@ -15,7 +15,10 @@ export const menus = {
 };
 
 export const strongerColor = {
+    [colors.PINK]: '#A5049E',
     [colors.YELLOW]: '#E59B01',
     [colors.ORANGE]: '#E55836',
+    [colors.PURPLE]: '#67027A',
     [colors.DARK_PINK]: '#F31070',
+    [colors.DARK_PURPLE]: '#5704AB',
 };

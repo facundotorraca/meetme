@@ -47,7 +47,7 @@ export default PubCard = ({ pub, color, onPress }) => {
 
     return (
         <TouchableOpacity onPress={onPress} disabled={!onPress}>
-            <Card containerStyle={{ ...styles.card, backgroundColor: color, padding: 0 }}>
+            <Card containerStyle={styles.card}>
                 <LinearGradient
                     colors={[color, strongerColor[color]]}
                     style={{ borderRadius: 20, padding: 15 }}
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 8,
         elevation: 9,
+        padding: 0, // for linear gradient
     },
 
     location: {

@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
-import { colors } from '../config';
+import { colors, strongerColor } from '../config';
 import { Animated } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function EmptyUserCard() {
     const centralIconSize = 180;
@@ -32,46 +33,36 @@ export default function EmptyUserCard() {
     }, []);
 
     return (
-        <View>
-            <View style={styles.container}>
-                <View style={styles.body}>
-                    <View style={styles.imageContainer}>
-                        <Animated.View style={{ transform: [{ scale: anim.current }] }}>
-                            <FontAwesome5
-                                name="fire"
-                                size={centralIconSize}
-                                color={colors.YELLOW}
-                            />
-                        </Animated.View>
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <View style={styles.textRow}>
-                        <Text style={[styles.textMessagePrimary, styles.textShadow]}>
-                            No quedan mas opciones cerca de ti...
-                        </Text>
-                    </View>
-                    <View style={styles.textRow}>
-                        <Text style={[styles.textMessageSeconday, styles.textShadow]}>
-                            Puedes cambiar los ajustes de ubicacion o volver a cargar usuarios.
-                        </Text>
-                    </View>
-
-                    <View style={styles.textRow}>
-                        <TouchableOpacity
-                            style={{ ...styles.button, backgroundColor: colors.PURPLE }}
-                        >
-                            <FontAwesome name="gear" style={styles.textButton} color="black" />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={{ ...styles.button, backgroundColor: colors.ORANGE }}
-                        >
-                            <FontAwesome name="repeat" style={styles.textButton} color="black" />
-                        </TouchableOpacity>
-                    </View>
+        <LinearGradient style={styles.container} colors={[colors.PINK, strongerColor[colors.PINK]]}>
+            <View style={styles.body}>
+                <View style={styles.imageContainer}>
+                    <Animated.View style={{ transform: [{ scale: anim.current }] }}>
+                        <FontAwesome5 name="fire" size={centralIconSize} color={colors.YELLOW} />
+                    </Animated.View>
                 </View>
             </View>
-        </View>
+            <View style={styles.footer}>
+                <View style={styles.textRow}>
+                    <Text style={[styles.textMessagePrimary, styles.textShadow]}>
+                        No quedan mas opciones cerca de ti...
+                    </Text>
+                </View>
+                <View style={styles.textRow}>
+                    <Text style={[styles.textMessageSeconday, styles.textShadow]}>
+                        Puedes cambiar los ajustes de ubicacion o volver a cargar usuarios.
+                    </Text>
+                </View>
+
+                <View style={styles.textRow}>
+                    <TouchableOpacity style={{ ...styles.button, backgroundColor: colors.PURPLE }}>
+                        <FontAwesome name="gear" style={styles.textButton} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.button, backgroundColor: colors.ORANGE }}>
+                        <FontAwesome name="repeat" style={styles.textButton} color="black" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </LinearGradient>
     );
 }
 
