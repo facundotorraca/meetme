@@ -1,7 +1,8 @@
 import React from 'react';
-import { colors } from '../config';
 import { TouchableOpacity } from 'react-native';
+import { colors, strongerColor } from '../config';
 import { giftType } from '../reducers/initialState';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
 import { FontAwesome5, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
@@ -15,32 +16,39 @@ export default GiftCard = ({ gift, color, onPress, shippingCost }) => {
 
     return (
         <TouchableOpacity onPress={onPress} disabled={!onPress}>
-            <Card containerStyle={{ ...styles.card, backgroundColor: color }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.title}>{gift.name}</Text>
-                    <View style={styles.icon}>{giftIcon[gift.tipo]}</View>
-                </View>
-
-                <Divider style={styles.divider} width={1} />
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                    }}
+            <Card containerStyle={styles.card}>
+                <LinearGradient
+                    colors={[color, strongerColor[color]]}
+                    style={{ borderRadius: 20, padding: 15 }}
                 >
-                    <Image style={styles.image} source={{ uri: gift.link }} />
-
-                    <View style={{ alignSelf: 'flex-end' }}>
-                        <Text style={[styles.price, styles.textShadow]}>
-                            ${gift.precio.toFixed(2)}
-                        </Text>
-                        {shippingCost && (
-                            <Text style={styles.shippingPrice}>+ {shippingCost.toFixed(2)}</Text>
-                        )}
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.title}>{gift.name}</Text>
+                        <View style={styles.icon}>{giftIcon[gift.tipo]}</View>
                     </View>
-                </View>
+
+                    <Divider style={styles.divider} width={1} />
+
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Image style={styles.image} source={{ uri: gift.link }} />
+
+                        <View style={{ alignSelf: 'flex-end' }}>
+                            <Text style={[styles.price, styles.textShadow]}>
+                                ${gift.precio.toFixed(2)}
+                            </Text>
+                            {shippingCost && (
+                                <Text style={styles.shippingPrice}>
+                                    + {shippingCost.toFixed(2)}
+                                </Text>
+                            )}
+                        </View>
+                    </View>
+                </LinearGradient>
             </Card>
         </TouchableOpacity>
     );
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 8,
         elevation: 9,
+        padding: 0, // for linear gradient
     },
 
     price: {

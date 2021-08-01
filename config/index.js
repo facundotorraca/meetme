@@ -13,3 +13,9 @@ export const menus = {
     PUBS: 3,
     REGALO: 4,
 };
+
+export const strongerColor = {
+    [colors.YELLOW]: '#E59B01',
+    [colors.ORANGE]: '#E55836',
+    [colors.DARK_PINK]: '#F31070',
+};

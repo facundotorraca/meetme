@@ -1,7 +1,9 @@
 import React from 'react';
 import { times } from 'lodash';
+import { strongerColor } from '../config';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, Image, Divider } from 'react-native-elements';
 
@@ -45,34 +47,39 @@ export default PubCard = ({ pub, color, onPress }) => {
 
     return (
         <TouchableOpacity onPress={onPress} disabled={!onPress}>
-            <Card containerStyle={{ ...styles.card, backgroundColor: color }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.title}>{pub.name}</Text>
-                    <View style={styles.stars}>{getStars(pub)}</View>
-                </View>
-
-                <Divider style={styles.divider} width={1} />
-
-                <View style={{ flexDirection: 'row' }}>
-                    <Image style={styles.image} source={{ uri: pub.link }} />
-
-                    <View style={{ alignSelf: 'flex-end', paddingLeft: 15, flex: 1 }}>
-                        <Text style={[styles.city, styles.textShadow]}>
-                            {' ' /*TODO -> no se como arreglarlo*/}
-                            <FontAwesome
-                                name="map-marker"
-                                size={24}
-                                color="white"
-                                style={{ marginRight: paddingStars }}
-                            />
-                            {' ' + pub.city}
-                        </Text>
-
-                        <Text style={[styles.location, styles.textShadow]}>
-                            {pub.neighborhood}, {pub.address}
-                        </Text>
+            <Card containerStyle={{ ...styles.card, backgroundColor: color, padding: 0 }}>
+                <LinearGradient
+                    colors={[color, strongerColor[color]]}
+                    style={{ borderRadius: 20, padding: 15 }}
+                >
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.title}>{pub.name}</Text>
+                        <View style={styles.stars}>{getStars(pub)}</View>
                     </View>
-                </View>
+
+                    <Divider style={styles.divider} width={1} />
+
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image style={styles.image} source={{ uri: pub.link }} />
+
+                        <View style={{ alignSelf: 'flex-end', paddingLeft: 15, flex: 1 }}>
+                            <Text style={[styles.city, styles.textShadow]}>
+                                {' ' /*TODO -> no se como arreglarlo*/}
+                                <FontAwesome
+                                    name="map-marker"
+                                    size={24}
+                                    color="white"
+                                    style={{ marginRight: paddingStars }}
+                                />
+                                {' ' + pub.city}
+                            </Text>
+
+                            <Text style={[styles.location, styles.textShadow]}>
+                                {pub.neighborhood}, {pub.address}
+                            </Text>
+                        </View>
+                    </View>
+                </LinearGradient>
             </Card>
         </TouchableOpacity>
     );
