@@ -9,7 +9,6 @@ import { FlatList } from 'react-native';
 import GiftCard from '../components/GiftCard.js';
 import { giftType } from '../reducers/initialState.js';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { KeyboardAvoidingView } from 'react-native';
 
 export const MensajeRegalo = (props) => {
     const dispatch = useDispatch();

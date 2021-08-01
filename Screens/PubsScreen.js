@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { ListItem, Card, Avatar, Input, Button, Image, Badge } from 'react-native-elements';
-import { StyleSheet, View, Text, Picker } from 'react-native';
+import { Card, Input, Button, Image } from 'react-native-elements';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../config/index.js';
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { guardarInvite, guardarMensaje } from '../actions/index';
-import { actividades } from '../reducers/initialState.js';
+import PubCard from '../components/PubCard.js';
 
 export const Invitacion = (props) => {
     const { navigation } = props;
@@ -163,73 +163,89 @@ export default function PubsScreen(props) {
     const pubs = [
         {
             id: 1,
+            stars: 5,
             name: 'Moby Dick',
-            location: 'Palermo',
+            neighborhood: 'Palermo',
+            city: 'CABA',
             link: 'https://www.baresyboliches.com/wp-content/uploads/moby-2-722x480.jpg',
-            direction: 'Av Rafael Obligado 2234',
+            address: 'Av Rafael Obligado 2234',
         },
         {
             id: 2,
+            stars: 3,
             name: 'Jobs',
-            location: 'Caballito',
+            neighborhood: 'Caballito',
+            city: 'CABA',
             link: 'https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/92/36/img-20170702-011749-largejpg.jpg',
-            direction: 'Arenales 1233',
+            address: 'Arenales 1233',
         },
         {
             id: 3,
+            stars: 4,
             name: 'Moscow',
-            location: 'Almagro',
+            city: 'CABA',
+            neighborhood: 'Almagro',
             link: 'https://images.clarin.com/2019/11/28/pacha-para-amanecer-junto-al___e-SW0JTL_1256x620__1.jpg',
-            direction: 'Av Costanera 122',
+            address: 'Av Costanera 122',
         },
         {
             id: 4,
+            stars: 4,
             name: 'Rose in Rio',
-            location: 'Palermo',
+            neighborhood: 'Palermo',
+            city: 'CABA',
             link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
-            direction: 'Av Cordoba 700',
+            address: 'Av Cordoba 700',
         },
         {
             id: 5,
+            stars: 2,
             name: '7030',
-            location: 'Pilar',
+            city: 'CABA',
+            neighborhood: 'Pilar',
             link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
-            direction: 'Las Magnolias 765',
+            address: 'Las Magnolias 765',
         },
         {
             id: 6,
+            stars: 5,
             name: 'Blest',
-            location: 'Nordelta',
+            neighborhood: 'Nordelta',
+            city: 'CABA',
             link: 'https://res.cloudinary.com/tf-lab/image/upload/restaurant/979dc9fc-3554-42de-8e9f-a4480d31a534/fa2d2036-bd0f-4b46-8457-0adb588ee4a4.jpg',
-            direction: 'Ex ruta 8 km 33',
+            address: 'Ex ruta 8 km 33',
         },
     ];
+
     const { top, bottom } = useSafeAreaInsets();
 
+    const colorByIndex = {
+        0: colors.DARK_PINK,
+        1: colors.ORANGE,
+        2: colors.YELLOW,
+    };
+
+    const getNextColor = (pubIndex) => {
+        const normalizedIndex = pubIndex % 3;
+        return colorByIndex[normalizedIndex];
+    };
+
     return (
-        <View style={{ ...styles.container, marginTop: top + 10, marginBottom: bottom }}>
-            <View style={{ marginTop: 15 }}>
-                {pubs.map((pub, index) => (
-                    <ListItem
-                        containerStyle={{ backgroundColor: colors.PINK }}
-                        key={index}
-                        onPress={() => navigation.navigate('Pub', { pub: pub, usuario: usuario })}
-                        bottomDivider
-                    >
-                        <Avatar source={{ uri: pub.link }} />
-                        <ListItem.Content>
-                            <ListItem.Title
-                                style={{
-                                    fontWeight: 'bold',
-                                    fontSize: 19,
-                                }}
-                            >
-                                {pub.name}
-                            </ListItem.Title>
-                            <ListItem.Subtitle>{pub.location}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))}
+        <View style={{ ...styles.container, marginTop: top, marginBottom: bottom + 20 }}>
+            <View>
+                <FlatList
+                    data={pubs}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ index, item }) => (
+                        <PubCard
+                            pub={item}
+                            color={getNextColor(index)}
+                            onPress={() =>
+                                navigation.navigate('Pub', { pub: item, usuario: usuario })
+                            }
+                        />
+                    )}
+                />
             </View>
         </View>
     );
@@ -238,12 +254,6 @@ export default function PubsScreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-
-    pubCard: {
-        backgroundColor: 'rgba(56, 172, 236, 1)',
-        borderWidth: 0,
-        borderRadius: 20,
     },
 
     time: {
