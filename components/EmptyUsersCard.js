@@ -33,7 +33,10 @@ export default function EmptyUserCard() {
     }, []);
 
     return (
-        <LinearGradient style={styles.container} colors={[colors.PINK, strongerColor[colors.PINK]]}>
+        <LinearGradient
+            style={styles.container}
+            colors={[colors.PURPLE, strongerColor[colors.PURPLE]]}
+        >
             <View style={styles.body}>
                 <View style={styles.imageContainer}>
                     <Animated.View style={{ transform: [{ scale: anim.current }] }}>
@@ -54,10 +57,10 @@ export default function EmptyUserCard() {
                 </View>
 
                 <View style={styles.textRow}>
-                    <TouchableOpacity style={{ ...styles.button, backgroundColor: colors.PURPLE }}>
+                    <TouchableOpacity style={styles.button}>
                         <FontAwesome name="gear" style={styles.textButton} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ ...styles.button, backgroundColor: colors.ORANGE }}>
+                    <TouchableOpacity style={styles.button}>
                         <FontAwesome name="repeat" style={styles.textButton} color="black" />
                     </TouchableOpacity>
                 </View>
@@ -124,6 +127,6 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         paddingHorizontal: 5,
         marginHorizontal: 10,
-        backgroundColor: colors.ORANGE,
+        backgroundColor: colors.YELLOW,
     },
 });

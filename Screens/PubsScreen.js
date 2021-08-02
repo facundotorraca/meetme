@@ -3,8 +3,9 @@ import { Card, Button } from 'react-native-elements';
 import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { colors } from '../config/index.js';
+import { colors, strongerColor } from '../config/index.js';
 import { useDispatch } from 'react-redux';
+import { LinearGradient } from 'expo-linear-gradient';
 import { guardarInvite, guardarMensaje } from '../actions/index';
 import PubCard from '../components/PubCard.js';
 
@@ -26,30 +27,37 @@ export const Invitacion = (props) => {
                 marginBottom: bottom,
             }}
         >
-            <Card containerStyle={{ ...styles.pubInvitationSentCard, backgroundColor: pubColor }}>
-                <Card.Title>
-                    <Text style={styles.pubInvitationSentCardTitle}>
-                        {'Tu inviación a\n'}
-                        <Text style={{ color: colors.DARK_PURPLE }}>{user.nombre}</Text>{' '}
-                        {'\n fue enviada con exito!'}
-                    </Text>
-                </Card.Title>
+            <Card
+                containerStyle={{ ...styles.pubInvitationSentCard, backgroundColor: colors.PURPLE }}
+            >
+                <LinearGradient
+                    colors={[pubColor, strongerColor[pubColor]]}
+                    style={{ borderRadius: 20, padding: 15, height: '100%' }}
+                >
+                    <Card.Title>
+                        <Text style={styles.pubInvitationSentCardTitle}>
+                            {'Tu inviación a\n'}
+                            <Text style={{ color: colors.BLUE }}>{user.nombre}</Text>{' '}
+                            {'\n fue enviada con exito!'}
+                        </Text>
+                    </Card.Title>
 
-                <View>
-                    <Text style={{ alignSelf: 'center' }}>
-                        <FontAwesome5
-                            name="glass-cheers"
-                            size={CHEERS_ICON_SIZE}
-                            color={colors.PURPLE}
-                        ></FontAwesome5>
-                    </Text>
-                </View>
+                    <View>
+                        <Text style={{ alignSelf: 'center' }}>
+                            <FontAwesome5
+                                name="glass-cheers"
+                                size={CHEERS_ICON_SIZE}
+                                color={colors.PURPLE}
+                            ></FontAwesome5>
+                        </Text>
+                    </View>
 
-                <Card containerStyle={styles.subcardWithPubInvitation}>
-                    <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
-                    <Card.Divider></Card.Divider>
-                    <Text>{mensaje}</Text>
-                </Card>
+                    <Card containerStyle={styles.subcardWithPubInvitation}>
+                        <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
+                        <Card.Divider></Card.Divider>
+                        <Text>{mensaje}</Text>
+                    </Card>
+                </LinearGradient>
             </Card>
 
             <View style={styles.buttonContainer}>
@@ -264,8 +272,6 @@ const styles = StyleSheet.create({
 
     textAreaContainer: {
         flex: 1,
-        flex: 1,
-
         paddingTop: Platform.OS === 'ios' ? 20 : 0,
         justifyContent: 'center',
         margin: 20,
@@ -295,6 +301,7 @@ const styles = StyleSheet.create({
     pubInvitationSentCard: {
         height: '80%',
         borderRadius: 25,
+        padding: 0,
         shadowOffset: {
             width: 0,
             height: 0,

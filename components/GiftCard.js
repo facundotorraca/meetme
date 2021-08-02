@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        backgroundColor: colors.DARK_PURPLE,
+        backgroundColor: colors.BLUE,
         padding: 7,
         borderRadius: 25,
         alignSelf: 'flex-end',

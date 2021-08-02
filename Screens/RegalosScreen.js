@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-native-elements';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '../config/index.js';
+import { colors, strongerColor } from '../config/index.js';
 import { guardarRegalo } from '../actions';
 import { useDispatch } from 'react-redux';
 import { FlatList } from 'react-native';
 import GiftCard from '../components/GiftCard.js';
 import { giftType } from '../reducers/initialState.js';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const MensajeRegalo = (props) => {
     const GIFT_ICON_SIZE = 250;
@@ -28,30 +29,35 @@ export const MensajeRegalo = (props) => {
                 marginBottom: bottom,
             }}
         >
-            <Card containerStyle={{ ...styles.giftSentCard, backgroundColor: giftColor }}>
-                <Card.Title>
-                    <Text style={styles.giftSentCardTitle}>
-                        {'Tu regalo a \n'}
-                        <Text style={{ color: colors.DARK_PURPLE }}>{user.nombre}</Text>{' '}
-                        {'\n fue enviado con exito!'}
-                    </Text>
-                </Card.Title>
+            <Card containerStyle={styles.giftSentCard}>
+                <LinearGradient
+                    colors={[giftColor, strongerColor[giftColor]]}
+                    style={{ borderRadius: 20, padding: 15, height: '100%' }}
+                >
+                    <Card.Title>
+                        <Text style={styles.giftSentCardTitle}>
+                            {'Tu regalo a \n'}
+                            <Text style={{ color: colors.BLUE }}>{user.nombre}</Text>{' '}
+                            {'\n fue enviado con exito!'}
+                        </Text>
+                    </Card.Title>
 
-                <View>
-                    <Text style={{ alignSelf: 'center' }}>
-                        <FontAwesome5
-                            name="gift"
-                            size={GIFT_ICON_SIZE}
-                            color={colors.PURPLE}
-                        ></FontAwesome5>
-                    </Text>
-                </View>
+                    <View>
+                        <Text style={{ alignSelf: 'center' }}>
+                            <FontAwesome5
+                                name="gift"
+                                size={GIFT_ICON_SIZE}
+                                color={colors.PURPLE}
+                            ></FontAwesome5>
+                        </Text>
+                    </View>
 
-                <Card containerStyle={styles.subcardWithGiftMessage}>
-                    <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
-                    <Card.Divider></Card.Divider>
-                    <Text>{mensaje}</Text>
-                </Card>
+                    <Card containerStyle={styles.subcardWithGiftMessage}>
+                        <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
+                        <Card.Divider></Card.Divider>
+                        <Text>{mensaje}</Text>
+                    </Card>
+                </LinearGradient>
             </Card>
 
             <View style={styles.buttonContainer}>
@@ -138,9 +144,6 @@ export default Regalos = (props) => {
     const usuario = props.route.params.usuario;
 
     const regalos = [
-        // no poner en PURPLE ni DARKPURPLE en
-        // los regalos, no se nota el descuento
-        // usar, PINK, DARKPINK, YELLOW, ORANGE
         {
             id: 1,
             name: 'Caja de Chocolates',
@@ -274,8 +277,10 @@ const styles = StyleSheet.create({
     },
 
     giftSentCard: {
+        padding: 0,
         height: '80%',
         borderRadius: 25,
+        borderWidth: 0,
         shadowOffset: {
             width: 0,
             height: 0,

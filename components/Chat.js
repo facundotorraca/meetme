@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { colors } from '../config';
+import { View, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { guardarMensaje } from '../actions/index';
-import { Button } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { colors } from '../config';
 
 const PanelBotonesChat = ({ navigation, usuario }) => {
     const buttonSize = 27;
@@ -19,13 +17,13 @@ const PanelBotonesChat = ({ navigation, usuario }) => {
                 style={styles.button}
                 onPress={() => navigation.navigate('Regalos', { usuario: usuario })}
             >
-                <FontAwesome name="gift" size={buttonSize} color={colors.DARK_PURPLE}></FontAwesome>
+                <FontAwesome name="gift" size={buttonSize} color={colors.YELLOW}></FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.navigate('Pubs', { usuario: usuario })}
             >
-                <FontAwesome name="glass" size={buttonSize} color={colors.DARK_PINK}></FontAwesome>
+                <FontAwesome name="glass" size={buttonSize} color={colors.YELLOW}></FontAwesome>
             </TouchableOpacity>
             <View />
         </View>
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     button: {
         width: 50,
         height: 50,
-        backgroundColor: colors.YELLOW,
+        backgroundColor: colors.PURPLE,
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',

@@ -37,7 +37,7 @@ const TabTopBar = () => {
                         <FontAwesome5
                             name="fire"
                             size={iconSize}
-                            color={focused ? colors.PURPLE : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome5>
                     ),
                 }}
@@ -69,7 +69,7 @@ const TabTopBar = () => {
                         <FontAwesome5
                             name="tasks"
                             size={iconSize}
-                            color={focused ? colors.PURPLE : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome5>
                     ),
                 }}
@@ -85,7 +85,7 @@ const TabTopBar = () => {
                         <FontAwesome
                             name="user"
                             size={iconSize}
-                            color={focused ? colors.PINK : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome>
                     ),
                 }}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 50,
         paddingBottom: 10,
-        backgroundColor: colors.ORANGE,
+        backgroundColor: colors.PURPLE,
     },
 });
 

@@ -1,10 +1,12 @@
 export const colors = {
+    PASS: 'red',
+    LIKE: '#64EDCC',
     PINK: '#E850E0',
+    BLUE: '#8225E2',
     PURPLE: '#9C27B0',
     YELLOW: '#FBB831',
     ORANGE: '#FB8569',
     DARK_PINK: '#FB569C',
-    DARK_PURPLE: '#8225E2',
 };
 
 export const menus = {
@@ -20,5 +22,5 @@ export const strongerColor = {
     [colors.ORANGE]: '#E55836',
     [colors.PURPLE]: '#67027A',
     [colors.DARK_PINK]: '#F31070',
-    [colors.DARK_PURPLE]: '#5704AB',
+    [colors.BLUE]: '#5704AB',
 };
