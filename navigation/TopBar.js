@@ -52,7 +52,7 @@ const TabTopBar = () => {
                     tabBarIcon: ({ focused }) => (
                         <FontAwesome
                             name="comments"
-                            size={iconSize}
+                            size={iconSize - 2 /*es un poco mas grande que los normales*/}
                             color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome>
                     ),
