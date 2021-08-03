@@ -3,30 +3,22 @@ import { Card, Button } from 'react-native-elements';
 import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { colors, strongerColor } from '../config/index.js';
+import { colors, strongerColor, screenSize } from '../config/index.js';
 import { useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { guardarInvite, guardarMensaje } from '../actions/index';
 import PubCard from '../components/PubCard.js';
 
 export const Invitacion = (props) => {
-    const CHEERS_ICON_SIZE = 250;
+    const CHEERS_ICON_SIZE = screenSize.ratio * 120;
 
     const dispatch = useDispatch();
 
     const { navigation } = props;
     const { mensaje, user, pub, pubColor } = props.route.params;
 
-    const { top, bottom } = useSafeAreaInsets();
-
     return (
-        <View
-            style={{
-                ...styles.container,
-                marginTop: top + 10,
-                marginBottom: bottom,
-            }}
-        >
+        <View style={styles.container}>
             <Card
                 containerStyle={{ ...styles.pubInvitationSentCard, backgroundColor: colors.PURPLE }}
             >
@@ -114,7 +106,7 @@ export const PubScreen = (props) => {
                     />
                 </View>
 
-                <View style={{ padding: 10 }}>
+                <View style={styles.buttonContainer}>
                     <Button
                         buttonStyle={{ ...styles.button, paddingHorizontal: 150 }}
                         title="Invitar!"
@@ -254,7 +246,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         padding: 20,
         alignSelf: 'flex-end',
-        paddingTop: 30,
+        paddingTop: 10,
     },
 
     image: {
@@ -263,19 +255,13 @@ const styles = StyleSheet.create({
         borderRadius: 25,
     },
 
-    notes: {
-        fontSize: 18,
-        color: '#fff',
-        textTransform: 'capitalize',
-    },
-    invitacion: { fontSize: 25, textAlign: 'center', padding: 10 },
-
     textAreaContainer: {
         flex: 1,
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        paddingTop: '7%',
         justifyContent: 'center',
         margin: 20,
-        marginBottom: 200,
+        marginBottom:
+            screenSize.height >= 750 ? screenSize.height * 0.25 : screenSize.height * 0.15,
     },
 
     textArea: {

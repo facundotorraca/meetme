@@ -3,11 +3,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
-import { colors, strongerColor } from '../config';
+import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function UserCard({ user, color }) {
     const iconSize = 25;
+    const avatarSize =
+        screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
 
     const infoGustos = {
         'Salir de fiesta': { icono: 'glass', color: colors.YELLOW },
@@ -60,7 +62,7 @@ export default function UserCard({ user, color }) {
                         lipColor="purple"
                         mouth="open"
                         showBackground={true}
-                        size={400}
+                        size={avatarSize}
                         skinTone="brown"
                     />
                 </View>
@@ -85,8 +87,8 @@ export default function UserCard({ user, color }) {
 const styles = StyleSheet.create({
     container: {
         borderRadius: 30,
-        height: '100%',
         padding: 15,
+        height: `${screenSize.ratio * 48}%`,
     },
 
     chip: {

@@ -1,13 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
-import { colors, strongerColor } from '../config';
+import { colors, strongerColor, screenSize } from '../config';
 import { Animated } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function EmptyUserCard() {
-    const centralIconSize = 180;
+    const centralIconSize =
+        screenSize.height >= 750 ? screenSize.height * 0.2 : screenSize.height * 0.12;
 
     const anim = useRef(new Animated.Value(1));
 
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.PINK,
         borderRadius: 30,
-        height: '100%',
+        height: `${screenSize.ratio * 48}%`,
         padding: 10,
     },
 

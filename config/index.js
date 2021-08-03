@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 export const colors = {
     PASS: 'red',
     LIKE: '#64EDCC',
@@ -23,4 +25,10 @@ export const strongerColor = {
     [colors.PURPLE]: '#67027A',
     [colors.DARK_PINK]: '#F31070',
     [colors.BLUE]: '#5704AB',
+};
+
+export const screenSize = {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    ratio: Dimensions.get('window').height / Dimensions.get('window').width,
 };

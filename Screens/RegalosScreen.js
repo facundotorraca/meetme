@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-native-elements';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, strongerColor } from '../config/index.js';
+import { colors, strongerColor, screenSize } from '../config';
 import { guardarRegalo } from '../actions';
 import { useDispatch } from 'react-redux';
 import { FlatList } from 'react-native';
@@ -12,23 +12,15 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const MensajeRegalo = (props) => {
-    const GIFT_ICON_SIZE = 250;
+    const GIFT_ICON_SIZE = screenSize.ratio * 120;
 
     const dispatch = useDispatch();
 
     const { navigation } = props;
     const { mensaje, user, regalo, giftColor } = props.route.params;
 
-    const { top, bottom } = useSafeAreaInsets();
-
     return (
-        <View
-            style={{
-                ...styles.container,
-                marginTop: top + 10,
-                marginBottom: bottom,
-            }}
-        >
+        <View style={styles.container}>
             <Card containerStyle={styles.giftSentCard}>
                 <LinearGradient
                     colors={[giftColor, strongerColor[giftColor]]}
@@ -243,17 +235,16 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         padding: 20,
         alignSelf: 'flex-end',
-        paddingTop: 30,
+        paddingTop: 10,
     },
 
     textAreaContainer: {
         flex: 1,
-        flex: 1,
-
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        paddingTop: '7%',
         justifyContent: 'center',
         margin: 20,
-        marginBottom: 200,
+        marginBottom:
+            screenSize.height >= 750 ? screenSize.height * 0.25 : screenSize.height * 0.15,
     },
 
     textArea: {

@@ -1,9 +1,9 @@
 import React from 'react';
 import StackChat from './StackChat';
-import MiPerfil from '../components/MiPerfil';
 import { colors } from '../config';
 import HomeScreen from '../Screens/HomeScreen';
 import { StyleSheet } from 'react-native';
+import UserSettingsScreen from '../Screens/UserSettingsScreen';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 
@@ -77,7 +77,7 @@ const TabTopBar = () => {
 
             <Tab.Screen
                 name="MiPerfil"
-                component={MiPerfil}
+                component={UserSettingsScreen}
                 options={{
                     title: 'Me',
                     showIcon: true,
