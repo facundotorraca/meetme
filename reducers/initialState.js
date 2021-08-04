@@ -38,10 +38,21 @@ const mensajes = {
 const misActividades = {
     1: {
         agenda: [
-            { senderMe: false, tipo: actividades.REGALO, fecha: new Date('2021-07-21T21:00') },
+            { senderMe: false, tipo: actividades.INVITACION, fecha: new Date('2021-07-21T21:00') },
         ],
     },
 };
+
+const listaDeActividades = [
+    {
+        id: 0,
+        usuarioId: 1,
+        senderMe: false,
+        tipo: actividades.INVITACION,
+        fecha: new Date('2021-07-21T21:00'),
+        pub: { name: 'Jobs' },
+    },
+];
 
 const usuarios = [
     {
@@ -140,6 +151,7 @@ export const initialState = {
 
     mensajes: mensajes,
     misActividades: misActividades,
+    listaDeActividades: listaDeActividades,
     usuariosTotales: usuarios,
     app: { idUsuarioChat: null },
 };

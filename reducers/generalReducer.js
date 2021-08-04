@@ -37,7 +37,6 @@ export default function generalReducer(state = initialState, action) {
         case 'GUARDAR_MENSAJE': {
             let mensajes = state.mensajes;
             let mensaje = action.payload;
-            console.log(mensaje);
 
             let nuevaConversacion = [
                 ...mensajes[`${mensaje._id}`].conversacion,
@@ -64,7 +63,7 @@ export default function generalReducer(state = initialState, action) {
             let agenda = misActividadesConUsuario.agenda;
             let nuevaAgenda = [
                 ...agenda,
-                { senderMe: true, tipo: actividades.INVITACION, fecha: new Date() },
+                { senderMe: true, tipo: action.payload.tipo, fecha: new Date() },
             ];
 
             let nuevasActividadesConUsuario = {
@@ -76,7 +75,23 @@ export default function generalReducer(state = initialState, action) {
 
             let misNuevasActividades = { ...misActividadesConUsuario, nuevasActividadesConUsuario };
 
-            return { ...state, misActividades: misNuevasActividades };
+            let nuevaListaActividades = [
+                ...state.listaDeActividades,
+                {
+                    id: state.listaDeActividades.length,
+                    usuarioId: usuario.id,
+                    senderMe: true,
+                    tipo: action.payload.tipo,
+                    fecha: new Date(),
+                    pub: action.payload.pub,
+                },
+            ];
+
+            return {
+                ...state,
+                misActividades: misNuevasActividades,
+                listaDeActividades: nuevaListaActividades,
+            };
         }
         default:
             return state;
