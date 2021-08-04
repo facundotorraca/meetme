@@ -13,6 +13,14 @@ export const actividades = {
     INVITACION: 'Invitacion',
 };
 
+// TODO -> tal vez esto ver que
+// nos pusieron en la encuesta
+export const giftType = {
+    CANDY: 'Dulces',
+    FLOWER: 'Flores',
+    DRINKS: 'Bebidas',
+};
+
 const mensajes = {
     1: {
         conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
@@ -40,7 +48,7 @@ const usuarios = [
         id: 0,
         nombre: 'Sergio Aguero',
         edad: 40,
-        colorCard: colors.PURPLE,
+        colorCard: colors.DARK_PINK,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         meDioLike: false,
@@ -64,7 +72,7 @@ const usuarios = [
         id: 2,
         nombre: 'Roman Riquelme',
         edad: 37,
-        colorCard: colors.DARK_PINK,
+        colorCard: colors.YELLOW,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         meDioLike: true,
@@ -76,7 +84,7 @@ const usuarios = [
         id: 3,
         nombre: 'Facundo Torraca',
         edad: 22,
-        colorCard: colors.DARK_PURPLE,
+        colorCard: colors.BLUE,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         meDioLike: true,
@@ -109,7 +117,7 @@ const usuarios = [
         id: 6,
         nombre: 'Roberto Cahu',
         edad: 22,
-        colorCard: colors.DARK_PURPLE,
+        colorCard: colors.BLUE,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS],
         meDioLike: true,

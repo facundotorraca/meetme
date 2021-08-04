@@ -11,14 +11,14 @@ export default function BottomBar({ handlePassPress, handleLikePress, disabled }
                 <FontAwesome
                     name="times"
                     size={buttonSize}
-                    color={disabled ? 'grey' : colors.DARK_PURPLE}
+                    color={disabled ? 'grey' : colors.PASS}
                 ></FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleLikePress} disabled={disabled}>
                 <FontAwesome
                     name="heart"
                     size={buttonSize}
-                    color={disabled ? 'grey' : colors.DARK_PINK}
+                    color={disabled ? 'grey' : colors.LIKE}
                 ></FontAwesome>
             </TouchableOpacity>
             <View />
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     button: {
         width: 60,
         height: 60,
-        backgroundColor: colors.YELLOW,
+        backgroundColor: colors.PURPLE,
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',

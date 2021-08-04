@@ -1,9 +1,9 @@
 import React from 'react';
 import StackChat from './StackChat';
-import MiPerfil from '../components/MiPerfil';
 import { colors } from '../config';
 import HomeScreen from '../Screens/HomeScreen';
 import { StyleSheet } from 'react-native';
+import UserSettingsScreen from '../Screens/UserSettingsScreen';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 
@@ -37,7 +37,7 @@ const TabTopBar = () => {
                         <FontAwesome5
                             name="fire"
                             size={iconSize}
-                            color={focused ? colors.PURPLE : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome5>
                     ),
                 }}
@@ -52,7 +52,7 @@ const TabTopBar = () => {
                     tabBarIcon: ({ focused }) => (
                         <FontAwesome
                             name="comments"
-                            size={iconSize}
+                            size={iconSize - 2 /*es un poco mas grande que los normales*/}
                             color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome>
                     ),
@@ -69,7 +69,7 @@ const TabTopBar = () => {
                         <FontAwesome5
                             name="tasks"
                             size={iconSize}
-                            color={focused ? colors.PURPLE : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome5>
                     ),
                 }}
@@ -77,7 +77,7 @@ const TabTopBar = () => {
 
             <Tab.Screen
                 name="MiPerfil"
-                component={MiPerfil}
+                component={UserSettingsScreen}
                 options={{
                     title: 'Me',
                     showIcon: true,
@@ -85,7 +85,7 @@ const TabTopBar = () => {
                         <FontAwesome
                             name="user"
                             size={iconSize}
-                            color={focused ? colors.PINK : inactiveColor}
+                            color={focused ? colors.YELLOW : inactiveColor}
                         ></FontAwesome>
                     ),
                 }}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 50,
         paddingBottom: 10,
-        backgroundColor: colors.ORANGE,
+        backgroundColor: colors.PURPLE,
     },
 });
 

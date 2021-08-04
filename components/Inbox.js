@@ -27,6 +27,13 @@ export default function Inbox({ navigation }) {
 
     let matches = users.filter((u) => u.leDiLike && u.meDioLike);
 
+    const dateOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
+
     const chatItem = ({ item }) => {
         return (
             <TouchableOpacity
@@ -64,7 +71,7 @@ export default function Inbox({ navigation }) {
                             <Text style={styles.chatPostTime}>
                                 {chats[`${item.id}`]?.conversacion?.[
                                     chats[`${item.id}`]?.conversacion?.length - 1
-                                ].fecha?.toString()}
+                                ].fecha?.toLocaleDateString('es-ES', dateOptions)}
                             </Text>
                         </View>
                         <Text style={styles.messageText}>
@@ -147,6 +154,7 @@ const styles = StyleSheet.create({
     chatPostTime: {
         fontSize: 12,
         color: '#666',
+        paddingRight: 10,
     },
 
     messageText: {
