@@ -8,6 +8,7 @@ import configureStore from './store/configureStore';
 
 // desactivar warning de las librerias
 import { LogBox } from 'react-native';
+import LoginScreen from './Screens/LoginScreen';
 LogBox.ignoreLogs(['Animated']);
 
 const RootComponent = () => {
@@ -23,6 +24,7 @@ const RootComponent = () => {
                     },
                 }}
             >
+                <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Tab" component={TopBar} />
             </Stack.Navigator>
         </NavigationContainer>
