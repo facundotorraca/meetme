@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import HomeScreen from './Screens/HomeScreen';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
-import MiPerfil from './components/MiPerfil';
 import TopBar from './navigation/TopBar';
+import configureStore from './store/configureStore';
 
 // desactivar warning de las librerias
-import { View, LogBox } from 'react-native';
+import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Animated']);
 
 const RootComponent = () => {

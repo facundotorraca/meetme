@@ -32,3 +32,61 @@ export const screenSize = {
     height: Dimensions.get('window').height,
     ratio: Dimensions.get('window').height / Dimensions.get('window').width,
 };
+
+export const userAtributes = {
+    ACCESSORY: 'accessory',
+    TSHIRT_GRAPHIC: 'graphic',
+    FACIAL_HAIR: 'facialHair',
+    SKIN_TONE: 'skinTone',
+    HAIR: 'hair',
+    BODY: 'body',
+    CLOTHING: 'clothing',
+};
+
+export const userAtributesOptions = {
+    [userAtributes.CLOTHING]: [
+        'naked',
+        'shirt',
+        'dressShirt',
+        'vneck',
+        'tankTop',
+        'dress',
+        'denimJacket',
+        'hoodie',
+        'chequeredShirt',
+        'chequeredShirtDark',
+    ],
+    [userAtributes.BODY]: ['chest', 'breasts'],
+    [userAtributes.FACIAL_HAIR]: ['none', 'stubble', 'mediumBeard', 'goatee'],
+    [userAtributes.SKIN_TONE]: ['light', 'yellow', 'brown', 'dark', 'red', 'black'],
+    [userAtributes.ACCESSORY]: [
+        'none',
+        'roundGlasses',
+        'tinyGlasses',
+        'shades',
+        'faceMask',
+        'hoopEarrings',
+    ],
+    [userAtributes.TSHIRT_GRAPHIC]: [
+        'none',
+        'redwood',
+        'gatsby',
+        'vue',
+        'react',
+        'graphQL',
+        'donut',
+        'rainbow',
+    ],
+    [userAtributes.HAIR]: [
+        'none',
+        'long',
+        'bun',
+        'short',
+        'pixie',
+        'balding',
+        'buzz',
+        'afro',
+        'bob',
+        'mohawk',
+    ],
+};

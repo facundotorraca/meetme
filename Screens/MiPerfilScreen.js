@@ -1,7 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { colors } from '../config';
+import { FontAwesome } from '@expo/vector-icons';
 import SettingsComponent from '../components/Settings';
+import { StyleSheet, View } from 'react-native';
+import UserEditor from '../components/UserEditor';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 
-const UserSettingsScreen = () => {
+export const EditarCard = (props) => {
+    const miUsuario = useSelector((state) => state.general.usuario);
+    const buttonSize = 27;
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.userCardContainer}>
+                <UserEditor user={miUsuario} color={miUsuario.colorCard} />
+            </View>
+        </View>
+    );
+};
+
+const MiPerfilScreen = ({ navigation }) => {
     const [email, setEmail] = useState(null);
     const [sortBy, setSortBy] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,7 +30,11 @@ const UserSettingsScreen = () => {
     };
 
     const settingsOptions = [
-        { title: 'Avatar', subTitle: 'Selecciona tu avatar', onPress: () => {} },
+        {
+            title: 'Avatar',
+            subTitle: 'Selecciona tu avatar',
+            onPress: () => navigation.navigate('EditarCard'),
+        },
         { title: 'Name format', subTitle: 'First name first', onPress: () => {} },
         { title: 'Import', subTitle: null, onPress: () => {} },
         { title: 'Export', subTitle: null, onPress: () => {} },
@@ -44,10 +67,6 @@ const UserSettingsScreen = () => {
     const getSettings = async () => {
         const user = { email: 'test' };
         setEmail(user.email);
-
-        if (sortPref) {
-            setSortBy('First Name');
-        }
     };
     useEffect(() => {
         getSettings();
@@ -63,4 +82,18 @@ const UserSettingsScreen = () => {
     );
 };
 
-export default UserSettingsScreen;
+export default MiPerfilScreen;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+
+    userCardContainer: {
+        flex: 1,
+        marginTop: 20,
+        marginHorizontal: 20,
+        marginBottom: 180,
+        backgroundColor: 'white',
+    },
+});

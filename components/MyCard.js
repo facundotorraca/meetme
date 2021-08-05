@@ -6,7 +6,7 @@ import { Chip } from 'react-native-elements';
 import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function UserCard({ user, color }) {
+export default function MyCard() {
     const iconSize = 25;
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
@@ -34,6 +34,9 @@ export default function UserCard({ user, color }) {
         </View>
     );
 
+    const color = colors.PURPLE;
+    const user = { gustos: [], nombre: 'TEST', edad: 1, descripcion: 'hola', ciudad: 'Chicago' };
+
     return (
         <LinearGradient colors={[color, strongerColor[color]]} style={{ ...styles.container }}>
             <View style={styles.header}>
@@ -41,7 +44,6 @@ export default function UserCard({ user, color }) {
                     return tagGusto(value);
                 })}
             </View>
-
             <View style={styles.body}>
                 <View style={styles.imageContainer}>
                     <BigHead
@@ -68,20 +70,17 @@ export default function UserCard({ user, color }) {
                     />
                 </View>
             </View>
-
             <View style={styles.footer}>
-                <View>
-                    <View style={styles.textRow}>
-                        <Text style={[styles.textPrimary, styles.textShadow]}>{user.nombre}</Text>
-                        <Text style={[styles.textSecondary, styles.textShadow]}>{user.edad}</Text>
-                    </View>
-                    <View style={styles.textRow}>
-                        <FontAwesome name="map-marker" size={28} color="white"></FontAwesome>
-                        <Text style={[styles.textLocation, styles.textShadow]}>{user.ciudad}</Text>
-                    </View>
-                    <View style={styles.textRow}>
-                        <Text style={styles.textDescription}>{user.descripcion} </Text>
-                    </View>
+                <View style={styles.textRow}>
+                    <Text style={[styles.textPrimary, styles.textShadow]}>{user.nombre}</Text>
+                    <Text style={[styles.textSecondary, styles.textShadow]}>{user.edad}</Text>
+                </View>
+                <View style={styles.textRow}>
+                    <FontAwesome name="map-marker" size={28} color="white"></FontAwesome>
+                    <Text style={[styles.textLocation, styles.textShadow]}>{user.ciudad}</Text>
+                </View>
+                <View style={styles.textRow}>
+                    <Text style={styles.textDescription}>{user.descripcion} </Text>
                 </View>
             </View>
         </LinearGradient>

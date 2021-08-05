@@ -59,7 +59,7 @@ const usuarios = [
         id: 0,
         nombre: 'Sergio Aguero',
         edad: 40,
-        colorCard: colors.DARK_PINK,
+        colorCard: colors.PINK,
         ciudad: 'Buenos Aires',
         gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         meDioLike: false,
@@ -138,7 +138,16 @@ const usuarios = [
 ];
 
 export const initialState = {
-    usuario: { autorizado: false, id: 9000, nombre: 'Barbara' },
+    usuario: {
+        autorizado: false,
+        id: 9000,
+        nombre: 'Barbara',
+        edad: 22,
+        colorCard: colors.PINK,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        descripcion: 'Saa',
+    },
 
     caracteristicasPago: {
         numeroTarjeta: 123134141,

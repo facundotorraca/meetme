@@ -1,19 +1,14 @@
 import React from 'react';
 import StackChat from './StackChat';
 import { colors } from '../config';
-import HomeScreen from '../Screens/HomeScreen';
 import { StyleSheet } from 'react-native';
-import UserSettingsScreen from '../Screens/UserSettingsScreen';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { Dimensions } from 'react-native';
-
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import StackMiPerfil from './StackMiPerfil';
+import HomeScreen from '../Screens/HomeScreen';
 import Actividades from '../Screens/ActividadesScreen';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const TabTopBar = () => {
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-
     const Tab = createMaterialTopTabNavigator();
 
     const inactiveColor = 'white';
@@ -77,7 +72,7 @@ const TabTopBar = () => {
 
             <Tab.Screen
                 name="MiPerfil"
-                component={UserSettingsScreen}
+                component={StackMiPerfil}
                 options={{
                     title: 'Me',
                     showIcon: true,
