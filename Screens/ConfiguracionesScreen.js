@@ -97,13 +97,11 @@ const CofiguracionesScreen = ({ navigation }) => {
         },
         {
             title: 'Sobre nosotros',
-            subTitle: null,
             onPress: () => {},
             icon: <MaterialIcons name="info" size={40} color={colors.PURPLE} />,
         },
         {
             title: 'Terminos y condiciones',
-            subTitle: null,
             onPress: () => {},
             icon: <FontAwesome name="book" size={40} color={colors.PURPLE} />,
         },

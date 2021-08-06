@@ -56,11 +56,10 @@ const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, pre
                             >
                                 <View>
                                     <Text style={{ fontSize: 17 }}>{title}</Text>
-                                    {subTitle && (
-                                        <Text style={{ fontSize: 14, opacity: 0.5, paddingTop: 5 }}>
-                                            {subTitle}
-                                        </Text>
-                                    )}
+
+                                    <Text style={{ fontSize: 14, opacity: 0.5, paddingTop: 5 }}>
+                                        {subTitle ?? ' '}
+                                    </Text>
                                 </View>
                                 {icon}
                             </View>
