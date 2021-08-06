@@ -2,10 +2,10 @@ import React from 'react';
 import StackChat from './StackChat';
 import { colors } from '../config';
 import { StyleSheet } from 'react-native';
-import StackMiPerfil from './StackMiPerfil';
 import HomeScreen from '../Screens/HomeScreen';
 import Actividades from '../Screens/ActividadesScreen';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import StackConfiguraciones from './StackConfiguraciones';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const TabTopBar = () => {
@@ -72,7 +72,7 @@ const TabTopBar = () => {
 
             <Tab.Screen
                 name="MiPerfil"
-                component={StackMiPerfil}
+                component={StackConfiguraciones}
                 options={{
                     title: 'Me',
                     showIcon: true,

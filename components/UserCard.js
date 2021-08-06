@@ -3,7 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
-import { colors, strongerColor, screenSize } from '../config';
+import { colors, strongerColor, screenSize, gustos } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function UserCard({ user, color }) {
@@ -12,9 +12,9 @@ export default function UserCard({ user, color }) {
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
 
     const infoGustos = {
-        'Salir de fiesta': { icono: 'glass', color: colors.YELLOW },
-        'Videojuegos': { icono: 'gamepad', color: colors.YELLOW },
-        'Aire libre': { icono: 'tree', color: colors.YELLOW },
+        [gustos.SALIR_DE_FIESTA]: { icono: 'glass', color: colors.YELLOW },
+        [gustos.VIDEOJUEGOS]: { icono: 'gamepad', color: colors.YELLOW },
+        [gustos.AIRE_LIBRE]: { icono: 'tree', color: colors.YELLOW },
     };
 
     const tagGusto = (gusto) => (
@@ -27,8 +27,9 @@ export default function UserCard({ user, color }) {
                     size: iconSize,
                     color: infoGustos[gusto]?.color,
                 }}
+                buttonStyle={{ backgroundColor: colors.BLUE }}
                 type="solid"
-                backgroundColor="red"
+                background
                 iconRight
             />
         </View>

@@ -1,10 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import MiPerfilScreen, { EditarCard } from '../Screens/MiPerfilScreen';
+import CofiguracionesScreen, {
+    EditarCard,
+    InformacionPersonal,
+} from '../Screens/ConfiguracionesScreen';
 
 const Stack = createStackNavigator();
 
-const StackMiPerfil = () => {
+const StackConfiguraciones = () => {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -16,7 +19,7 @@ const StackMiPerfil = () => {
         >
             <Stack.Screen
                 name="MiPerfil"
-                component={MiPerfilScreen}
+                component={CofiguracionesScreen}
                 options={({ route }) => ({
                     headerBackTitleVisible: true,
                 })}
@@ -29,8 +32,16 @@ const StackMiPerfil = () => {
                     headerBackTitleVisible: true,
                 })}
             />
+
+            <Stack.Screen
+                name="InformacionPersonal"
+                component={InformacionPersonal}
+                options={({ route }) => ({
+                    headerBackTitleVisible: true,
+                })}
+            />
         </Stack.Navigator>
     );
 };
 
-export default StackMiPerfil;
+export default StackConfiguraciones;

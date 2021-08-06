@@ -1,12 +1,4 @@
-import { colors } from '../config';
-
-export const gustos = {
-    MUSICA: 'Musica',
-    DEPORTES: 'Deportes',
-    AIRE_LIBRE: 'Aire libre',
-    VIDEOJUEGOS: 'Videojuegos',
-    SALIR_DE_FIESTA: 'Salir de fiesta',
-};
+import { colors, gustos } from '../config';
 
 export const actividades = {
     REGALO: 'Regalo',

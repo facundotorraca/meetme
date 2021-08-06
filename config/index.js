@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { FontAwesome, FontAweome5 } from '@expo/vector-icons';
 
 export const colors = {
     PASS: 'red',
@@ -9,6 +10,14 @@ export const colors = {
     YELLOW: '#FBB831',
     ORANGE: '#FB8569',
     DARK_PINK: '#FB569C',
+};
+
+export const gustos = {
+    MUSICA: 'Musica',
+    DEPORTES: 'Deportes',
+    AIRE_LIBRE: 'Aire libre',
+    VIDEOJUEGOS: 'Videojuegos',
+    SALIR_DE_FIESTA: 'Salir de fiesta',
 };
 
 export const strongerColor = {
