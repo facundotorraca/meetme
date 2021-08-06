@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { colors } from '../config';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import SettingsComponent from '../components/Settings';
 import { StyleSheet, View } from 'react-native';
 import UserEditor from '../components/UserEditor';
@@ -34,12 +34,26 @@ const MiPerfilScreen = ({ navigation }) => {
             title: 'Avatar',
             subTitle: 'Selecciona tu avatar',
             onPress: () => navigation.navigate('EditarCard'),
+            icon: <FontAwesome name="user-circle-o" size={40} color={colors.PURPLE} />,
         },
-        { title: 'Name format', subTitle: 'First name first', onPress: () => {} },
-        { title: 'Import', subTitle: null, onPress: () => {} },
-        { title: 'Export', subTitle: null, onPress: () => {} },
-        { title: 'Blocked numbers', subTitle: null, onPress: () => {} },
-        { title: 'About RNContacts', subTitle: null, onPress: () => {} },
+        {
+            title: 'Informacion',
+            subTitle: 'Edita tu informacion personal y gustos',
+            icon: <MaterialIcons name="description" size={40} color={colors.PURPLE} />,
+            onPress: () => {},
+        },
+        {
+            title: 'Sobre nosotros',
+            subTitle: null,
+            onPress: () => {},
+            icon: <MaterialIcons name="info" size={40} color={colors.PURPLE} />,
+        },
+        {
+            title: 'Terminos y condiciones',
+            subTitle: null,
+            onPress: () => {},
+            icon: <FontAwesome name="book" size={40} color={colors.PURPLE} />,
+        },
     ];
 
     const prefArr = [

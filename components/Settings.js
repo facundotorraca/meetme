@@ -38,7 +38,7 @@ const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, pre
                 setModalVisible={setModalVisible}
             />
             <ScrollView style={{ backgroundColor: 'white' }}>
-                {settingsOptions.map(({ title, subTitle, onPress }, index) => (
+                {settingsOptions.map(({ title, subTitle, onPress, icon }, index) => (
                     <TouchableOpacity key={title} onPress={onPress}>
                         <View
                             style={{
@@ -47,12 +47,23 @@ const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, pre
                                 paddingTop: 20,
                             }}
                         >
-                            <Text style={{ fontSize: 17 }}>{title}</Text>
-                            {subTitle && (
-                                <Text style={{ fontSize: 14, opacity: 0.5, paddingTop: 5 }}>
-                                    {subTitle}
-                                </Text>
-                            )}
+                            <View
+                                style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                }}
+                            >
+                                <View>
+                                    <Text style={{ fontSize: 17 }}>{title}</Text>
+                                    {subTitle && (
+                                        <Text style={{ fontSize: 14, opacity: 0.5, paddingTop: 5 }}>
+                                            {subTitle}
+                                        </Text>
+                                    )}
+                                </View>
+                                {icon}
+                            </View>
                         </View>
 
                         <View style={{ height: 0.5, backgroundColor: 'grey' }} />
