@@ -1,85 +1,118 @@
 import React, { useEffect, useState } from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { BigHead } from 'react-native-bigheads';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Chip } from 'react-native-elements';
-import { userAtributesOptions, userAtributes } from '../config';
+import { userAttributeOptions, userAttributeTypes } from '../config';
 import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function UserEditor({ user, color }) {
-    const [attrTypes, _] = useState(Object.values(userAtributes));
+    const attrTypes = Object.values(userAttributeTypes);
 
-    const [currAttrTypeIndex, setCurrAttrTypeIndex] = useState(0);
-    const [currAttrOptionIndex, setCurrAttrOptionIndex] = useState(0);
-    const [attrOptions, setAttrOptions] = useState(
-        userAtributesOptions[attrTypes[currAttrTypeIndex]]
-    );
+    const [attrOptions, setAttrOptions] = useState(userAttributeOptions[attrTypes[attrTypeIndex]]);
+    const [attrTypeIndex, setAttrTypeIndex] = useState(0);
+    const [attrOptionIndex, setAttrOptionIndex] = useState(0);
 
     // TODO -> inicializar con los valores del initial state
     const [currentAtributes, setCurrentAttributes] = useState({
-        [userAtributes.HAIR]: 'short',
-        [userAtributes.SKIN_TONE]: 'brown',
-        [userAtributes.FACIAL_HAIR]: 'mediumBeard',
-        [userAtributes.TSHIRT_GRAPHIC]: 'vue',
-        [userAtributes.ACCESSORY]: 'shades',
-        [userAtributes.BODY]: 'chest',
-        [userAtributes.CLOTHING]: 'tankTop',
+        [userAttributeTypes.HAIR]: 'short',
+        [userAttributeTypes.SKIN_TONE]: 'brown',
+        [userAttributeTypes.FACIAL_HAIR]: 'mediumBeard',
+        [userAttributeTypes.TSHIRT_GRAPHIC]: 'vue',
+        [userAttributeTypes.ACCESSORY]: 'shades',
+        [userAttributeTypes.BODY]: 'chest',
+        [userAttributeTypes.CLOTHING]: 'tankTop',
+        [userAttributeTypes.CLOTHING_COLOR]: 'white',
+        [userAttributeTypes.EYES]: 'wink',
+        [userAttributeTypes.HAIR_COLOR]: 'blonde',
+        [userAttributeTypes.LIP_COLOR]: 'pink',
+        [userAttributeTypes.HAT_COLOR]: 'green',
+        [userAttributeTypes.HAT]: 'none',
+        [userAttributeTypes.MOUTH]: 'open',
+        [userAttributeTypes.EYEBROWS]: 'angry',
     });
+
+    const nombreAtributo = {
+        [userAttributeTypes.ACCESSORY]: 'Accesorio',
+        [userAttributeTypes.TSHIRT_GRAPHIC]: 'Dibujo remera',
+        [userAttributeTypes.FACIAL_HAIR]: 'Vello facil',
+        [userAttributeTypes.SKIN_TONE]: 'Color de piel',
+        [userAttributeTypes.HAIR]: 'Peinado',
+        [userAttributeTypes.BODY]: 'Cuerpo',
+        [userAttributeTypes.CLOTHING]: 'Ropa',
+        [userAttributeTypes.EYES]: 'Ojos',
+        [userAttributeTypes.HAT]: 'Sombrero',
+        [userAttributeTypes.MOUTH]: 'Boca',
+        [userAttributeTypes.EYEBROWS]: 'Cejas',
+        [userAttributeTypes.LIP_COLOR]: 'Color de labios',
+        [userAttributeTypes.HAIR_COLOR]: 'Color de pelo',
+        [userAttributeTypes.HAT_COLOR]: 'Color de sombrero',
+        [userAttributeTypes.CLOTHING_COLOR]: 'Color de ropa',
+    };
 
     const buttonSize = 27;
 
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
 
-    const nombreAtributo = {
-        [userAtributes.ACCESSORY]: 'Accesorio',
-        [userAtributes.TSHIRT_GRAPHIC]: 'Dibujo remera',
-        [userAtributes.FACIAL_HAIR]: 'Vello facil',
-        [userAtributes.SKIN_TONE]: 'Color de piel',
-        [userAtributes.HAIR]: 'Peinado',
-        [userAtributes.BODY]: 'Cuerpo',
-        [userAtributes.CLOTHING]: 'Ropa',
-    };
-
     useEffect(() => {
-        setAttrOptions(userAtributesOptions[attrTypes[currAttrTypeIndex]]);
-    }, [currAttrTypeIndex]);
+        setAttrOptions(userAttributeOptions[attrTypes[attrTypeIndex]]);
+    }, [attrTypeIndex]);
 
     const nextAttributeType = () => {
-        let proxIndex = currAttrTypeIndex + 1;
+        let proxIndex = attrTypeIndex + 1;
         if (proxIndex >= attrTypes.length) proxIndex = 0;
-        setCurrAttrTypeIndex(proxIndex);
+        setAttrTypeIndex(proxIndex);
     };
 
     const prevAttributeType = () => {
-        let proxIndex = currAttrTypeIndex - 1;
+        let proxIndex = attrTypeIndex - 1;
         if (proxIndex < 0) proxIndex = attrTypes.length - 1;
-        setCurrAttrTypeIndex(proxIndex);
+        setAttrTypeIndex(proxIndex);
     };
 
     const nextAttributeOption = () => {
-        let proxIndex = currAttrOptionIndex + 1;
+        let proxIndex = attrOptionIndex + 1;
         if (proxIndex >= attrOptions.length) proxIndex = 0;
-        setCurrAttrOptionIndex(proxIndex);
+        setAttrOptionIndex(proxIndex);
         updateCurrentAtributes();
     };
 
     const prevAttributeOption = () => {
-        let proxIndex = currAttrTypeIndex - 1;
+        let proxIndex = attrTypeIndex - 1;
         if (proxIndex < 0) proxIndex = attrOptions.length - 1;
-        setCurrAttrOptionIndex(proxIndex);
+        setAttrOptionIndex(proxIndex);
         updateCurrentAtributes();
     };
 
     const updateCurrentAtributes = () => {
         const newAttributes = {
             ...currentAtributes,
-            [attrTypes[currAttrTypeIndex]]: attrOptions[currAttrOptionIndex],
+            [attrTypes[attrTypeIndex]]: attrOptions[attrOptionIndex],
         };
 
         setCurrentAttributes(newAttributes);
+    };
+
+    const randInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    };
+
+    const randomize = () => {
+        const randomAttributes = {};
+
+        attrTypes.forEach((type) => {
+            let randomOptions = userAttributeOptions[type];
+            randomAttributes[type] = randomOptions[randInt(0, randomOptions.length)];
+        });
+
+        setCurrentAttributes(randomAttributes);
+    };
+
+    const save = () => {
+        return;
     };
 
     const tagGusto = (nombreAtributo) => (
@@ -98,31 +131,46 @@ export default function UserEditor({ user, color }) {
     return (
         <View>
             <LinearGradient colors={[color, strongerColor[color]]} style={{ ...styles.container }}>
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        style={[styles.saveButton, styles.shadow]}
+                        onPress={randomize}
+                    >
+                        <FontAwesome5
+                            name="random"
+                            size={buttonSize}
+                            color={colors.YELLOW}
+                        ></FontAwesome5>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.randomButton, styles.shadow]} onPress={save}>
+                        <Entypo name="save" size={buttonSize} color={colors.YELLOW}></Entypo>
+                    </TouchableOpacity>
+                </View>
+
                 <View style={styles.body}>
-                    <View style={styles.imageContainer}>
-                        <BigHead
-                            accessory={currentAtributes[userAtributes.ACCESSORY]}
-                            bgColor="yellow"
-                            bgShape="circle"
-                            body={currentAtributes[userAtributes.BODY]}
-                            clothing={currentAtributes[userAtributes.CLOTHING]}
-                            clothingColor="black"
-                            eyebrows="angry"
-                            eyes="wink"
-                            facialHair={currentAtributes[userAtributes.FACIAL_HAIR]}
-                            graphic={currentAtributes[userAtributes.TSHIRT_GRAPHIC]}
-                            hair={currentAtributes[userAtributes.HAIR]}
-                            hairColor="black"
-                            hat="none"
-                            hatColor="green"
-                            lashes={false}
-                            lipColor="purple"
-                            mouth="open"
-                            showBackground={true}
-                            size={avatarSize}
-                            skinTone={currentAtributes[userAtributes.SKIN_TONE]}
-                        />
-                    </View>
+                    <BigHead
+                        lashes={false}
+                        bgColor="yellow"
+                        bgShape="circle"
+                        size={avatarSize}
+                        showBackground={true}
+                        body={currentAtributes[userAttributeTypes.BODY]}
+                        hat={currentAtributes[userAttributeTypes.HAT]}
+                        mouth={currentAtributes[userAttributeTypes.MOUTH]}
+                        accessory={currentAtributes[userAttributeTypes.ACCESSORY]}
+                        clothingColor={currentAtributes[userAttributeTypes.CLOTHING_COLOR]}
+                        eyes={currentAtributes[userAttributeTypes.EYES]}
+                        clothing={currentAtributes[userAttributeTypes.CLOTHING]}
+                        facialHair={currentAtributes[userAttributeTypes.FACIAL_HAIR]}
+                        graphic={currentAtributes[userAttributeTypes.TSHIRT_GRAPHIC]}
+                        hair={currentAtributes[userAttributeTypes.HAIR]}
+                        hairColor={currentAtributes[userAttributeTypes.HAIR_COLOR]}
+                        hatColor={currentAtributes[userAttributeTypes.HAT_COLOR]}
+                        eyebrows={currentAtributes[userAttributeTypes.EYEBROWS]}
+                        lipColor={currentAtributes[userAttributeTypes.LIP_COLOR]}
+                        skinTone={currentAtributes[userAttributeTypes.SKIN_TONE]}
+                    />
 
                     <View style={styles.arrowButtonsContainer}>
                         <View />
@@ -137,7 +185,7 @@ export default function UserEditor({ user, color }) {
                             ></FontAwesome>
                         </TouchableOpacity>
 
-                        {tagGusto(nombreAtributo[attrTypes[currAttrTypeIndex]])}
+                        {tagGusto(nombreAtributo[attrTypes[attrTypeIndex]])}
 
                         <TouchableOpacity
                             style={[styles.cardArrowButton, styles.shadow]}
@@ -190,23 +238,31 @@ const styles = StyleSheet.create({
         height: `${screenSize.ratio * 48}%`,
     },
 
+    header: {
+        flexDirection: 'row',
+        marginTop: 10,
+        marginRight: 10,
+        marginLeft: 10,
+        justifyContent: 'flex-end',
+    },
+
     chip: {
         marginHorizontal: 20,
         flexDirection: 'row',
     },
 
     body: {
+        flex: 1,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
     },
 
     arrowButtonsContainer: {
         height: 90,
         flexDirection: 'row',
-        justifyContent: 'space-around',
         alignItems: 'center',
+        justifyContent: 'space-around',
     },
 
     cardArrowButton: {
@@ -214,8 +270,8 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: colors.YELLOW,
         borderRadius: 100,
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     },
 
     arrowButton: {
@@ -223,6 +279,25 @@ const styles = StyleSheet.create({
         height: 60,
         backgroundColor: colors.PURPLE,
         borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    saveButton: {
+        width: 70,
+        height: 70,
+        backgroundColor: colors.PURPLE,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    randomButton: {
+        width: 70,
+        height: 70,
+        backgroundColor: colors.PURPLE,
+        borderRadius: 20,
+        marginLeft: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
