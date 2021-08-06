@@ -4,7 +4,7 @@ import { colors } from '../config';
 import { StyleSheet } from 'react-native';
 import HomeScreen from '../Screens/HomeScreen';
 import Actividades from '../Screens/ActividadesScreen';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, Foundation } from '@expo/vector-icons';
 import StackConfiguraciones from './StackConfiguraciones';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -61,11 +61,11 @@ const TabTopBar = () => {
                     title: 'Actividades',
                     tabBarBadge: 3,
                     tabBarIcon: ({ focused }) => (
-                        <FontAwesome5
-                            name="tasks"
-                            size={iconSize}
+                        <Foundation
+                            name="calendar"
+                            size={iconSize + 6}
                             color={focused ? colors.YELLOW : inactiveColor}
-                        ></FontAwesome5>
+                        ></Foundation>
                     ),
                 }}
             />

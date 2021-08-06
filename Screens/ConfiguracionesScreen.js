@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { colors, gustos } from '../config';
 import SettingsComponent from '../components/Settings';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import UserEditor from '../components/UserEditor';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,7 +9,7 @@ import { Entypo, FontAwesome, MaterialIcons, FontAwesome5 } from '@expo/vector-i
 
 export const InformacionPersonal = (props) => {
     const sizeIcons = 27;
-    const gustosPorFila = 3;
+    const gustosPorFila = 2;
     const nombreGustos = Object.values(gustos);
 
     const [selectedTags, setSelectedTags] = useState([]);
@@ -24,41 +24,42 @@ export const InformacionPersonal = (props) => {
         [gustos.VIDEOJUEGOS]: (
             <FontAwesome5 name="gamepad" size={sizeIcons} color={colors.YELLOW} />
         ),
+        [gustos.MODA]: <FontAwesome5 name="tshirt" size={sizeIcons} color={colors.YELLOW} />,
+        [gustos.VIAJAR]: <FontAwesome5 name="plane" size={sizeIcons} color={colors.YELLOW} />,
+        [gustos.TECNOLOGIA]: <FontAwesome5 name="laptop" size={sizeIcons} color={colors.YELLOW} />,
+        [gustos.ANIMALES]: <FontAwesome5 name="dog" size={sizeIcons} color={colors.YELLOW} />,
+        [gustos.CIENCIA]: <MaterialIcons name="science" size={sizeIcons} color={colors.YELLOW} />,
+    };
+
+    const handlePress = (gusto) => {
+        console.log(selectedTags);
+        if (selectedTags.includes(gusto)) setSelectedTags(selectedTags.filter((g) => g != gusto));
+        else setSelectedTags([...selectedTags, gusto]);
+    };
+
+    const getColorBotonGusto = (gusto) => {
+        if (selectedTags.includes(gusto)) return colors.DARK_PINK;
+        return colors.BLUE;
     };
 
     const botonGusto = (gusto) => (
-        <TouchableOpacity>
-            <View style={styles.gustoContainer}>
+        <TouchableOpacity onPress={() => handlePress(gusto)}>
+            <View style={{ ...styles.gustoContainer, backgroundColor: getColorBotonGusto(gusto) }}>
                 <Text style={styles.textGustos}>{gusto}</Text>
                 {iconosGustos[gusto]}
             </View>
         </TouchableOpacity>
     );
 
-    const gustosSelector = () => {
-        const botonesGustos = [];
-
-        let filaGustos = [];
-        nombreGustos.forEach((gusto, index) => {
-            filaGustos.push(botonGusto(gusto));
-            if ((index + 1) % gustosPorFila == 0) {
-                botonesGustos.push(
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{filaGustos}</View>
-                );
-                filaGustos = [];
-            }
-        });
-
-        // si quedaron algunos
-        if (filaGustos.length != 0)
-            botonesGustos.push(
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{filaGustos}</View>
-            );
-
-        return botonesGustos;
-    };
-
-    return <View style={styles.container}>{gustosSelector()}</View>;
+    return (
+        <FlatList
+            data={nombreGustos}
+            numColumns={gustosPorFila}
+            keyExtractor={(index) => index}
+            style={styles.container}
+            renderItem={({ item: gusto }) => botonGusto(gusto)}
+        />
+    );
 };
 
 export const EditarCard = (props) => {
@@ -155,13 +156,14 @@ const styles = StyleSheet.create({
     },
 
     gustoContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
         flexDirection: 'row',
-        borderRadius: 40,
         marginTop: 15,
-        paddingHorizontal: 20,
+        borderRadius: 40,
         paddingVertical: 5,
         marginHorizontal: 4,
-        backgroundColor: colors.BLUE,
+        paddingHorizontal: 20,
     },
 
     userCardContainer: {
@@ -176,7 +178,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '300',
         textAlign: 'center',
-        marginRight: 10,
         color: 'white',
+        marginLeft: 10,
+        marginRight: 10,
     },
 });

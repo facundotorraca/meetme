@@ -14,10 +14,15 @@ export const colors = {
 
 export const gustos = {
     MUSICA: 'Musica',
+    ANIMALES: 'Animales',
     DEPORTES: 'Deportes',
     AIRE_LIBRE: 'Aire libre',
+    TECNOLOGIA: 'Tecnologia',
+    CIENCIA: 'Ciencia',
     VIDEOJUEGOS: 'Videojuegos',
-    SALIR_DE_FIESTA: 'Salir de fiesta',
+    VIAJAR: 'Viajar',
+    MODA: 'Moda',
+    SALIR_DE_FIESTA: 'Fiestas',
 };
 
 export const strongerColor = {
