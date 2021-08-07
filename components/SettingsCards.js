@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { ToastAndroid } from 'react-native';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Text, FlatList, Platform, ToastAndroid, Alert } from 'react-native';
 import { colors, strongerColor, screenSize, gustos } from '../config';
 import { TouchableOpacity, TextInput } from 'react-native';
 import { Input } from 'react-native-elements';
@@ -98,13 +97,17 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
     };
 
     const showToastWithGravityAndOffset = () => {
-        ToastAndroid.showWithGravityAndOffset(
-            'No puedes seleccionar mas...',
-            ToastAndroid.LONG,
-            ToastAndroid.CENTER,
-            50,
-            50
-        );
+        if (Platform.OS === 'ios') {
+            Alert.alert('No puedes seleccionar mas...');
+        } else {
+            ToastAndroid.showWithGravityAndOffset(
+                'No puedes seleccionar mas...',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER,
+                50,
+                50
+            );
+        }
     };
 
     const getColorBotonGusto = (gusto) => {

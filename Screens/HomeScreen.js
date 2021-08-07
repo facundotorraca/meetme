@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Platform, ToastAndroid } from 'react-native';
+import { Platform, ToastAndroid, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
 import { StyleSheet, View } from 'react-native';
@@ -24,13 +24,20 @@ export default function HomeScreen() {
     });
 
     const showToastWithGravityAndOffset = () => {
-        ToastAndroid.showWithGravityAndOffset(
-            'Has hecho match!',
-            ToastAndroid.LONG,
-            ToastAndroid.CENTER,
-            25,
-            50
-        );
+        if (Platform.OS === 'ios') {
+            Alert.alert(
+                'Has hecho match!',
+                'Ve a la pantalla de mensajes para entablar una conversación!'
+            );
+        } else {
+            ToastAndroid.showWithGravityAndOffset(
+                'Has hecho match!',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER,
+                25,
+                50
+            );
+        }
     };
 
     const renderCard = (user) => {

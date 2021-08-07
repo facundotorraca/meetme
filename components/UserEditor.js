@@ -10,7 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { guardarAvatar } from '../actions';
-import { ToastAndroid } from 'react-native';
+import { ToastAndroid, Alert } from 'react-native';
 
 export default function UserEditor() {
     const usuario = useSelector((state) => state.general.usuario);
@@ -26,13 +26,17 @@ export default function UserEditor() {
     const [currentAtributes, setCurrentAttributes] = useState(usuario.atributos);
 
     const showToastWithGravityAndOffset = () => {
-        ToastAndroid.showWithGravityAndOffset(
-            'Avatar guardado',
-            ToastAndroid.LONG,
-            ToastAndroid.CENTER,
-            50,
-            50
-        );
+        if (Platform.OS === 'ios') {
+            Alert.alert('Avatar guardado');
+        } else {
+            ToastAndroid.showWithGravityAndOffset(
+                'Avatar guardado',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER,
+                50,
+                50
+            );
+        }
     };
 
     const nombreAtributo = {
