@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { Platform, ToastAndroid } from 'react-native';
-
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
 import { StyleSheet, View } from 'react-native';

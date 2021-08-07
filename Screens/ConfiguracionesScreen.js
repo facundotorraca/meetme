@@ -6,14 +6,12 @@ import UserEditor from '../components/UserEditor';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import SeleccionGustosCard from '../components/SeleccionGustosCard';
+import { SeleccionGustosCard } from '../components/SettingsCards';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
 
 export const InformacionPersonal = (props) => {
-    useEffect(() => {
-        console.log('puto');
-    }, [selectedTags]);
+    useEffect(() => {}, [selectedTags]);
 
     const swipesRef = useRef(null);
 

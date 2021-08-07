@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { ToastAndroid } from 'react-native';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { colors, strongerColor, screenSize, gustos } from '../config';
 import { TouchableOpacity } from 'react-native';
@@ -11,12 +12,9 @@ import {
     MaterialCommunityIcons,
 } from '@expo/vector-icons';
 
-export default function SeleccionGustosCard({
-    onGustoSelected,
-    selectedGustos,
-    onRestore,
-    onSave,
-}) {
+export const DatosPersonalesCard = ({ usuario }) => {};
+
+export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore, onSave }) => {
     const sizeIcons = 27;
     const buttonSize = 27;
     const gustosPorFila = 2;
@@ -44,13 +42,31 @@ export default function SeleccionGustosCard({
         [gustos.CIENCIA]: <MaterialIcons name="science" size={sizeIcons} color={colors.YELLOW} />,
     };
 
+    const showToastWithGravityAndOffset = () => {
+        ToastAndroid.showWithGravityAndOffset(
+            'No puedes seleccionar mas...',
+            ToastAndroid.LONG,
+            ToastAndroid.CENTER,
+            50,
+            50
+        );
+    };
+
     const getColorBotonGusto = (gusto) => {
         if (selectedGustos.includes(gusto)) return colors.DARK_PINK;
         return colors.BLUE;
     };
 
+    const handleSelect = (gusto) => {
+        if (selectedGustos.length == maximosGustosPosibles && !selectedGustos.includes(gusto)) {
+            showToastWithGravityAndOffset();
+            return;
+        }
+        onGustoSelected(gusto);
+    };
+
     const botonGusto = (gusto) => (
-        <TouchableOpacity onPress={() => onGustoSelected(gusto)}>
+        <TouchableOpacity onPress={() => handleSelect(gusto)}>
             <View style={{ ...styles.gustoContainer, backgroundColor: getColorBotonGusto(gusto) }}>
                 <Text style={styles.textGustos}>{gusto}</Text>
                 {iconosGustos[gusto]}
@@ -76,6 +92,10 @@ export default function SeleccionGustosCard({
                 </Text>
             </View>
 
+            <Text style={[styles.textMessageSeconday, styles.textShadow]}>
+                {selectedGustos.length} de {maximosGustosPosibles}
+            </Text>
+
             <View style={styles.body}>
                 <FlatList
                     data={nombreGustos}
@@ -89,12 +109,12 @@ export default function SeleccionGustosCard({
             <View style={styles.footer}>
                 <Text style={[styles.textMessagePrimary, styles.textShadow]}>
                     swipe para otras opciones{'\n'}
-                    {<MaterialIcons name="swipe" size={60} color={colors.YELLOW} />}
+                    {<MaterialIcons name="swipe" size={50} color={colors.YELLOW} />}
                 </Text>
             </View>
         </LinearGradient>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
