@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { ToastAndroid } from 'react-native';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { colors, strongerColor, screenSize, gustos } from '../config';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native';
+import { Input } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
     Entypo,
@@ -12,11 +13,65 @@ import {
     MaterialCommunityIcons,
 } from '@expo/vector-icons';
 
-export const DatosPersonalesCard = ({ usuario }) => {};
+const commandsButtonsSize = 27;
+
+export const DatosPersonalesCard = ({ usuario }) => {
+    return (
+        <LinearGradient
+            style={styles.container}
+            colors={[colors.ORANGE, strongerColor[colors.ORANGE]]}
+        >
+            <View style={styles.header}>
+                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => {}}>
+                    <Entypo name="back-in-time" size={commandsButtonsSize} color={colors.YELLOW} />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => {}}>
+                    <Entypo name="save" size={commandsButtonsSize} color={colors.YELLOW} />
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.textRow}>
+                <Text style={[styles.textMessagePrimary, styles.textShadow]}>Datos personales</Text>
+            </View>
+
+            <View style={styles.body}>
+                <View style={{ ...styles.inputView, height: '15%' }}>
+                    <Text style={styles.label}>User Name</Text>
+                    <TextInput
+                        label="Email"
+                        style={styles.textInput}
+                        placeholder="Nombre"
+                        placeholderTextColor="#000"
+                        onChangeText={(nombre) => {}}
+                    />
+                </View>
+
+                <View style={{ ...styles.inputView, height: '50%', marginTop: 20 }}>
+                    <Text style={{ flexDirection: 'row' }}>User Name</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Escribe un mensaje"
+                        placeholderTextColor="#000"
+                        multiline={true}
+                        textAlignVertical={'auto'}
+                        onChangeText={(descripcion) => {}}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.footer}>
+                <Text style={[styles.textMessagePrimary, styles.textShadow]}>
+                    swipe para otras opciones{'\n'}
+                    {<MaterialIcons name="swipe" size={50} color={colors.YELLOW} />}
+                </Text>
+            </View>
+        </LinearGradient>
+    );
+};
 
 export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore, onSave }) => {
     const sizeIcons = 27;
-    const buttonSize = 27;
     const gustosPorFila = 2;
     const maximosGustosPosibles = 4;
     const nombreGustos = Object.values(gustos);
@@ -78,11 +133,11 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
         <LinearGradient style={styles.container} colors={[colors.PINK, strongerColor[colors.PINK]]}>
             <View style={styles.header}>
                 <TouchableOpacity style={[styles.button, styles.shadow]} onPress={onRestore}>
-                    <Entypo name="back-in-time" size={buttonSize} color={colors.YELLOW} />
+                    <Entypo name="back-in-time" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
 
                 <TouchableOpacity style={[styles.button, styles.shadow]} onPress={onSave}>
-                    <Entypo name="save" size={buttonSize} color={colors.YELLOW} />
+                    <Entypo name="save" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
             </View>
 
@@ -128,10 +183,32 @@ const styles = StyleSheet.create({
     },
 
     body: {
-        position: 'relative',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    inputView: {
+        backgroundColor: '#FFF',
+        borderColor: colors.PURPLE,
+        borderWidth: 3,
+        borderRadius: 30,
+        width: '100%',
+    },
+
+    textArea: {
+        borderWidth: 2,
+        borderColor: '#9E9E9E',
+        borderRadius: 20,
+        height: 100,
+        backgroundColor: '#FFFFFF',
+        padding: 20,
+    },
+
+    textInput: {
+        height: 50,
         flex: 1,
+        paddingLeft: 25,
     },
 
     footer: {
@@ -145,6 +222,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 10,
     },
+
+    label: {},
 
     textButton: {
         color: 'white',

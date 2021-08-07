@@ -1,16 +1,24 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { colors, gustos } from '../config';
+import { colors } from '../config';
 import SettingsComponent from '../components/Settings';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import UserEditor from '../components/UserEditor';
 import { useSelector } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import { SeleccionGustosCard } from '../components/SettingsCards';
+import { SeleccionGustosCard, DatosPersonalesCard } from '../components/SettingsCards';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
+import MyCard from '../components/MyCard';
 
 export const InformacionPersonal = (props) => {
+    const usuario = useSelector((state) => state.general.usuario);
+
+    const pantallas = {
+        SELECCION_DE_GUSTOS: 'Seleccion de gustos',
+        DATOS_PERSONALES: 'Datos personales',
+        MY_CARD: 'My card',
+    };
+
     useEffect(() => {}, [selectedTags]);
 
     const swipesRef = useRef(null);
@@ -25,12 +33,28 @@ export const InformacionPersonal = (props) => {
     const restore = () => {};
     const save = () => {};
 
-    const renderCard = () => {
-        return (
-            <RectButton style={styles.container}>
-                <SeleccionGustosCard onGustoSelected={handlePress} selectedGustos={selectedTags} />
-            </RectButton>
-        );
+    const obtenerPantalla = (pantalla) => {
+        switch (pantalla) {
+            case pantallas.SELECCION_DE_GUSTOS:
+                return (
+                    <SeleccionGustosCard
+                        onGustoSelected={handlePress}
+                        selectedGustos={selectedTags}
+                    />
+                );
+            case pantallas.DATOS_PERSONALES:
+                return <DatosPersonalesCard />;
+
+            case pantallas.MY_CARD:
+                return <MyCard user={usuario} />;
+
+            default:
+                throw new exception('Settings menu not found');
+        }
+    };
+
+    const renderCard = (pantalla) => {
+        return <RectButton style={styles.container}>{obtenerPantalla(pantalla)}</RectButton>;
     };
 
     return (
@@ -43,14 +67,18 @@ export const InformacionPersonal = (props) => {
                     marginBottom={150}
                     onSwipedLeft={() => {}}
                     onSwipedRight={() => {}}
-                    cards={[1]}
+                    cards={[
+                        pantallas.SELECCION_DE_GUSTOS,
+                        pantallas.DATOS_PERSONALES,
+                        pantallas.MY_CARD,
+                    ]}
                     key={selectedTags.length}
                     cardIndex={0}
                     renderCard={renderCard}
                     stackSize={3}
-                    useViewOverflow={Platform.OS === 'ios'}
                     stackSeparation={15}
-                    infinite={false}
+                    useViewOverflow={Platform.OS === 'ios'}
+                    infinite={true}
                     animateOverlayLabelsOpacity
                     animateCardOpacity
                     swipeBackCard

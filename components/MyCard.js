@@ -6,7 +6,7 @@ import { Chip } from 'react-native-elements';
 import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function MyCard() {
+export default function MyCard({ user }) {
     const iconSize = 25;
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
@@ -35,7 +35,6 @@ export default function MyCard() {
     );
 
     const color = colors.PURPLE;
-    const user = { gustos: [], nombre: 'TEST', edad: 1, descripcion: 'hola', ciudad: 'Chicago' };
 
     return (
         <LinearGradient colors={[color, strongerColor[color]]} style={{ ...styles.container }}>
