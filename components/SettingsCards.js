@@ -174,8 +174,8 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
 const styles = StyleSheet.create({
     container: {
         borderRadius: 30,
-        height: `${screenSize.ratio * 48}%`,
         padding: 10,
+        height: `${screenSize.height >= 750 ? screenSize.ratio * 48 : screenSize.ratio * 56}%`,
     },
 
     header: {

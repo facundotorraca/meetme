@@ -1,9 +1,9 @@
 import React from 'react';
-import Chat from '../components/Chat';
-import Inbox from '../components/Inbox';
+import Chat from '../Screens/Chat';
+import Inbox from '../Screens/Inbox';
 import { createStackNavigator } from '@react-navigation/stack';
-import PubsScreen, { Invitacion, PubScreen } from '../Screens/PubsScreen';
 import Regalos, { Regalo, MensajeRegalo } from '../Screens/RegalosScreen';
+import Lugares, { Lugar, InvitacionLugar } from '../Screens/LugaresScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,24 +27,24 @@ const StackChat = () => {
             <Stack.Screen name="Chat" component={Chat} />
 
             <Stack.Screen
-                name="Pubs"
-                component={PubsScreen}
+                name="Lugares"
+                component={Lugares}
                 options={({ route }) => ({
                     headerBackTitleVisible: false,
                 })}
             />
 
             <Stack.Screen
-                name="Pub"
-                component={PubScreen}
+                name="Lugar"
+                component={Lugar}
                 options={({ route }) => ({
                     headerBackTitleVisible: false,
                 })}
             />
 
             <Stack.Screen
-                name="Invitacion"
-                component={Invitacion}
+                name="InvitacionLugar"
+                component={InvitacionLugar}
                 options={({ route }) => ({
                     headerBackTitleVisible: false,
                 })}

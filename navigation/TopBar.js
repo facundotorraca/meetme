@@ -11,8 +11,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const TabTopBar = () => {
     const Tab = createMaterialTopTabNavigator();
 
-    const inactiveColor = 'white';
     const iconSize = 25;
+    const inactiveColor = 'white';
 
     return (
         <Tab.Navigator
@@ -63,7 +63,7 @@ const TabTopBar = () => {
                     tabBarIcon: ({ focused }) => (
                         <Foundation
                             name="calendar"
-                            size={iconSize + 6}
+                            size={iconSize + 6 /*es un poco mas chico que los normales*/}
                             color={focused ? colors.YELLOW : inactiveColor}
                         ></Foundation>
                     ),

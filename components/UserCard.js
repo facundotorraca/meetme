@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 30,
         padding: 15,
-        height: `${screenSize.ratio * 48}%`,
+        height: `${screenSize.height >= 750 ? screenSize.ratio * 48 : screenSize.ratio * 56}%`,
     },
 
     chip: {

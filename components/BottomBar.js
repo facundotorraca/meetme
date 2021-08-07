@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '../config';
+import { FontAwesome } from '@expo/vector-icons';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function BottomBar({ handlePassPress, handleLikePress, disabled }) {
     return (

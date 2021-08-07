@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-native-elements';
-import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { colors, strongerColor, screenSize } from '../config/index.js';
-import { useDispatch } from 'react-redux';
-import { LinearGradient } from 'expo-linear-gradient';
-import { guardarInvite, guardarMensaje } from '../actions/index';
 import PubCard from '../components/PubCard.js';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Button, Card } from 'react-native-elements';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import { colors, screenSize, strongerColor } from '../config';
+import { guardarInvite, guardarMensaje } from '../actions/index';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export const Invitacion = (props) => {
-    const CHEERS_ICON_SIZE = screenSize.ratio * 120;
+export const InvitacionLugar = (props) => {
+    const TAMANIO_ICONO_BRINDIS = screenSize.ratio * 120;
 
     const dispatch = useDispatch();
 
     const { navigation } = props;
-    const { mensaje, user, pub, pubColor } = props.route.params;
+    const { mensaje, usuario, lugar, color } = props.route.params;
 
     return (
         <View style={styles.container}>
-            <Card
-                containerStyle={{ ...styles.pubInvitationSentCard, backgroundColor: colors.PURPLE }}
-            >
+            <Card containerStyle={{ ...styles.invitacionCard, backgroundColor: colors.PURPLE }}>
                 <LinearGradient
-                    colors={[pubColor, strongerColor[pubColor]]}
+                    colors={[color, strongerColor[color]]}
                     style={{ borderRadius: 20, padding: 15, height: '100%' }}
                 >
                     <Card.Title>
-                        <Text style={styles.pubInvitationSentCardTitle}>
+                        <Text style={styles.tituloCardInvitacion}>
                             {'Tu inviación a\n'}
-                            <Text style={{ color: colors.BLUE }}>{user.nombre}</Text>{' '}
+                            <Text style={{ color: colors.BLUE }}>{usuario.nombre}</Text>{' '}
                             {'\n fue enviada con exito!'}
                         </Text>
                     </Card.Title>
@@ -38,13 +36,13 @@ export const Invitacion = (props) => {
                         <Text style={{ alignSelf: 'center' }}>
                             <FontAwesome5
                                 name="glass-cheers"
-                                size={CHEERS_ICON_SIZE}
+                                size={TAMANIO_ICONO_BRINDIS}
                                 color={colors.PURPLE}
                             ></FontAwesome5>
                         </Text>
                     </View>
 
-                    <Card containerStyle={styles.subcardWithPubInvitation}>
+                    <Card containerStyle={styles.subcardConInvitacionEscrita}>
                         <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
                         <Card.Divider></Card.Divider>
                         <Text>{mensaje}</Text>
@@ -60,12 +58,12 @@ export const Invitacion = (props) => {
                         dispatch(
                             guardarMensaje({
                                 text: '¡Te he enviado una invitacion! \n' + mensaje,
-                                _id: user.id,
+                                _id: usuario.id,
                             })
                         );
 
-                        dispatch(guardarInvite(user, mensaje, pub));
-                        navigation.navigate('Chat', { user: user });
+                        dispatch(guardarInvite(usuario, mensaje, lugar));
+                        navigation.navigate('Chat', { user: usuario });
                     }}
                 />
             </View>
@@ -73,11 +71,11 @@ export const Invitacion = (props) => {
     );
 };
 
-export const PubScreen = (props) => {
-    const [message, setMessage] = useState('');
+export const Lugar = (props) => {
+    const [mensaje, setMensaje] = useState('');
 
     const { top, bottom } = useSafeAreaInsets();
-    const { pub, pubColor, usuario } = props.route.params;
+    const { lugar, usuario, color } = props.route.params;
 
     return (
         <View
@@ -88,11 +86,11 @@ export const PubScreen = (props) => {
             }}
         >
             <View style={{ flex: 1 }}>
-                <PubCard pub={pub} color={pubColor} />
+                <PubCard pub={lugar} color={color} />
 
-                <Text style={styles.mensajePrincipalPub}>
+                <Text style={styles.textInvitandoA}>
                     {'Estas invitando a\n'}
-                    <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{usuario.nombre}</Text>
                 </Text>
 
                 <View style={styles.textAreaContainer}>
@@ -102,7 +100,7 @@ export const PubScreen = (props) => {
                         placeholder="Escribe un mensaje"
                         placeholderTextColor={'#9E9E9E'}
                         multiline={true}
-                        onChangeText={(message) => setMessage(message)}
+                        onChangeText={(message) => setMensaje(message)}
                     />
                 </View>
 
@@ -111,17 +109,17 @@ export const PubScreen = (props) => {
                         buttonStyle={{ ...styles.button, paddingHorizontal: 150 }}
                         title="Invitar!"
                         onPress={() =>
-                            props.navigation.navigate('Invitacion', {
-                                mensaje: message,
-                                user: usuario,
-                                pub: pub,
-                                pubColor: pubColor,
+                            props.navigation.navigate('InvitacionLugar', {
+                                mensaje,
+                                usuario,
+                                lugar,
+                                color,
                             })
                         }
                     />
                 </View>
 
-                <Text style={styles.mensajeInformativoPub}>
+                <Text style={styles.textBasesYCondiciones}>
                     Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
                 </Text>
@@ -130,95 +128,40 @@ export const PubScreen = (props) => {
     );
 };
 
-export default function PubsScreen(props) {
+export default function Lugares(props) {
     const { navigation } = props;
     const usuario = props.route.params.usuario;
 
-    const pubs = [
-        {
-            id: 1,
-            stars: 5,
-            name: 'Moby Dick',
-            neighborhood: 'Palermo',
-            city: 'CABA',
-            link: 'https://www.baresyboliches.com/wp-content/uploads/moby-2-722x480.jpg',
-            address: 'Av Rafael Obligado 2234',
-        },
-        {
-            id: 2,
-            stars: 3,
-            name: 'Jobs',
-            neighborhood: 'Caballito',
-            city: 'CABA',
-            link: 'https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/92/36/img-20170702-011749-largejpg.jpg',
-            address: 'Arenales 1233',
-        },
-        {
-            id: 3,
-            stars: 4,
-            name: 'Moscow',
-            city: 'CABA',
-            neighborhood: 'Almagro',
-            link: 'https://images.clarin.com/2019/11/28/pacha-para-amanecer-junto-al___e-SW0JTL_1256x620__1.jpg',
-            address: 'Av Costanera 122',
-        },
-        {
-            id: 4,
-            stars: 4,
-            name: 'Rose in Rio',
-            neighborhood: 'Palermo',
-            city: 'CABA',
-            link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
-            address: 'Av Cordoba 700',
-        },
-        {
-            id: 5,
-            stars: 2,
-            name: '7030',
-            city: 'CABA',
-            neighborhood: 'Pilar',
-            link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
-            address: 'Las Magnolias 765',
-        },
-        {
-            id: 6,
-            stars: 5,
-            name: 'Blest',
-            neighborhood: 'Nordelta',
-            city: 'CABA',
-            link: 'https://res.cloudinary.com/tf-lab/image/upload/restaurant/979dc9fc-3554-42de-8e9f-a4480d31a534/fa2d2036-bd0f-4b46-8457-0adb588ee4a4.jpg',
-            address: 'Ex ruta 8 km 33',
-        },
-    ];
+    const lugares = useSelector((state) => state.general.lugares);
 
     const { top, bottom } = useSafeAreaInsets();
 
-    const colorByIndex = {
+    const colorPorIndex = {
         0: colors.DARK_PINK,
         1: colors.ORANGE,
         2: colors.YELLOW,
     };
 
-    const getNextColor = (pubIndex) => {
-        const normalizedIndex = pubIndex % 3;
-        return colorByIndex[normalizedIndex];
+    const proximoColor = (indexLugar) => {
+        const indiceNormalizado = indexLugar % 3;
+        return colorPorIndex[indiceNormalizado];
     };
 
     return (
         <View style={{ ...styles.container, marginTop: top, marginBottom: bottom + 20 }}>
             <View>
                 <FlatList
-                    data={pubs}
+                    data={lugares}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ index, item }) => (
+                    renderItem={({ index, item: lugar }) => (
                         <PubCard
-                            pub={item}
-                            color={getNextColor(index)}
+                            pub={lugar}
+                            color={proximoColor(index)}
                             onPress={() =>
-                                navigation.navigate('Pub', {
-                                    pub: item,
-                                    usuario: usuario,
-                                    pubColor: getNextColor(index),
+                                navigation.navigate('Lugar', {
+                                    lugar,
+                                    usuario,
+                                    color: proximoColor(index),
                                 })
                             }
                         />
@@ -234,14 +177,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    mensajePrincipalPub: {
+    textInvitandoA: {
         fontSize: 25,
         textAlign: 'center',
         padding: 10,
         paddingTop: 30,
     },
 
-    mensajeInformativoPub: {
+    textBasesYCondiciones: {
         fontSize: 13,
         textAlign: 'justify',
         padding: 20,
@@ -284,7 +227,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
-    pubInvitationSentCard: {
+    invitacionCard: {
         height: '80%',
         borderRadius: 25,
         padding: 0,
@@ -297,11 +240,11 @@ const styles = StyleSheet.create({
         elevation: 9,
     },
 
-    pubInvitationSentCardTitle: {
+    tituloCardInvitacion: {
         fontSize: 25,
     },
 
-    subcardWithPubInvitation: {
+    subcardConInvitacionEscrita: {
         borderRadius: 20,
         height: '23%',
         backgroundColor: '#FFFFFF',
