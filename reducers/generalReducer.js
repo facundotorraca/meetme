@@ -120,6 +120,15 @@ export default function generalReducer(state = initialState, action) {
                 usuario: { ...state.usuario, autorizado: false },
             };
         }
+
+        case 'GUARDAR_AVATAR': {
+            const nuevosAtributos = action.payload;
+
+            return {
+                ...state,
+                usuario: { ...state.usuario, atributos: nuevosAtributos },
+            };
+        }
         default:
             return state;
     }

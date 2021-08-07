@@ -47,7 +47,7 @@ export const InformacionPersonal = (props) => {
                 return <DatosPersonalesCard />;
 
             case pantallas.MY_CARD:
-                return <MyCard user={usuario} />;
+                return <MyCard />;
 
             default:
                 throw new exception('Settings menu not found');
@@ -90,12 +90,10 @@ export const InformacionPersonal = (props) => {
 };
 
 export const EditarCard = (props) => {
-    const miUsuario = useSelector((state) => state.general.usuario);
-
     return (
         <View style={styles.container}>
             <View style={styles.userCardContainer}>
-                <UserEditor user={miUsuario} color={miUsuario.colorCard} />
+                <UserEditor />
             </View>
         </View>
     );

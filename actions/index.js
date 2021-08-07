@@ -33,3 +33,8 @@ export const desautorizar = (email, password) => ({
     type: 'DESAUTORIZAR',
     payload: { email, password },
 });
+
+export const guardarAvatar = (atributos) => ({
+    type: 'GUARDAR_AVATAR',
+    payload: atributos,
+});

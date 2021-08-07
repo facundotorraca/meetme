@@ -5,8 +5,11 @@ import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
 import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function MyCard({ user }) {
+export default function MyCard() {
+    const usuario = useSelector((state) => state.general.usuario);
+
     const iconSize = 25;
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
@@ -39,47 +42,47 @@ export default function MyCard({ user }) {
     return (
         <LinearGradient colors={[color, strongerColor[color]]} style={{ ...styles.container }}>
             <View style={styles.header}>
-                {user.gustos.map((value, index) => {
+                {usuario.gustos.map((value, index) => {
                     return tagGusto(value);
                 })}
             </View>
             <View style={styles.body}>
                 <View style={styles.imageContainer}>
                     <BigHead
-                        accessory="shades"
+                        lashes={false}
                         bgColor="yellow"
                         bgShape="circle"
-                        body="chest"
-                        clothing="tankTop"
-                        clothingColor="black"
-                        eyebrows="angry"
-                        eyes="wink"
-                        facialHair="mediumBeard"
-                        graphic="vue"
-                        hair="short"
-                        hairColor="black"
-                        hat="none"
-                        hatColor="green"
-                        lashes={false}
-                        lipColor="purple"
-                        mouth="open"
-                        showBackground={true}
                         size={avatarSize}
-                        skinTone="brown"
+                        showBackground={true}
+                        body={usuario.atributos.body}
+                        hat={usuario.atributos.hat}
+                        eyes={usuario.atributos.eyes}
+                        hair={usuario.atributos.hair}
+                        mouth={usuario.atributos.mouth}
+                        graphic={usuario.atributos.graphic}
+                        clothing={usuario.atributos.clothing}
+                        eyebrows={usuario.atributos.eyebrows}
+                        hatColor={usuario.atributos.hatColor}
+                        lipColor={usuario.atributos.lipColor}
+                        skinTone={usuario.atributos.skinTone}
+                        accessory={usuario.atributos.accessory}
+                        hairColor={usuario.atributos.hairColor}
+                        facialHair={usuario.atributos.facialHair}
+                        clothingColor={usuario.atributos.clothingColor}
                     />
                 </View>
             </View>
             <View style={styles.footer}>
                 <View style={styles.textRow}>
-                    <Text style={[styles.textPrimary, styles.textShadow]}>{user.nombre}</Text>
-                    <Text style={[styles.textSecondary, styles.textShadow]}>{user.edad}</Text>
+                    <Text style={[styles.textPrimary, styles.textShadow]}>{usuario.nombre}</Text>
+                    <Text style={[styles.textSecondary, styles.textShadow]}>{usuario.edad}</Text>
                 </View>
                 <View style={styles.textRow}>
                     <FontAwesome name="map-marker" size={28} color="white"></FontAwesome>
-                    <Text style={[styles.textLocation, styles.textShadow]}>{user.ciudad}</Text>
+                    <Text style={[styles.textLocation, styles.textShadow]}>{usuario.ciudad}</Text>
                 </View>
                 <View style={styles.textRow}>
-                    <Text style={styles.textDescription}>{user.descripcion} </Text>
+                    <Text style={styles.textDescription}>{usuario.descripcion} </Text>
                 </View>
             </View>
         </LinearGradient>

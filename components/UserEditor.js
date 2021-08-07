@@ -7,8 +7,15 @@ import { Chip } from 'react-native-elements';
 import { userAttributeOptions, userAttributeTypes } from '../config';
 import { colors, strongerColor, screenSize } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { guardarAvatar } from '../actions';
+import { ToastAndroid } from 'react-native';
 
-export default function UserEditor({ user, color }) {
+export default function UserEditor() {
+    const usuario = useSelector((state) => state.general.usuario);
+    const dispatch = useDispatch();
+
     const attrTypes = Object.values(userAttributeTypes);
 
     const [attrOptions, setAttrOptions] = useState(userAttributeOptions[attrTypes[attrTypeIndex]]);
@@ -16,23 +23,17 @@ export default function UserEditor({ user, color }) {
     const [attrOptionIndex, setAttrOptionIndex] = useState(0);
 
     // TODO -> inicializar con los valores del initial state
-    const [currentAtributes, setCurrentAttributes] = useState({
-        [userAttributeTypes.HAIR]: 'short',
-        [userAttributeTypes.SKIN_TONE]: 'brown',
-        [userAttributeTypes.FACIAL_HAIR]: 'mediumBeard',
-        [userAttributeTypes.TSHIRT_GRAPHIC]: 'vue',
-        [userAttributeTypes.ACCESSORY]: 'shades',
-        [userAttributeTypes.BODY]: 'chest',
-        [userAttributeTypes.CLOTHING]: 'tankTop',
-        [userAttributeTypes.CLOTHING_COLOR]: 'white',
-        [userAttributeTypes.EYES]: 'wink',
-        [userAttributeTypes.HAIR_COLOR]: 'blonde',
-        [userAttributeTypes.LIP_COLOR]: 'pink',
-        [userAttributeTypes.HAT_COLOR]: 'green',
-        [userAttributeTypes.HAT]: 'none',
-        [userAttributeTypes.MOUTH]: 'open',
-        [userAttributeTypes.EYEBROWS]: 'angry',
-    });
+    const [currentAtributes, setCurrentAttributes] = useState(usuario.atributos);
+
+    const showToastWithGravityAndOffset = () => {
+        ToastAndroid.showWithGravityAndOffset(
+            'Avatar guardado',
+            ToastAndroid.LONG,
+            ToastAndroid.CENTER,
+            50,
+            50
+        );
+    };
 
     const nombreAtributo = {
         [userAttributeTypes.ACCESSORY]: 'Accesorio',
@@ -112,7 +113,8 @@ export default function UserEditor({ user, color }) {
     };
 
     const save = () => {
-        return;
+        dispatch(guardarAvatar(currentAtributes));
+        showToastWithGravityAndOffset();
     };
 
     const tagGusto = (nombreAtributo) => (
@@ -130,7 +132,10 @@ export default function UserEditor({ user, color }) {
 
     return (
         <View>
-            <LinearGradient colors={[color, strongerColor[color]]} style={{ ...styles.container }}>
+            <LinearGradient
+                colors={[usuario.colorCard, strongerColor[usuario.colorCard]]}
+                style={styles.container}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity
                         style={[styles.saveButton, styles.shadow]}
@@ -235,7 +240,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 30,
         padding: 15,
-        height: `${screenSize.height >= 750 ? screenSize.ratio * 48 : screenSize.ratio * 53}%`,
+        height: `${screenSize.ratio * 48}%`,
     },
 
     header: {

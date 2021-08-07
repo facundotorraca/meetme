@@ -1,4 +1,4 @@
-import { colors, gustos } from '../config';
+import { colors, gustos, userAttributeTypes } from '../config';
 
 export const actividades = {
     REGALO: 'Regalo',
@@ -245,6 +245,23 @@ export const initialState = {
         colorCard: colors.PINK,
         ciudad: 'Buenos Aires',
         gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        atributos: {
+            [userAttributeTypes.HAIR]: 'short',
+            [userAttributeTypes.SKIN_TONE]: 'brown',
+            [userAttributeTypes.FACIAL_HAIR]: 'mediumBeard',
+            [userAttributeTypes.TSHIRT_GRAPHIC]: 'vue',
+            [userAttributeTypes.ACCESSORY]: 'shades',
+            [userAttributeTypes.BODY]: 'chest',
+            [userAttributeTypes.CLOTHING]: 'tankTop',
+            [userAttributeTypes.CLOTHING_COLOR]: 'white',
+            [userAttributeTypes.EYES]: 'wink',
+            [userAttributeTypes.HAIR_COLOR]: 'blonde',
+            [userAttributeTypes.LIP_COLOR]: 'pink',
+            [userAttributeTypes.HAT_COLOR]: 'green',
+            [userAttributeTypes.HAT]: 'none',
+            [userAttributeTypes.MOUTH]: 'open',
+            [userAttributeTypes.EYEBROWS]: 'angry',
+        },
     },
 
     caracteristicasPago: {
