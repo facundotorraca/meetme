@@ -102,7 +102,7 @@ export default function HomeScreen() {
                     stackSize={3}
                     useViewOverflow={Platform.OS === 'ios'}
                     stackSeparation={15}
-                    key={users.length}
+                    key={users.length.toString()}
                     overlayLabels={{ left: leftLabel, right: rightLabel }}
                     infinite={true}
                     animateOverlayLabelsOpacity

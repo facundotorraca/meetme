@@ -56,7 +56,7 @@ export const MensajeRegalo = (props) => {
                     title="Volver al chat!"
                     onPress={() => {
                         dispatch(guardarRegalo(usuario, mensaje, regalo));
-                        navigation.navigate('Chat', { user: user });
+                        navigation.navigate('Chat', { user: usuario });
                     }}
                 />
             </View>
