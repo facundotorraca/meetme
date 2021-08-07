@@ -1,6 +1,6 @@
 import React from 'react';
-import Chat from '../components/Chat';
-import Inbox from '../components/Inbox';
+import Chat from '../Screens/Chat';
+import Inbox from '../Screens/Inbox';
 import { createStackNavigator } from '@react-navigation/stack';
 import Regalos, { Regalo, MensajeRegalo } from '../Screens/RegalosScreen';
 import Lugares, { Lugar, InvitacionLugar } from '../Screens/LugaresScreen';
