@@ -1,64 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { colors, gustos } from '../config';
 import SettingsComponent from '../components/Settings';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import UserEditor from '../components/UserEditor';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Entypo, FontAwesome, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import SeleccionGustosCard from '../components/SeleccionGustosCard';
+import { RectButton } from 'react-native-gesture-handler';
+import Swiper from 'react-native-deck-swiper';
 
 export const InformacionPersonal = (props) => {
-    const sizeIcons = 27;
-    const gustosPorFila = 2;
-    const nombreGustos = Object.values(gustos);
+    useEffect(() => {
+        console.log('puto');
+    }, [selectedTags]);
+
+    const swipesRef = useRef(null);
 
     const [selectedTags, setSelectedTags] = useState([]);
 
-    const iconosGustos = {
-        [gustos.MUSICA]: <FontAwesome5 name="music" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.AIRE_LIBRE]: <FontAwesome5 name="tree" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.DEPORTES]: (
-            <MaterialIcons name="sports-tennis" size={sizeIcons} color={colors.YELLOW} />
-        ),
-        [gustos.SALIR_DE_FIESTA]: <Entypo name="drink" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.VIDEOJUEGOS]: (
-            <FontAwesome5 name="gamepad" size={sizeIcons} color={colors.YELLOW} />
-        ),
-        [gustos.MODA]: <FontAwesome5 name="tshirt" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.VIAJAR]: <FontAwesome5 name="plane" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.TECNOLOGIA]: <FontAwesome5 name="laptop" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.ANIMALES]: <FontAwesome5 name="dog" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.CIENCIA]: <MaterialIcons name="science" size={sizeIcons} color={colors.YELLOW} />,
-    };
-
     const handlePress = (gusto) => {
-        console.log(selectedTags);
         if (selectedTags.includes(gusto)) setSelectedTags(selectedTags.filter((g) => g != gusto));
         else setSelectedTags([...selectedTags, gusto]);
     };
 
-    const getColorBotonGusto = (gusto) => {
-        if (selectedTags.includes(gusto)) return colors.DARK_PINK;
-        return colors.BLUE;
+    const restore = () => {};
+    const save = () => {};
+
+    const renderCard = () => {
+        return (
+            <RectButton style={styles.container}>
+                <SeleccionGustosCard onGustoSelected={handlePress} selectedGustos={selectedTags} />
+            </RectButton>
+        );
     };
 
-    const botonGusto = (gusto) => (
-        <TouchableOpacity onPress={() => handlePress(gusto)}>
-            <View style={{ ...styles.gustoContainer, backgroundColor: getColorBotonGusto(gusto) }}>
-                <Text style={styles.textGustos}>{gusto}</Text>
-                {iconosGustos[gusto]}
-            </View>
-        </TouchableOpacity>
-    );
-
     return (
-        <FlatList
-            data={nombreGustos}
-            numColumns={gustosPorFila}
-            keyExtractor={(index) => index}
-            style={styles.container}
-            renderItem={({ item: gusto }) => botonGusto(gusto)}
-        />
+        <View style={styles.container}>
+            <View style={styles.swipe}>
+                <Swiper
+                    ref={swipesRef}
+                    backgroundColor={'white'}
+                    cardVerticalMargin={20}
+                    marginBottom={150}
+                    onSwipedLeft={() => {}}
+                    onSwipedRight={() => {}}
+                    cards={[1]}
+                    key={selectedTags.length}
+                    cardIndex={0}
+                    renderCard={renderCard}
+                    stackSize={3}
+                    useViewOverflow={Platform.OS === 'ios'}
+                    stackSeparation={15}
+                    infinite={false}
+                    animateOverlayLabelsOpacity
+                    animateCardOpacity
+                    swipeBackCard
+                />
+            </View>
+        </View>
     );
 };
 
@@ -155,15 +155,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    gustoContainer: {
+    swipe: {
         flex: 1,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        marginTop: 15,
-        borderRadius: 40,
-        paddingVertical: 5,
-        marginHorizontal: 4,
-        paddingHorizontal: 20,
+        backgroundColor: 'white',
     },
 
     userCardContainer: {
@@ -172,14 +166,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginBottom: 180,
         backgroundColor: 'white',
-    },
-
-    textGustos: {
-        fontSize: 20,
-        fontWeight: '300',
-        textAlign: 'center',
-        color: 'white',
-        marginLeft: 10,
-        marginRight: 10,
     },
 });

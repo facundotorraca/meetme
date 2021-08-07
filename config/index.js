@@ -22,6 +22,8 @@ export const gustos = {
     VIDEOJUEGOS: 'Videojuegos',
     VIAJAR: 'Viajar',
     MODA: 'Moda',
+    ASTRONOMIA: 'Astronomia',
+    RELIGION: 'Religion',
     SALIR_DE_FIESTA: 'Fiestas',
 };
 
