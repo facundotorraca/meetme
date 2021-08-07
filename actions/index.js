@@ -23,3 +23,13 @@ export const guardarMensaje = (message) => ({
     type: 'GUARDAR_MENSAJE',
     payload: message,
 });
+
+export const autorizar = (email, password) => ({
+    type: 'AUTORIZAR',
+    payload: { email, password },
+});
+
+export const desautorizar = (email, password) => ({
+    type: 'DESAUTORIZAR',
+    payload: { email, password },
+});

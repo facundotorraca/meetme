@@ -93,6 +93,33 @@ export default function generalReducer(state = initialState, action) {
                 listaDeActividades: nuevaListaActividades,
             };
         }
+        case 'AUTORIZAR': {
+            let password = state.usuario.password;
+            let email = state.usuario.email;
+
+            if (
+                action.payload.password.toLowerCase() == password &&
+                action.payload.email.toLowerCase() == email
+            ) {
+                return {
+                    ...state,
+                    usuario: { ...state.usuario, autorizado: true },
+                    error: '',
+                };
+            }
+
+            return {
+                ...state,
+                error: 'Email o contraseña incorrectos',
+            };
+        }
+
+        case 'DESAUTORIZAR': {
+            return {
+                ...state,
+                usuario: { ...state.usuario, autorizado: false },
+            };
+        }
         default:
             return state;
     }

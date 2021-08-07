@@ -3,12 +3,13 @@ import { colors } from '../config';
 import SettingsComponent from '../components/Settings';
 import { StyleSheet, View } from 'react-native';
 import UserEditor from '../components/UserEditor';
-import { useSelector } from 'react-redux';
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { SeleccionGustosCard, DatosPersonalesCard } from '../components/SettingsCards';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
 import MyCard from '../components/MyCard';
+import { desautorizar } from '../actions/index';
 
 export const InformacionPersonal = (props) => {
     const usuario = useSelector((state) => state.general.usuario);
@@ -105,6 +106,7 @@ const CofiguracionesScreen = ({ navigation }) => {
     const [sortBy, setSortBy] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
+    const dispatch = useDispatch();
     const saveSetting = (key, value) => {
         return;
     };
@@ -131,6 +133,13 @@ const CofiguracionesScreen = ({ navigation }) => {
             title: 'Terminos y condiciones',
             onPress: () => {},
             icon: <FontAwesome name="book" size={40} color={colors.PURPLE} />,
+        },
+        {
+            title: 'Logout!',
+            onPress: () => {
+                dispatch(desautorizar());
+            },
+            icon: <FontAwesome5 name="door-open" size={35} color={colors.PURPLE} />,
         },
     ];
 

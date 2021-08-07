@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import TopBar from './navigation/TopBar';
 import configureStore from './store/configureStore';
 
@@ -12,6 +12,7 @@ import LoginScreen from './Screens/LoginScreen';
 LogBox.ignoreLogs(['Animated']);
 
 const RootComponent = () => {
+    const autorizado = useSelector((state) => state.general.usuario.autorizado);
     const Stack = createStackNavigator();
 
     return (
@@ -24,8 +25,11 @@ const RootComponent = () => {
                     },
                 }}
             >
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Tab" component={TopBar} />
+                {!autorizado ? (
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                ) : (
+                    <Stack.Screen name="Tab" component={TopBar} />
+                )}
             </Stack.Navigator>
         </NavigationContainer>
     );

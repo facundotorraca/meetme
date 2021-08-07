@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Image, Text, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { colors, strongerColor } from '../config';
+import { autorizar } from '../actions/index';
 
 export default function LoginScreen({ navigation }) {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const error = useSelector((state) => state.general.error);
 
     return (
         <View style={styles.container}>
             <Image style={styles.image} source={require('../assets/logos/logo2.png')} />
+            <Text style={styles.error}>{error}</Text>
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.textInput}
@@ -26,11 +31,11 @@ export default function LoginScreen({ navigation }) {
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
-            <TouchableOpacity>
-                <Text style={styles.forgotButton}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Tab')}>
+            <TouchableOpacity
+                style={styles.loginButton}
+                onPress={() => dispatch(autorizar(email, password))}
+            >
                 <Text style={styles.loginText}>CONECTARSE</Text>
             </TouchableOpacity>
         </View>
@@ -80,5 +85,10 @@ const styles = StyleSheet.create({
     loginText: {
         color: '#FFF',
         fontWeight: 'bold',
+    },
+    error: {
+        color: 'red',
+        fontWeight: 'bold',
+        margin: 10,
     },
 });

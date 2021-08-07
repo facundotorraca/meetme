@@ -237,6 +237,8 @@ export const initialState = {
     usuario: {
         id: 9000,
         edad: 22,
+        email: 'barbara@gmail.com',
+        password: 'meetme2021',
         autorizado: false,
         descripcion: 'Saa',
         nombre: 'Barbara',
@@ -259,4 +261,5 @@ export const initialState = {
     listaDeActividades: listaDeActividades,
     usuariosTotales: usuarios,
     app: { idUsuarioChat: null },
+    error: '',
 };
