@@ -1,17 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ToastAndroid } from 'react-native';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
-import { colors, strongerColor, screenSize, gustos } from '../config';
+import { colors, strongerColor, screenSize, gustos, iconosGustos } from '../config';
 import { TouchableOpacity, TextInput } from 'react-native';
 import { Input } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
-import {
-    Entypo,
-    FontAwesome,
-    MaterialIcons,
-    FontAwesome5,
-    MaterialCommunityIcons,
-} from '@expo/vector-icons';
+import { Entypo, MaterialIcons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { guardarGustos } from '../actions';
 
 const commandsButtonsSize = 27;
 
@@ -70,36 +67,20 @@ export const DatosPersonalesCard = ({ usuario }) => {
     );
 };
 
-export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore, onSave }) => {
-    const sizeIcons = 27;
+export const SeleccionGustosCard = () => {
+    const usuario = useSelector((state) => state.general.usuario);
+
+    const dispatch = useDispatch();
+
+    const [gustosSeleccionados, setGustosSeleccionados] = useState(usuario.gustos);
+
     const gustosPorFila = 2;
     const maximosGustosPosibles = 4;
     const nombreGustos = Object.values(gustos);
 
-    const iconosGustos = {
-        [gustos.MUSICA]: <FontAwesome5 name="music" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.AIRE_LIBRE]: <FontAwesome5 name="tree" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.DEPORTES]: (
-            <MaterialIcons name="sports-tennis" size={sizeIcons} color={colors.YELLOW} />
-        ),
-        [gustos.SALIR_DE_FIESTA]: <Entypo name="drink" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.VIDEOJUEGOS]: (
-            <FontAwesome5 name="gamepad" size={sizeIcons} color={colors.YELLOW} />
-        ),
-        [gustos.ASTRONOMIA]: (
-            <MaterialCommunityIcons name="zodiac-cancer" size={sizeIcons} color={colors.YELLOW} />
-        ),
-        [gustos.RELIGION]: <FontAwesome5 name="cross" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.MODA]: <FontAwesome5 name="tshirt" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.VIAJAR]: <FontAwesome5 name="plane" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.TECNOLOGIA]: <FontAwesome5 name="laptop" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.ANIMALES]: <FontAwesome5 name="dog" size={sizeIcons} color={colors.YELLOW} />,
-        [gustos.CIENCIA]: <MaterialIcons name="science" size={sizeIcons} color={colors.YELLOW} />,
-    };
-
-    const showToastWithGravityAndOffset = () => {
+    const showToastWithGravityAndOffset = (mensaje) => {
         ToastAndroid.showWithGravityAndOffset(
-            'No puedes seleccionar mas...',
+            mensaje,
             ToastAndroid.LONG,
             ToastAndroid.CENTER,
             50,
@@ -108,16 +89,31 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
     };
 
     const getColorBotonGusto = (gusto) => {
-        if (selectedGustos.includes(gusto)) return colors.DARK_PINK;
+        if (gustosSeleccionados.includes(gusto)) return colors.DARK_PINK;
         return colors.BLUE;
     };
 
     const handleSelect = (gusto) => {
-        if (selectedGustos.length == maximosGustosPosibles && !selectedGustos.includes(gusto)) {
-            showToastWithGravityAndOffset();
+        if (
+            gustosSeleccionados.length == maximosGustosPosibles &&
+            !gustosSeleccionados.includes(gusto)
+        ) {
+            showToastWithGravityAndOffset('No puedes seleccionar mas...');
             return;
         }
-        onGustoSelected(gusto);
+
+        if (gustosSeleccionados.includes(gusto))
+            setGustosSeleccionados(gustosSeleccionados.filter((g) => g != gusto));
+        else setGustosSeleccionados([...gustosSeleccionados, gusto]);
+    };
+
+    const save = () => {
+        dispatch(guardarGustos(gustosSeleccionados));
+        showToastWithGravityAndOffset('Gustos guardados');
+    };
+
+    const restore = () => {
+        setGustosSeleccionados(usuario.gustos);
     };
 
     const botonGusto = (gusto) => (
@@ -132,11 +128,11 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
     return (
         <LinearGradient style={styles.container} colors={[colors.PINK, strongerColor[colors.PINK]]}>
             <View style={styles.header}>
-                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={onRestore}>
+                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={restore}>
                     <Entypo name="back-in-time" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={onSave}>
+                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={save}>
                     <Entypo name="save" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
             </View>
@@ -148,7 +144,7 @@ export const SeleccionGustosCard = ({ onGustoSelected, selectedGustos, onRestore
             </View>
 
             <Text style={[styles.textMessageSeconday, styles.textShadow]}>
-                {selectedGustos.length} de {maximosGustosPosibles}
+                {gustosSeleccionados.length} de {maximosGustosPosibles}
             </Text>
 
             <View style={styles.body}>

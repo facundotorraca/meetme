@@ -38,3 +38,8 @@ export const guardarAvatar = (atributos) => ({
     type: 'GUARDAR_AVATAR',
     payload: atributos,
 });
+
+export const guardarGustos = (gustos) => ({
+    type: 'GUARDAR_GUSTOS',
+    payload: gustos,
+});

@@ -12,37 +12,19 @@ import MyCard from '../components/MyCard';
 import { desautorizar } from '../actions/index';
 
 export const InformacionPersonal = (props) => {
-    const usuario = useSelector((state) => state.general.usuario);
-
     const pantallas = {
         SELECCION_DE_GUSTOS: 'Seleccion de gustos',
         DATOS_PERSONALES: 'Datos personales',
         MY_CARD: 'My card',
     };
 
-    useEffect(() => {}, [selectedTags]);
-
     const swipesRef = useRef(null);
-
-    const [selectedTags, setSelectedTags] = useState([]);
-
-    const handlePress = (gusto) => {
-        if (selectedTags.includes(gusto)) setSelectedTags(selectedTags.filter((g) => g != gusto));
-        else setSelectedTags([...selectedTags, gusto]);
-    };
-
-    const restore = () => {};
-    const save = () => {};
 
     const obtenerPantalla = (pantalla) => {
         switch (pantalla) {
             case pantallas.SELECCION_DE_GUSTOS:
-                return (
-                    <SeleccionGustosCard
-                        onGustoSelected={handlePress}
-                        selectedGustos={selectedTags}
-                    />
-                );
+                return <SeleccionGustosCard />;
+
             case pantallas.DATOS_PERSONALES:
                 return <DatosPersonalesCard />;
 
@@ -73,7 +55,6 @@ export const InformacionPersonal = (props) => {
                         pantallas.DATOS_PERSONALES,
                         pantallas.MY_CARD,
                     ]}
-                    key={selectedTags.length}
                     cardIndex={0}
                     renderCard={renderCard}
                     stackSize={3}

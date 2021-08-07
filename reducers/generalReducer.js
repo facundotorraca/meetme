@@ -129,6 +129,15 @@ export default function generalReducer(state = initialState, action) {
                 usuario: { ...state.usuario, atributos: nuevosAtributos },
             };
         }
+
+        case 'GUARDAR_GUSTOS': {
+            const nuevosGustos = action.payload;
+
+            return {
+                ...state,
+                usuario: { ...state.usuario, gustos: nuevosGustos },
+            };
+        }
         default:
             return state;
     }

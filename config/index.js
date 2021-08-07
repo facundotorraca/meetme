@@ -1,5 +1,13 @@
+import React from 'react';
 import { Dimensions } from 'react-native';
-import { FontAwesome, FontAweome5 } from '@expo/vector-icons';
+
+import {
+    FontAwesome,
+    FontAwesome5,
+    Entypo,
+    MaterialIcons,
+    MaterialCommunityIcons,
+} from '@expo/vector-icons';
 
 export const colors = {
     PASS: 'red',
@@ -149,4 +157,25 @@ export const userAttributeOptions = {
         'piercedTongue',
         'vomitingRainbow',
     ],
+};
+
+const sizeIcons = 27;
+
+export const iconosGustos = {
+    [gustos.MUSICA]: <FontAwesome5 name="music" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.AIRE_LIBRE]: <FontAwesome5 name="tree" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.DEPORTES]: (
+        <MaterialIcons name="sports-tennis" size={sizeIcons} color={colors.YELLOW} />
+    ),
+    [gustos.SALIR_DE_FIESTA]: <Entypo name="drink" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.VIDEOJUEGOS]: <FontAwesome5 name="gamepad" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.ASTRONOMIA]: (
+        <MaterialCommunityIcons name="zodiac-cancer" size={sizeIcons} color={colors.YELLOW} />
+    ),
+    [gustos.RELIGION]: <FontAwesome5 name="cross" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.MODA]: <FontAwesome5 name="tshirt" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.VIAJAR]: <FontAwesome5 name="plane" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.TECNOLOGIA]: <FontAwesome5 name="laptop" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.ANIMALES]: <FontAwesome5 name="dog" size={sizeIcons} color={colors.YELLOW} />,
+    [gustos.CIENCIA]: <MaterialIcons name="science" size={sizeIcons} color={colors.YELLOW} />,
 };
