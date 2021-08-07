@@ -129,16 +129,120 @@ const usuarios = [
     },
 ];
 
+// todo -> manjear la opcion de tipo lugar
+// párques, etc
+const lugares = [
+    {
+        id: 1,
+        stars: 5,
+        name: 'Moby Dick',
+        neighborhood: 'Palermo',
+        city: 'CABA',
+        link: 'https://www.baresyboliches.com/wp-content/uploads/moby-2-722x480.jpg',
+        address: 'Av Rafael Obligado 2234',
+    },
+    {
+        id: 2,
+        stars: 3,
+        name: 'Jobs',
+        neighborhood: 'Caballito',
+        city: 'CABA',
+        link: 'https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/92/36/img-20170702-011749-largejpg.jpg',
+        address: 'Arenales 1233',
+    },
+    {
+        id: 3,
+        stars: 4,
+        name: 'Moscow',
+        city: 'CABA',
+        neighborhood: 'Almagro',
+        link: 'https://images.clarin.com/2019/11/28/pacha-para-amanecer-junto-al___e-SW0JTL_1256x620__1.jpg',
+        address: 'Av Costanera 122',
+    },
+    {
+        id: 4,
+        stars: 4,
+        name: 'Rose in Rio',
+        neighborhood: 'Palermo',
+        city: 'CABA',
+        link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
+        address: 'Av Cordoba 700',
+    },
+    {
+        id: 5,
+        stars: 2,
+        name: '7030',
+        city: 'CABA',
+        neighborhood: 'Pilar',
+        link: 'https://px.cdn.bigbangnews.com/bigbang/122019/1575321848605/rose.webp?cw=555&ch=499&extw=jpg',
+        address: 'Las Magnolias 765',
+    },
+    {
+        id: 6,
+        stars: 5,
+        name: 'Blest',
+        neighborhood: 'Nordelta',
+        city: 'CABA',
+        link: 'https://res.cloudinary.com/tf-lab/image/upload/restaurant/979dc9fc-3554-42de-8e9f-a4480d31a534/fa2d2036-bd0f-4b46-8457-0adb588ee4a4.jpg',
+        address: 'Ex ruta 8 km 33',
+    },
+];
+
+const regalos = [
+    {
+        id: 1,
+        name: 'Caja de Chocolates',
+        precio: 500,
+        tipo: giftType.CANDY,
+        link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
+    },
+    {
+        id: 2,
+        name: 'Ramo de Flores',
+        precio: 900,
+        tipo: giftType.FLOWER,
+        link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
+    },
+    {
+        id: 3,
+        name: '1/4 kg Helado',
+        precio: 420,
+        tipo: giftType.DRINKS,
+        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+    },
+    {
+        id: 4,
+        name: '1/4 kg Helado',
+        precio: 420,
+        tipo: giftType.DRINKS,
+        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+    },
+    {
+        id: 5,
+        name: '1/4 kg Helado',
+        precio: 420,
+        tipo: giftType.FLOWER,
+        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+    },
+    {
+        id: 6,
+        name: '1/4 kg Helado',
+        precio: 420,
+        tipo: giftType.CANDY,
+        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+    },
+];
+
 export const initialState = {
     usuario: {
-        autorizado: false,
         id: 9000,
-        nombre: 'Barbara',
         edad: 22,
+        autorizado: false,
+        descripcion: 'Saa',
+        nombre: 'Barbara',
         colorCard: colors.PINK,
         ciudad: 'Buenos Aires',
         gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
-        descripcion: 'Saa',
     },
 
     caracteristicasPago: {
@@ -147,8 +251,8 @@ export const initialState = {
         premium: true,
     },
 
-    lugares: [{ nombre: 'Vita', direccion: 'Palermo', Estrellas: 4, tipo: 'Pub' }],
-    regalos: [{ nombre: 'Caja de bombones', precio: 500, tipo: 'Dulces' }],
+    lugares: lugares,
+    regalos: regalos,
 
     mensajes: mensajes,
     misActividades: misActividades,

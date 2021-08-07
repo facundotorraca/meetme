@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
-import { BigHead } from 'react-native-bigheads';
 import { useSelector } from 'react-redux';
+import { BigHead } from 'react-native-bigheads';
 import { actividades } from '../reducers/initialState';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
 
-const Actividades = ({ navigation }) => {
+const Actividades = () => {
     const lista = useSelector((state) => state.general.listaDeActividades).filter(
         (a) => a.tipo == actividades.INVITACION
     );

@@ -21,7 +21,7 @@ const PanelBotonesChat = ({ navigation, usuario }) => {
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('Pubs', { usuario: usuario })}
+                onPress={() => navigation.navigate('Lugares', { usuario: usuario })}
             >
                 <FontAwesome name="glass" size={buttonSize} color={colors.YELLOW}></FontAwesome>
             </TouchableOpacity>

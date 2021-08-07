@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-native-elements';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, strongerColor, screenSize } from '../config';
 import { guardarRegalo } from '../actions';
-import { useDispatch } from 'react-redux';
-import { FlatList } from 'react-native';
 import GiftCard from '../components/GiftCard.js';
-import { giftType } from '../reducers/initialState.js';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { Card, Button } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
+import { colors, strongerColor, screenSize } from '../config';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, View, Text, TextInput, FlatList } from 'react-native';
 
 export const MensajeRegalo = (props) => {
-    const GIFT_ICON_SIZE = screenSize.ratio * 120;
+    const TAMANIO_ICONO_REGALO = screenSize.ratio * 120;
 
     const dispatch = useDispatch();
 
     const { navigation } = props;
-    const { mensaje, user, regalo, giftColor } = props.route.params;
+    const { mensaje, usuario, regalo, color } = props.route.params;
 
     return (
         <View style={styles.container}>
-            <Card containerStyle={styles.giftSentCard}>
+            <Card containerStyle={styles.mensajeCard}>
                 <LinearGradient
-                    colors={[giftColor, strongerColor[giftColor]]}
+                    colors={[color, strongerColor[color]]}
                     style={{ borderRadius: 20, padding: 15, height: '100%' }}
                 >
                     <Card.Title>
-                        <Text style={styles.giftSentCardTitle}>
+                        <Text style={styles.tituloMensajeCard}>
                             {'Tu regalo a \n'}
-                            <Text style={{ color: colors.BLUE }}>{user.nombre}</Text>{' '}
+                            <Text style={{ color: colors.BLUE }}>{usuario.nombre}</Text>{' '}
                             {'\n fue enviado con exito!'}
                         </Text>
                     </Card.Title>
@@ -38,13 +36,13 @@ export const MensajeRegalo = (props) => {
                         <Text style={{ alignSelf: 'center' }}>
                             <FontAwesome5
                                 name="gift"
-                                size={GIFT_ICON_SIZE}
+                                size={TAMANIO_ICONO_REGALO}
                                 color={colors.PURPLE}
                             ></FontAwesome5>
                         </Text>
                     </View>
 
-                    <Card containerStyle={styles.subcardWithGiftMessage}>
+                    <Card containerStyle={styles.subcardConMensajeEscrito}>
                         <Card.Title style={{ alignSelf: 'flex-start' }}>Mensaje enviado</Card.Title>
                         <Card.Divider></Card.Divider>
                         <Text>{mensaje}</Text>
@@ -57,7 +55,7 @@ export const MensajeRegalo = (props) => {
                     buttonStyle={{ ...styles.button, paddingHorizontal: 100, marginTop: 50 }}
                     title="Volver al chat!"
                     onPress={() => {
-                        dispatch(guardarRegalo(user, mensaje, regalo));
+                        dispatch(guardarRegalo(usuario, mensaje, regalo));
                         navigation.navigate('Chat', { user: user });
                     }}
                 />
@@ -67,18 +65,10 @@ export const MensajeRegalo = (props) => {
 };
 
 export const Regalo = (props) => {
-    const minShippingCost = 15;
-    const maxShippingCost = 300;
-
-    const [message, setMessage] = useState('');
-    const [envio, setEnvio] = useState(getShippingCost(minShippingCost, maxShippingCost));
+    const [mensaje, setMensaje] = useState('');
+    const { regalo, usuario, color, costoEnvio } = props.route.params;
 
     const { top, bottom } = useSafeAreaInsets();
-    const { regalo, usuario, giftColor } = props.route.params;
-
-    function getShippingCost(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
 
     return (
         <View
@@ -89,9 +79,9 @@ export const Regalo = (props) => {
             }}
         >
             <View style={{ flex: 1 }}>
-                <GiftCard gift={regalo} color={giftColor} shippingCost={envio} />
+                <GiftCard gift={regalo} color={color} shippingCost={costoEnvio} />
 
-                <Text style={styles.mensajePrincipalRegalo}>
+                <Text style={styles.textRegalandoA}>
                     {'Estas eligiendo un regalo para\n'}
                     <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
                 </Text>
@@ -103,7 +93,7 @@ export const Regalo = (props) => {
                         placeholder="Escribe un mensaje"
                         placeholderTextColor={'#9E9E9E'}
                         multiline={true}
-                        onChangeText={(message) => setMessage(message)}
+                        onChangeText={(message) => setMensaje(message)}
                     />
                 </View>
 
@@ -113,16 +103,16 @@ export const Regalo = (props) => {
                         title="Enviar!"
                         onPress={() =>
                             props.navigation.navigate('MensajeRegalo', {
-                                mensaje: message,
-                                user: usuario,
-                                regalo: regalo,
-                                giftColor: giftColor,
+                                mensaje,
+                                usuario,
+                                regalo,
+                                color,
                             })
                         }
                     />
                 </View>
 
-                <Text style={styles.mensajeInformativoRegalo}>
+                <Text style={styles.textBasesYCondiciones}>
                     Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
                 </Text>
@@ -135,62 +125,26 @@ export default Regalos = (props) => {
     const { navigation } = props;
     const usuario = props.route.params.usuario;
 
-    const regalos = [
-        {
-            id: 1,
-            name: 'Caja de Chocolates',
-            precio: 500,
-            tipo: giftType.CANDY,
-            link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
-        },
-        {
-            id: 2,
-            name: 'Ramo de Flores',
-            precio: 900,
-            tipo: giftType.FLOWER,
-            link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
-        },
-        {
-            id: 3,
-            name: '1/4 kg Helado',
-            precio: 420,
-            tipo: giftType.DRINKS,
-            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
-        },
-        {
-            id: 4,
-            name: '1/4 kg Helado',
-            precio: 420,
-            tipo: giftType.DRINKS,
-            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
-        },
-        {
-            id: 5,
-            name: '1/4 kg Helado',
-            precio: 420,
-            tipo: giftType.FLOWER,
-            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
-        },
-        {
-            id: 6,
-            name: '1/4 kg Helado',
-            precio: 420,
-            tipo: giftType.CANDY,
-            link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
-        },
-    ];
+    const regalos = useSelector((state) => state.general.regalos);
+
+    const costoEnvioMin = 15;
+    const costoEnvioMax = 300;
 
     const { top, bottom } = useSafeAreaInsets();
 
-    const colorByIndex = {
+    const colorPorIndex = {
         0: colors.DARK_PINK,
         1: colors.ORANGE,
         2: colors.YELLOW,
     };
 
-    const getNextColor = (giftIndex) => {
-        const normalizedIndex = giftIndex % 3;
-        return colorByIndex[normalizedIndex];
+    const proximoColor = (regaloIndex) => {
+        const normalizedIndex = regaloIndex % 3;
+        return colorPorIndex[normalizedIndex];
+    };
+
+    const calcularCostoEnvio = () => {
+        return Math.floor(Math.random() * (costoEnvioMax - costoEnvioMin)) + costoEnvioMin;
     };
 
     return (
@@ -199,15 +153,16 @@ export default Regalos = (props) => {
                 <FlatList
                     data={regalos}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ index, item }) => (
+                    renderItem={({ index, item: regalo }) => (
                         <GiftCard
-                            gift={item}
-                            color={getNextColor(index)}
+                            gift={regalo}
+                            color={proximoColor(index)}
                             onPress={() =>
                                 navigation.navigate('Regalo', {
-                                    regalo: item,
+                                    regalo: regalo,
                                     usuario: usuario,
-                                    giftColor: getNextColor(index),
+                                    color: proximoColor(index),
+                                    costoEnvio: calcularCostoEnvio(),
                                 })
                             }
                         />
@@ -223,14 +178,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    mensajePrincipalRegalo: {
+    textRegalandoA: {
         fontSize: 25,
         textAlign: 'center',
         padding: 10,
         paddingTop: 30,
     },
 
-    mensajeInformativoRegalo: {
+    textBasesYCondiciones: {
         fontSize: 13,
         textAlign: 'justify',
         padding: 20,
@@ -267,7 +222,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
-    giftSentCard: {
+    mensajeCard: {
         padding: 0,
         height: '80%',
         borderRadius: 25,
@@ -281,11 +236,11 @@ const styles = StyleSheet.create({
         elevation: 9,
     },
 
-    giftSentCardTitle: {
+    tituloMensajeCard: {
         fontSize: 25,
     },
 
-    subcardWithGiftMessage: {
+    subcardConMensajeEscrito: {
         borderRadius: 20,
         height: '23%',
         backgroundColor: '#FFFFFF',
