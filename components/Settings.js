@@ -1,10 +1,51 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import AppModal from './AppModal';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { colors, strongerColor } from '../config';
 
-const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, prefArr }) => {
+const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, prefArr, navigation }) => {
+
+    const renderPremiumOption = () => {
+        return (
+            <TouchableOpacity 
+                key={'premium'} 
+                onPress={() => navigation.navigate('PremiumScreen')}
+            >
+                <View style={{
+                    paddingHorizontal: 20,
+                    paddingBottom: 20,
+                    paddingTop: 20,
+                    backgroundColor: strongerColor[colors.PURPLE]
+                }}>
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                    }}>
+                        <View>
+                            <Text style={{ 
+                                fontSize: 18,
+                                color: colors.YELLOW,
+                                fontWeight: 'bold'
+                             }}>¿Aun no sos usuario premium?</Text>
+                            <Text style={{ 
+                                fontSize: 14, 
+                                color: colors.YELLOW, 
+                                paddingTop: 5 }}>
+                                Obtene beneficios exclusivos
+                            </Text>
+                        </View>
+                        <MaterialIcons name="stars" size={40} color={colors.YELLOW} />
+                    </View>
+                </View>
+
+                <View style={{ height: 0.5, backgroundColor: 'grey' }} />
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <>
             <AppModal
@@ -38,6 +79,7 @@ const SettingsComponent = ({ modalVisible, setModalVisible, settingsOptions, pre
                 setModalVisible={setModalVisible}
             />
             <ScrollView style={{ backgroundColor: 'white' }}>
+                {renderPremiumOption()}
                 {settingsOptions.map(({ title, subTitle, onPress, icon }, index) => (
                     <TouchableOpacity key={title} onPress={onPress}>
                         <View
