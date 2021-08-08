@@ -177,6 +177,7 @@ const CofiguracionesScreen = ({ navigation }) => {
             setModalVisible={setModalVisible}
             settingsOptions={settingsOptions}
             prefArr={prefArr}
+            navigation={navigation}
         />
     );
 };

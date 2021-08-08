@@ -4,6 +4,7 @@ import CofiguracionesScreen, {
     EditarCard,
     InformacionPersonal,
 } from '../Screens/ConfiguracionesScreen';
+import PremiumScreen from '../Screens/PremiumScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,14 @@ const StackConfiguraciones = () => {
             <Stack.Screen
                 name="InformacionPersonal"
                 component={InformacionPersonal}
+                options={({ route }) => ({
+                    headerBackTitleVisible: true,
+                })}
+            />
+
+            <Stack.Screen
+                name="PremiumScreen"
+                component={PremiumScreen}
                 options={({ route }) => ({
                     headerBackTitleVisible: true,
                 })}
