@@ -75,12 +75,12 @@ export const DatosPersonalesCard = () => {
 
             <View style={styles.body}>
                 <View style={{ ...styles.inputView, height: '15%' }}>
-                    <Text style={styles.label}>User Name</Text>
+                    <Text style={styles.label}>Nombre</Text>
                     <TextInput
                         label="Email"
                         style={styles.textInput}
-                        placeholder="Nombre"
-                        placeholderTextColor="#000"
+                        placeholder="Escribe el nombre que deseas mostrar!"
+                        placeholderTextColor="grey"
                         onChangeText={(n) => setName(n)}
                     />
                 </View>
@@ -89,8 +89,8 @@ export const DatosPersonalesCard = () => {
                     <Text style={styles.label}>Descripción</Text>
                     <TextInput
                         style={styles.textInput}
-                        placeholder="Escribe un mensaje"
-                        placeholderTextColor="#000"
+                        placeholder="Escribe una descripción que te describa!"
+                        placeholderTextColor="grey"
                         multiline={true}
                         textAlignVertical={'auto'}
                         onChangeText={(d) => {
