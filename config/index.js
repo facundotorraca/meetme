@@ -18,6 +18,7 @@ export const colors = {
     YELLOW: '#FBB831',
     ORANGE: '#FB8569',
     DARK_PINK: '#FB569C',
+    DISABLED: 'grey',
 };
 
 export const gustos = {

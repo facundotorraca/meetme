@@ -7,22 +7,64 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo, MaterialIcons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { guardarGustos } from '../actions';
+import { guardarGustos, guardarInfoPersonal } from '../actions';
 
 const commandsButtonsSize = 27;
 
-export const DatosPersonalesCard = ({ usuario }) => {
+export const DatosPersonalesCard = () => {
+    const usuario = useSelector((state) => state.general.usuario);
+    const [name, setName] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+
+    const dispatch = useDispatch();
+
+    const showToastWithGravityAndOffset = (mensaje) => {
+        if (Platform.OS === 'ios') {
+            Alert.alert(mensaje);
+        } else {
+            ToastAndroid.showWithGravityAndOffset(
+                mensaje,
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER,
+                50,
+                50
+            );
+        }
+    };
+
+    const restore = () => {
+        setName(usuario.nombre);
+        setDescripcion(usuario.descripcion);
+    };
+
+    const save = () => {
+        console.log('sava');
+        showToastWithGravityAndOffset('Informacion guardada');
+        dispatch(guardarInfoPersonal(name, descripcion));
+    };
+
     return (
         <LinearGradient
             style={styles.container}
             colors={[colors.ORANGE, strongerColor[colors.ORANGE]]}
         >
             <View style={styles.header}>
-                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => {}}>
+                <TouchableOpacity
+                    style={[styles.button, styles.shadow]}
+                    onPress={() => {
+                        restore();
+                    }}
+                >
                     <Entypo name="back-in-time" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => {}}>
+                <TouchableOpacity
+                    style={[styles.button, styles.shadow]}
+                    onPress={() => {
+                        console.log('hola');
+                        save();
+                    }}
+                >
                     <Entypo name="save" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
             </View>
@@ -39,19 +81,21 @@ export const DatosPersonalesCard = ({ usuario }) => {
                         style={styles.textInput}
                         placeholder="Nombre"
                         placeholderTextColor="#000"
-                        onChangeText={(nombre) => {}}
+                        onChangeText={(n) => setName(n)}
                     />
                 </View>
 
                 <View style={{ ...styles.inputView, height: '50%', marginTop: 20 }}>
-                    <Text style={{ flexDirection: 'row' }}>User Name</Text>
+                    <Text style={styles.label}>Descripción</Text>
                     <TextInput
                         style={styles.textInput}
                         placeholder="Escribe un mensaje"
                         placeholderTextColor="#000"
                         multiline={true}
                         textAlignVertical={'auto'}
-                        onChangeText={(descripcion) => {}}
+                        onChangeText={(d) => {
+                            setDescripcion(d);
+                        }}
                     />
                 </View>
             </View>
@@ -79,7 +123,7 @@ export const SeleccionGustosCard = () => {
 
     const showToastWithGravityAndOffset = (mensaje) => {
         if (Platform.OS === 'ios') {
-            Alert.alert('No puedes seleccionar mas...');
+            Alert.alert(mensaje);
         } else {
             ToastAndroid.showWithGravityAndOffset(
                 mensaje,
@@ -111,8 +155,9 @@ export const SeleccionGustosCard = () => {
     };
 
     const save = () => {
-        dispatch(guardarGustos(gustosSeleccionados));
+        console.log('sava');
         showToastWithGravityAndOffset('Gustos guardados');
+        dispatch(guardarGustos(gustosSeleccionados));
     };
 
     const restore = () => {
@@ -142,7 +187,7 @@ export const SeleccionGustosCard = () => {
 
             <View style={styles.textRow}>
                 <Text style={[styles.textMessagePrimary, styles.textShadow]}>
-                    Seleccioná los tus intereses...
+                    Seleccioná tus intereses...
                 </Text>
             </View>
 
@@ -222,7 +267,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 
-    label: {},
+    label: { paddingTop: 8, paddingStart: 8 },
 
     textButton: {
         color: 'white',
