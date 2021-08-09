@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 30,
         padding: 15,
-        height: `${screenSize.ratio * 48}%`,
+        height: '100%',
     },
 
     header: {

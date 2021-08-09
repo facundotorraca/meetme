@@ -72,7 +72,7 @@ const Actividades = () => {
         <View style={styles.container}>
             <FlatList
                 data={listaDeActividades}
-                keyExtractor={(actividad) => actividad.id}
+                keyExtractor={(actividad) => actividad.id.toString()}
                 renderItem={actividadItem}
             ></FlatList>
         </View>

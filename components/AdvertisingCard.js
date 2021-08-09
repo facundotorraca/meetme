@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
-import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { colors, strongerColor, screenSize } from '../config';
 import { Animated } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function EmptyUserCard() {
+export default function AdvertisingCard() {
     const centralIconSize =
-        screenSize.height >= 750 ? screenSize.height * 0.2 : screenSize.height * 0.12;
+        screenSize.height >= 750 ? screenSize.height * 0.18 : screenSize.height * 0.12;
 
     const anim = useRef(new Animated.Value(1));
 
@@ -36,12 +36,17 @@ export default function EmptyUserCard() {
     return (
         <LinearGradient
             style={styles.container}
-            colors={[colors.PURPLE, strongerColor[colors.PURPLE]]}
+            colors={[colors.YELLOW, strongerColor[colors.YELLOW]]}
         >
             <View style={styles.body}>
                 <View style={styles.imageContainer}>
                     <Animated.View style={{ transform: [{ scale: anim.current }] }}>
-                        <FontAwesome5 name="fire" size={centralIconSize} color={colors.YELLOW} />
+                        <Ionicons
+                            name="megaphone"
+                            size={centralIconSize}
+                            color={colors.PURPLE}
+                            style={{ transform: [{ rotate: '330deg' }] }}
+                        />
                     </Animated.View>
                 </View>
             </View>
