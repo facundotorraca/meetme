@@ -239,7 +239,7 @@ export const initialState = {
         edad: 22,
         email: 'barbara@gmail.com',
         password: 'meetme2021',
-        autorizado: true,
+        autorizado: false,
         descripcion: 'Saa',
         nombre: 'Barbara',
         colorCard: colors.PINK,
