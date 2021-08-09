@@ -52,23 +52,7 @@ export default function AdvertisingCard() {
             </View>
             <View style={styles.footer}>
                 <View style={styles.textRow}>
-                    <Text style={[styles.textMessagePrimary, styles.textShadow]}>
-                        No quedan mas opciones cerca de ti...
-                    </Text>
-                </View>
-                <View style={styles.textRow}>
-                    <Text style={[styles.textMessageSeconday, styles.textShadow]}>
-                        Puedes cambiar los ajustes de ubicacion o volver a cargar usuarios.
-                    </Text>
-                </View>
-
-                <View style={styles.textRow}>
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome name="gear" style={styles.textButton} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome name="repeat" style={styles.textButton} color="black" />
-                    </TouchableOpacity>
+                    <Text style={styles.textMessagePrimary}>Publicita con nosotros ya mismo!</Text>
                 </View>
             </View>
         </LinearGradient>
@@ -109,10 +93,11 @@ const styles = StyleSheet.create({
     },
 
     textMessagePrimary: {
-        color: 'white',
+        color: colors.BLUE,
         textAlign: 'center',
+        fontWeight: 'bold',
         marginLeft: 10,
-        fontSize: 25,
+        fontSize: 30,
     },
 
     textMessageSeconday: {
