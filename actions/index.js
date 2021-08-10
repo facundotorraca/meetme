@@ -43,3 +43,8 @@ export const guardarGustos = (gustos) => ({
     type: 'GUARDAR_GUSTOS',
     payload: gustos,
 });
+
+export const guardarInfoPersonal = (name, description) => ({
+    type: 'GUARDAR_INFO_PERSONAL',
+    payload: { name, description },
+});

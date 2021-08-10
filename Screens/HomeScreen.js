@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Platform, ToastAndroid, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swiper from 'react-native-deck-swiper';
@@ -7,21 +7,43 @@ import { useSelector, useDispatch } from 'react-redux';
 import UserCard from '../components/UserCard';
 import BottomBar from '../components/BottomBar';
 import { matchearUsuario } from '../actions';
+import AdvertisingCard from '../components/AdvertisingCard';
 import EmptyUserCard from '../components/EmptyUsersCard';
 
 export default function HomeScreen() {
+    const cardsBetweenAds = 3;
+    const ads = 'ADS';
+
     const dispatch = useDispatch();
     const swipesRef = useRef(null);
+
+    const [i, setI] = useState(0);
     const [index, setIndex] = useState(0);
 
-    const users = useSelector((state) => {
-        const usersToShow = state.general.usuariosTotales.filter((u) => !u.leDiLike);
+    const getIndexPublicidad = () => {
+        return cardsBetweenAds - (i % cardsBetweenAds) - 1;
+    };
 
-        // agrego un elemento null al final para poder
-        // detectar que se terminaron los usuarios y
-        // mostrar el card de fin de usuarios
-        return [...usersToShow, null];
-    });
+    const users = useSelector(
+        (state) => {
+            const usersToShow = state.general.usuariosTotales.filter((u) => !u.leDiLike);
+
+            // agrego un elemento null al final para poder
+            // detectar que se terminaron los usuarios y
+            // mostrar el card de fin de usuarios
+
+            let aux = [...usersToShow, null, null];
+
+            const indexPublicidad = getIndexPublicidad();
+
+            aux.splice(indexPublicidad, 0, ads);
+
+            console.log(aux.map((u) => (u === ads ? u : u?.nombre ?? 'null')));
+
+            return aux;
+        },
+        (a, b) => a.length === b.length
+    );
 
     const showToastWithGravityAndOffset = () => {
         if (Platform.OS === 'ios') {
@@ -41,6 +63,14 @@ export default function HomeScreen() {
     };
 
     const renderCard = (user) => {
+        if (user === ads) {
+            return (
+                <RectButton style={styles.container}>
+                    <AdvertisingCard />
+                </RectButton>
+            );
+        }
+
         return (
             <RectButton style={styles.container}>
                 {user ? <UserCard user={user} color={user.colorCard} /> : <EmptyUserCard />}
@@ -49,11 +79,19 @@ export default function HomeScreen() {
     };
 
     const handlePass = (index, user) => {
+        setI(i + 1);
+        if (!user || user == ads) return;
         setIndex(index + 1);
     };
 
     const handleLike = (index, user) => {
+        if (user == ads) {
+            return handlePass(index, user);
+        }
+
+        setI(i + 1);
         if (!user) return;
+
         if (user.meDioLike) showToastWithGravityAndOffset();
         dispatch(matchearUsuario(user));
     };
@@ -109,9 +147,9 @@ export default function HomeScreen() {
                     stackSize={3}
                     useViewOverflow={Platform.OS === 'ios'}
                     stackSeparation={15}
-                    key={users.length.toString()}
-                    overlayLabels={{ left: leftLabel, right: rightLabel }}
+                    key={users.length}
                     infinite={true}
+                    overlayLabels={{ left: leftLabel, right: rightLabel }}
                     animateOverlayLabelsOpacity
                     animateCardOpacity
                     swipeBackCard

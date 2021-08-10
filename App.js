@@ -5,10 +5,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider, useSelector } from 'react-redux';
 import TopBar from './navigation/TopBar';
 import configureStore from './store/configureStore';
+import LoginScreen from './Screens/LoginScreen';
 
 // desactivar warning de las librerias
 import { LogBox } from 'react-native';
-import LoginScreen from './Screens/LoginScreen';
 LogBox.ignoreLogs(['Animated']);
 
 const RootComponent = () => {

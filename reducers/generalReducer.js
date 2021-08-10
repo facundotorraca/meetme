@@ -138,6 +138,16 @@ export default function generalReducer(state = initialState, action) {
                 usuario: { ...state.usuario, gustos: nuevosGustos },
             };
         }
+        case 'GUARDAR_INFO_PERSONAL': {
+            const name = action.payload.name;
+            const description = action.payload.description;
+
+            return {
+                ...state,
+                usuario: { ...state.usuario, nombre: name, descripcion: description },
+            };
+        }
+
         default:
             return state;
     }
