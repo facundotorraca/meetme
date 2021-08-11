@@ -38,7 +38,6 @@ export const DatosPersonalesCard = () => {
     };
 
     const save = () => {
-        console.log('sava');
         showToastWithGravityAndOffset('Informacion guardada');
         dispatch(guardarInfoPersonal(name, descripcion));
     };
@@ -58,13 +57,7 @@ export const DatosPersonalesCard = () => {
                     <Entypo name="back-in-time" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={[styles.button, styles.shadow]}
-                    onPress={() => {
-                        console.log('hola');
-                        save();
-                    }}
-                >
+                <TouchableOpacity style={[styles.button, styles.shadow]} onPress={() => save()}>
                     <Entypo name="save" size={commandsButtonsSize} color={colors.YELLOW} />
                 </TouchableOpacity>
             </View>
@@ -155,7 +148,6 @@ export const SeleccionGustosCard = () => {
     };
 
     const save = () => {
-        console.log('sava');
         showToastWithGravityAndOffset('Gustos guardados');
         dispatch(guardarGustos(gustosSeleccionados));
     };

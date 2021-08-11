@@ -3,7 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
-import { colors, strongerColor, screenSize } from '../config';
+import { colors, strongerColor, screenSize, iconosGustos } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,22 +14,11 @@ export default function MyCard() {
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
 
-    const infoGustos = {
-        'Salir de fiesta': { icono: 'glass', color: colors.YELLOW },
-        'Videojuegos': { icono: 'gamepad', color: colors.YELLOW },
-        'Aire libre': { icono: 'tree', color: colors.YELLOW },
-    };
-
     const tagGusto = (gusto) => (
         <View key={gusto} style={styles.chip}>
             <Chip
                 title={gusto}
-                icon={{
-                    name: infoGustos[gusto]?.icono,
-                    type: 'font-awesome',
-                    size: iconSize,
-                    color: infoGustos[gusto]?.color,
-                }}
+                icon={() => iconosGustos[gusto]}
                 type="solid"
                 backgroundColor="red"
                 iconRight

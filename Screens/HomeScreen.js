@@ -33,13 +33,8 @@ export default function HomeScreen() {
             // mostrar el card de fin de usuarios
 
             let aux = [...usersToShow, null, null];
-
             const indexPublicidad = getIndexPublicidad();
-
             aux.splice(indexPublicidad, 0, ads);
-
-            console.log(aux.map((u) => (u === ads ? u : u?.nombre ?? 'null')));
-
             return aux;
         },
         (a, b) => a.length === b.length

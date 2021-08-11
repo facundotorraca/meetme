@@ -3,7 +3,7 @@ import { View, FlatList, TouchableOpacity, StyleSheet, Image, Text } from 'react
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { BigHead } from 'react-native-bigheads';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '../config';
+import { userAttributeTypes } from '../config';
 import { useSelector } from 'react-redux';
 
 export const InboxScreen = ({ navigation }) => {
@@ -23,8 +23,7 @@ var randomColor = function (obj) {
 
 export default function Inbox({ navigation }) {
     const users = useSelector((state) => state.general.usuariosTotales);
-    const chats = useSelector((state) => state.general.mensajes);
-
+    let chats = useSelector((state) => state.general.mensajes);
     let matches = users.filter((u) => u.leDiLike && u.meDioLike);
 
     const dateOptions = {
@@ -43,26 +42,26 @@ export default function Inbox({ navigation }) {
                 <View style={styles.chatInfo}>
                     <View style={styles.userImageWrapper}>
                         <BigHead
-                            accessory="shades"
+                            lashes={false}
                             bgColor="yellow"
                             bgShape="circle"
-                            body="chest"
-                            clothing="tankTop"
-                            clothingColor="black"
-                            eyebrows="angry"
-                            eyes="wink"
-                            facialHair="mediumBeard"
-                            graphic="vue"
-                            hair="short"
-                            hairColor="black"
-                            hat="none"
-                            hatColor="green"
-                            lashes={false}
-                            lipColor="purple"
-                            mouth="open"
-                            showBackground={true}
                             size={80}
-                            skinTone="brown"
+                            showBackground={true}
+                            body={item.atributos[userAttributeTypes.BODY]}
+                            hat={item.atributos[userAttributeTypes.HAT]}
+                            mouth={item.atributos[userAttributeTypes.MOUTH]}
+                            accessory={item.atributos[userAttributeTypes.ACCESSORY]}
+                            clothingColor={item.atributos[userAttributeTypes.CLOTHING_COLOR]}
+                            eyes={item.atributos[userAttributeTypes.EYES]}
+                            clothing={item.atributos[userAttributeTypes.CLOTHING]}
+                            facialHair={item.atributos[userAttributeTypes.FACIAL_HAIR]}
+                            graphic={item.atributos[userAttributeTypes.TSHIRT_GRAPHIC]}
+                            hair={item.atributos[userAttributeTypes.HAIR]}
+                            hairColor={item.atributos[userAttributeTypes.HAIR_COLOR]}
+                            hatColor={item.atributos[userAttributeTypes.HAT_COLOR]}
+                            eyebrows={item.atributos[userAttributeTypes.EYEBROWS]}
+                            lipColor={item.atributos[userAttributeTypes.LIP_COLOR]}
+                            skinTone={item.atributos[userAttributeTypes.SKIN_TONE]}
                         />
                     </View>
                     <View style={styles.chatDescription}>
@@ -90,7 +89,13 @@ export default function Inbox({ navigation }) {
     return (
         <View style={styles.container}>
             <FlatList
-                data={matches}
+                data={matches.sort(
+                    (x, y) =>
+                        chats[`${x.id}`]?.conversacion?.[chats[`${x.id}`]?.conversacion?.length - 1]
+                            .fecha <
+                        chats[`${y.id}`]?.conversacion?.[chats[`${y.id}`]?.conversacion?.length - 1]
+                            .fecha
+                )}
                 keyExtractor={(usuario) => usuario.id.toString()}
                 renderItem={chatItem}
             ></FlatList>

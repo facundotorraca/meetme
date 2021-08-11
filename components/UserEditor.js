@@ -42,7 +42,7 @@ export default function UserEditor() {
     const nombreAtributo = {
         [userAttributeTypes.ACCESSORY]: 'Accesorio',
         [userAttributeTypes.TSHIRT_GRAPHIC]: 'Dibujo remera',
-        [userAttributeTypes.FACIAL_HAIR]: 'Vello facil',
+        [userAttributeTypes.FACIAL_HAIR]: 'Vello facial',
         [userAttributeTypes.SKIN_TONE]: 'Color de piel',
         [userAttributeTypes.HAIR]: 'Peinado',
         [userAttributeTypes.BODY]: 'Cuerpo',
@@ -112,6 +112,8 @@ export default function UserEditor() {
             let randomOptions = userAttributeOptions[type];
             randomAttributes[type] = randomOptions[randInt(0, randomOptions.length)];
         });
+
+        console.log(randomAttributes);
 
         setCurrentAttributes(randomAttributes);
     };

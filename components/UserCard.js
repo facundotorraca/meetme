@@ -3,30 +3,18 @@ import { FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { BigHead } from 'react-native-bigheads';
 import { Chip } from 'react-native-elements';
-import { colors, strongerColor, screenSize, gustos } from '../config';
+import { colors, strongerColor, screenSize, userAttributeTypes, iconosGustos } from '../config';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function UserCard({ user, color }) {
-    const iconSize = 25;
     const avatarSize =
         screenSize.height >= 750 ? screenSize.height * 0.56 : screenSize.height * 0.45;
-
-    const infoGustos = {
-        [gustos.SALIR_DE_FIESTA]: { icono: 'glass', color: colors.YELLOW },
-        [gustos.VIDEOJUEGOS]: { icono: 'gamepad', color: colors.YELLOW },
-        [gustos.AIRE_LIBRE]: { icono: 'tree', color: colors.YELLOW },
-    };
 
     const tagGusto = (gusto) => (
         <View key={gusto} style={styles.chip}>
             <Chip
                 title={gusto}
-                icon={{
-                    name: infoGustos[gusto]?.icono,
-                    type: 'font-awesome',
-                    size: iconSize,
-                    color: infoGustos[gusto]?.color,
-                }}
+                icon={() => iconosGustos[gusto]}
                 buttonStyle={{ backgroundColor: colors.BLUE }}
                 type="solid"
                 background
@@ -46,26 +34,26 @@ export default function UserCard({ user, color }) {
             <View style={styles.body}>
                 <View style={styles.imageContainer}>
                     <BigHead
-                        accessory="shades"
+                        lashes={false}
                         bgColor="yellow"
                         bgShape="circle"
-                        body="chest"
-                        clothing="tankTop"
-                        clothingColor="black"
-                        eyebrows="angry"
-                        eyes="wink"
-                        facialHair="mediumBeard"
-                        graphic="vue"
-                        hair="short"
-                        hairColor="black"
-                        hat="none"
-                        hatColor="green"
-                        lashes={false}
-                        lipColor="purple"
-                        mouth="open"
-                        showBackground={true}
                         size={avatarSize}
-                        skinTone="brown"
+                        showBackground={true}
+                        body={user.atributos[userAttributeTypes.BODY]}
+                        hat={user.atributos[userAttributeTypes.HAT]}
+                        mouth={user.atributos[userAttributeTypes.MOUTH]}
+                        accessory={user.atributos[userAttributeTypes.ACCESSORY]}
+                        clothingColor={user.atributos[userAttributeTypes.CLOTHING_COLOR]}
+                        eyes={user.atributos[userAttributeTypes.EYES]}
+                        clothing={user.atributos[userAttributeTypes.CLOTHING]}
+                        facialHair={user.atributos[userAttributeTypes.FACIAL_HAIR]}
+                        graphic={user.atributos[userAttributeTypes.TSHIRT_GRAPHIC]}
+                        hair={user.atributos[userAttributeTypes.HAIR]}
+                        hairColor={user.atributos[userAttributeTypes.HAIR_COLOR]}
+                        hatColor={user.atributos[userAttributeTypes.HAT_COLOR]}
+                        eyebrows={user.atributos[userAttributeTypes.EYEBROWS]}
+                        lipColor={user.atributos[userAttributeTypes.LIP_COLOR]}
+                        skinTone={user.atributos[userAttributeTypes.SKIN_TONE]}
                     />
                 </View>
             </View>

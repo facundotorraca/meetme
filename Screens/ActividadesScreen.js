@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { userAttributeTypes } from '../config';
 import { BigHead } from 'react-native-bigheads';
 import { actividades } from '../reducers/initialState';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
@@ -21,34 +22,36 @@ const Actividades = () => {
     };
 
     const buscarUsuario = (id) => {
-        return usuarios.filter((u) => u.id == id).map((u) => u.nombre);
+        return usuarios.filter((u) => u.id == id);
     };
 
     const actividadItem = ({ item }) => {
+        const usuario = buscarUsuario(item.usuarioId)[0];
+
         return (
             <View style={styles.chatInfo}>
                 <View style={styles.userImageWrapper}>
                     <BigHead
-                        accessory="shades"
+                        lashes={false}
                         bgColor="yellow"
                         bgShape="circle"
-                        body="chest"
-                        clothing="tankTop"
-                        clothingColor="black"
-                        eyebrows="angry"
-                        eyes="wink"
-                        facialHair="mediumBeard"
-                        graphic="vue"
-                        hair="short"
-                        hairColor="black"
-                        hat="none"
-                        hatColor="green"
-                        lashes={false}
-                        lipColor="purple"
-                        mouth="open"
-                        showBackground={true}
                         size={80}
-                        skinTone="brown"
+                        showBackground={true}
+                        body={usuario.atributos[userAttributeTypes.BODY]}
+                        hat={usuario.atributos[userAttributeTypes.HAT]}
+                        mouth={usuario.atributos[userAttributeTypes.MOUTH]}
+                        accessory={usuario.atributos[userAttributeTypes.ACCESSORY]}
+                        clothingColor={usuario.atributos[userAttributeTypes.CLOTHING_COLOR]}
+                        eyes={usuario.atributos[userAttributeTypes.EYES]}
+                        clothing={usuario.atributos[userAttributeTypes.CLOTHING]}
+                        facialHair={usuario.atributos[userAttributeTypes.FACIAL_HAIR]}
+                        graphic={usuario.atributos[userAttributeTypes.TSHIRT_GRAPHIC]}
+                        hair={usuario.atributos[userAttributeTypes.HAIR]}
+                        hairColor={usuario.atributos[userAttributeTypes.HAIR_COLOR]}
+                        hatColor={usuario.atributos[userAttributeTypes.HAT_COLOR]}
+                        eyebrows={usuario.atributos[userAttributeTypes.EYEBROWS]}
+                        lipColor={usuario.atributos[userAttributeTypes.LIP_COLOR]}
+                        skinTone={usuario.atributos[userAttributeTypes.SKIN_TONE]}
                     />
                 </View>
                 <View style={styles.chatDescription}>
@@ -61,7 +64,7 @@ const Actividades = () => {
                     </View>
                     <Text style={styles.messageText}>
                         En: {item.pub?.name} {'\n'}
-                        Con el usuario: {buscarUsuario(item.usuarioId)}
+                        Con el usuario: {usuario.nombre}
                     </Text>
                 </View>
             </View>

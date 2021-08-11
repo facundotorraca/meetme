@@ -3,7 +3,6 @@ import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { View, StyleSheet, Text } from 'react-native';
 import { colors, strongerColor, screenSize } from '../config';
 import { Animated } from 'react-native';
-import { TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function EmptyUserCard() {
@@ -55,15 +54,6 @@ export default function EmptyUserCard() {
                     <Text style={[styles.textMessageSeconday, styles.textShadow]}>
                         Puedes cambiar los ajustes de ubicacion o volver a cargar usuarios.
                     </Text>
-                </View>
-
-                <View style={styles.textRow}>
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome name="gear" style={styles.textButton} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome name="repeat" style={styles.textButton} color="black" />
-                    </TouchableOpacity>
                 </View>
             </View>
         </LinearGradient>
