@@ -57,7 +57,7 @@ export const InvitacionLugar = (props) => {
                     onPress={() => {
                         dispatch(
                             guardarMensaje({
-                                text: '¡Te he enviado una invitacion! \n' + mensaje,
+                                text: '¡Te he enviado una invitación! \n' + mensaje,
                                 _id: usuario.id,
                             })
                         );
@@ -97,7 +97,7 @@ export const Lugar = (props) => {
                     <TextInput
                         style={styles.textArea}
                         underlineColorAndroid="transparent"
-                        placeholder="Escribe un mensaje"
+                        placeholder="Escribe un mensaje para la invitacion"
                         placeholderTextColor={'#9E9E9E'}
                         multiline={true}
                         onChangeText={(message) => setMensaje(message)}
@@ -107,7 +107,7 @@ export const Lugar = (props) => {
                 <View style={styles.buttonContainer}>
                     <Button
                         buttonStyle={{ ...styles.button, paddingHorizontal: 150 }}
-                        title="Invitar!"
+                        title="Invitar"
                         onPress={() =>
                             props.navigation.navigate('InvitacionLugar', {
                                 mensaje,
@@ -120,8 +120,7 @@ export const Lugar = (props) => {
                 </View>
 
                 <Text style={styles.textBasesYCondiciones}>
-                    Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    Al presionar Invitar queda sujeto a Bases y Condiciones
                 </Text>
             </View>
         </View>
@@ -186,10 +185,11 @@ const styles = StyleSheet.create({
 
     textBasesYCondiciones: {
         fontSize: 13,
-        textAlign: 'justify',
+        textAlign: 'center',
         padding: 20,
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
         paddingTop: 10,
+        color: '#555'
     },
 
     image: {
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     },
 
     textArea: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#9E9E9E',
         borderRadius: 20,
         height: 100,

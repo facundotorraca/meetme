@@ -67,12 +67,12 @@ export const DatosPersonalesCard = () => {
             </View>
 
             <View style={styles.body}>
-                <View style={{ ...styles.inputView, height: '15%' }}>
+                <View style={{ ...styles.inputView, height: '20%' }}>
                     <Text style={styles.label}>Nombre</Text>
                     <TextInput
                         label="Email"
                         style={styles.textInput}
-                        placeholder="Escribe el nombre que deseas mostrar!"
+                        placeholder="Escribe el nombre que deseas mostrar"
                         placeholderTextColor="grey"
                         onChangeText={(n) => setName(n)}
                     />
@@ -82,7 +82,7 @@ export const DatosPersonalesCard = () => {
                     <Text style={styles.label}>Descripción</Text>
                     <TextInput
                         style={styles.textInput}
-                        placeholder="Escribe una descripción que te describa!"
+                        placeholder="Escribe una descripción con la que te identifiques"
                         placeholderTextColor="grey"
                         multiline={true}
                         textAlignVertical={'auto'}
@@ -227,9 +227,9 @@ const styles = StyleSheet.create({
     inputView: {
         backgroundColor: '#FFF',
         borderColor: colors.PURPLE,
-        borderWidth: 3,
-        borderRadius: 30,
-        width: '100%',
+        borderWidth: 2,
+        borderRadius: 15,
+        width: '95%',
     },
 
     textArea: {

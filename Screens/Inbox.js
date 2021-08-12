@@ -77,6 +77,11 @@ export default function Inbox({ navigation }) {
                             {
                                 chats[`${item.id}`]?.conversacion?.[
                                     chats[`${item.id}`]?.conversacion?.length - 1
+                                ].senderMe && '> '
+                            }
+                            {
+                                chats[`${item.id}`]?.conversacion?.[
+                                    chats[`${item.id}`]?.conversacion?.length - 1
                                 ].mensaje
                             }
                         </Text>
@@ -159,11 +164,12 @@ const styles = StyleSheet.create({
     chatPostTime: {
         fontSize: 12,
         color: '#666',
-        paddingRight: 10,
+        paddingRight: 25,
     },
 
     messageText: {
         fontSize: 14,
         color: '#333333',
+        maxWidth: 250,
     },
 });

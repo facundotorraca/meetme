@@ -15,15 +15,24 @@ export const giftType = {
 
 const mensajes = {
     1: {
-        conversacion: [{ senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') }],
+        conversacion: [
+            { senderMe: false, mensaje: 'hola!!', fecha: new Date('2021-07-21T21:00') },
+            { senderMe: false, mensaje: 'che no sabras un poco de frances asi me enseñas? jaja', fecha: new Date('2021-07-21T21:00') },
+        ],
     },
     3: {
         conversacion: [
             { senderMe: false, mensaje: 'hola! como va?', fecha: new Date('2021-06-21T22:00') },
+            { senderMe: true, mensaje: 'todo bien vos??', fecha: new Date('2021-06-21T22:01') },
+            { senderMe: false, mensaje: 'tranqui', fecha: new Date('2021-06-21T22:02') },
+            { senderMe: false, mensaje: 'que andas haciendo?', fecha: new Date('2021-06-21T22:03') },
+
         ],
     },
     6: {
-        conversacion: [{ senderMe: false, mensaje: 'holuu', fecha: new Date('2021-07-23T19:00') }],
+        conversacion: [
+            { senderMe: false, mensaje: 'holuu', fecha: new Date('2021-07-23T19:00') }
+        ],
     },
 };
 
@@ -35,7 +44,6 @@ const misActividades = {
     },
 };
 
-console.log('sava');
 const listaDeActividades = [
     {
         id: 0,
@@ -58,7 +66,7 @@ const usuarios = [
         meDioLike: false,
         leDiLike: false,
         descripcion:
-            'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
+            'Me dicen Kun. Juego como delantero en el Barcelona. Busco a alguien que comparta mis pasiones: La pelota y los jueguitos.',
         atributos: {
             accessory: 'hoopEarrings',
             body: 'chest',
@@ -87,7 +95,7 @@ const usuarios = [
         meDioLike: true,
         leDiLike: true,
         descripcion:
-            'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
+            'Busco alguien que me enseñe un poco de frances',
         atributos: {
             accessory: 'roundGlasses',
             body: 'breasts',
@@ -116,7 +124,7 @@ const usuarios = [
         meDioLike: true,
         leDiLike: false,
         descripcion:
-            'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
+            'El ultimo 10. De boca como toda persona de bien. El mate se toma amargo.',
         atributos: {
             accessory: 'roundGlasses',
             body: 'breasts',
@@ -165,14 +173,14 @@ const usuarios = [
     },
     {
         id: 4,
-        nombre: 'Ramiro German',
-        edad: 22,
+        nombre: 'Lucas Rial Brandariz',
+        edad: 23,
         colorCard: colors.ORANGE,
         ciudad: 'Buenos Aires',
-        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
+        gustos: [gustos.SALIR_DE_FIESTA, gustos.VIDEOJUEGOS, gustos.CIENCIA],
         meDioLike: true,
         leDiLike: false,
-        descripcion: 'blblblblblblb',
+        descripcion: 'Andate Tinelli. Mis amigos me dicen "El Mago". Te invito a descubrir el porque...',
         atributos: {
             accessory: 'shades',
             body: 'chest',
@@ -184,12 +192,40 @@ const usuarios = [
             graphic: 'graphQL',
             hair: 'pixie',
             hairColor: 'blue',
-            hat: 'turban',
+            hat: 'beanie',
             hatColor: 'green',
             lipColor: 'purple',
             mouth: 'tongue',
             skinTone: 'red',
         },
+    },
+    {
+        id: 5,
+        nombre: 'Ignacio Nitz',
+        edad: 22,
+        colorCard: colors.PURPLE,
+        ciudad: 'Buenos Aires',
+        gustos: [gustos.VIAJAR, gustos.ASTRONOMIA, gustos.AIRE_LIBRE],
+        meDioLike: false,
+        leDiLike: false,
+        descripcion: 'Soy un pibe bastante humilde. Busco a alguien que comparta mi pasion por la Formula 1.',
+        atributos: {
+            "accessory": "shades",
+            "body": "chest",
+            "clothing": "hoodie",
+            "clothingColor": "green",
+            "eyebrows": "concerned",
+            "eyes": "leftTwitch",
+            "facialHair": "goatee",
+            "graphic": "none",
+            "hair": "long",
+            "hairColor": "pink",
+            "hat": "none",
+            "hatColor": "black",
+            "lipColor": "turqoise",
+            "mouth": "serious",
+            "skinTone": "light",
+        }          
     },
     {
         id: 5,
@@ -200,7 +236,7 @@ const usuarios = [
         gustos: [gustos.VIDEOJUEGOS, gustos.AIRE_LIBRE],
         meDioLike: false,
         leDiLike: true,
-        descripcion: 'Saa',
+        descripcion: 'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
         atributos: {
             accessory: 'hoopEarrings',
             body: 'chest',
@@ -314,7 +350,7 @@ const regalos = [
         name: 'Caja de Chocolates',
         precio: 500,
         tipo: giftType.CANDY,
-        link: 'https://i.pinimg.com/736x/ff/83/06/ff83064edeb9e91462a471118544f27b.jpg',
+        link: 'https://w7.pngwing.com/pngs/953/353/png-transparent-chocolate-truffle-praline-box-candy-chocolate-petit-four-chocolate-truffle-bonbon.png',
     },
     {
         id: 2,
@@ -327,29 +363,22 @@ const regalos = [
         id: 3,
         name: '1/4 kg Helado',
         precio: 420,
-        tipo: giftType.DRINKS,
+        tipo: giftType.CANDY,
         link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
     },
     {
         id: 4,
-        name: '1/4 kg Helado',
-        precio: 420,
+        name: 'Malbec Rutini',
+        precio: 3000,
         tipo: giftType.DRINKS,
-        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+        link: 'https://http2.mlstatic.com/D_NQ_NP_2X_967041-MLA46681819921_072021-F.webp',
     },
     {
         id: 5,
-        name: '1/4 kg Helado',
+        name: 'Cerveza Temple Wolf IPA',
         precio: 420,
-        tipo: giftType.FLOWER,
-        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
-    },
-    {
-        id: 6,
-        name: '1/4 kg Helado',
-        precio: 420,
-        tipo: giftType.CANDY,
-        link: 'https://media.minutouno.com/p/54ca0f734914a85fc9ea137fde2617e9/adjuntos/150/imagenes/023/804/0023804134/1200x675/smart/helado-cuartojpg.jpg',
+        tipo: giftType.DRINKS,
+        link: 'https://http2.mlstatic.com/D_NQ_NP_2X_810097-MLA44839765447_022021-F.webp',
     },
 ];
 
@@ -360,7 +389,7 @@ export const initialState = {
         email: 'barbara@gmail.com',
         password: 'meetme2021',
         autorizado: true,
-        descripcion: 'Saa',
+        descripcion: 'Busco alguien que comparta mi pasión por el running (y que me pueda seguir el paso). Paso mi tiempo libre en los juegos online, mas que nada en el CS.',
         nombre: 'Barbara',
         colorCard: colors.PINK,
         ciudad: 'Buenos Aires',

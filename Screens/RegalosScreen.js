@@ -82,7 +82,7 @@ export const Regalo = (props) => {
                 <GiftCard gift={regalo} color={color} shippingCost={costoEnvio} />
 
                 <Text style={styles.textRegalandoA}>
-                    {'Estas eligiendo un regalo para\n'}
+                    {'Estas enviando un regalo a\n'}
                     <Text style={{ fontWeight: 'bold' }}> {usuario.nombre}</Text>
                 </Text>
 
@@ -100,7 +100,7 @@ export const Regalo = (props) => {
                 <View style={styles.buttonContainer}>
                     <Button
                         buttonStyle={{ ...styles.button, paddingHorizontal: 150 }}
-                        title="Enviar!"
+                        title="Enviar"
                         onPress={() =>
                             props.navigation.navigate('MensajeRegalo', {
                                 mensaje,
@@ -113,8 +113,7 @@ export const Regalo = (props) => {
                 </View>
 
                 <Text style={styles.textBasesYCondiciones}>
-                    Lorem ipsu|m dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    Al presionar Enviar queda sujeto a Bases y Condiciones
                 </Text>
             </View>
         </View>
@@ -187,10 +186,11 @@ const styles = StyleSheet.create({
 
     textBasesYCondiciones: {
         fontSize: 13,
-        textAlign: 'justify',
+        textAlign: 'center',
         padding: 20,
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
         paddingTop: 10,
+        color: '#555'
     },
 
     textAreaContainer: {
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     },
 
     textArea: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#9E9E9E',
         borderRadius: 20,
         height: 100,
